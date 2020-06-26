@@ -1,0 +1,5 @@
+<map id="params::modelconfiguration" name="params::modelconfiguration">
+<area shape="rect" id="node2" href="$structparams_1_1modesconfiguration.html" title="The subclass containing the modes parameters. " alt="" coords="11,5,198,32"/>
+<area shape="rect" id="node3" href="$structparams_1_1integrationparameters.html" title="The subclass containing the integration parameters. " alt="" coords="5,56,204,83"/>
+<area shape="rect" id="node4" href="$structparams_1_1physicsconfiguration.html" title="The subclass containing the physical parameters of the model. " alt="" coords="9,107,201,133"/>
+</map>

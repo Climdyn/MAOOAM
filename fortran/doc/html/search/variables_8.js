@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['i',['i',['../namespacestat.html#aae82ae81e5eb5620583fec6c93aa6fa3',1,'stat']]],
-  ['ic',['ic',['../namespaceic__def.html#abef3b68b2ee81311ed2c796cba3a382f',1,'ic_def']]],
-  ['implied',['IMPLIED',['../LICENSE_8txt.html#ab0624cdd79a1b72ae3e8cb7b147149da',1,'LICENSE.txt']]]
+  ['i',['i',['../structstat_1_1stataccumulator.html#aa8f9105e658b823c19d9e7a67c1cb10b',1,'stat::stataccumulator']]],
+  ['inner_5fproducts',['inner_products',['../structinprod__analytic_1_1atmosphereinnerproducts.html#acfba9f7e96f6cb71d932ed0f2bbf24ac',1,'inprod_analytic::atmosphereinnerproducts::inner_products()'],['../structinprod__analytic_1_1oceaninnerproducts.html#a7500d80ced60b14563bdf7697eea45c6',1,'inprod_analytic::oceaninnerproducts::inner_products()'],['../structmodel__def_1_1model.html#adf914bba30b77b03601cfb3e7415a272',1,'model_def::model::inner_products()']]]
 ];

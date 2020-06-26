@@ -1,0 +1,18 @@
+<map id="integrator_def::integrator" name="integrator_def::integrator">
+<area shape="rect" id="node2" href="$structmodel__def_1_1model.html" title="Class to hold the components of a model version. " alt="" coords="1355,275,1481,301"/>
+<area shape="rect" id="node3" href="$structtl__ad__tensor_1_1tltensor.html" title="Tensor representation of the Tangent Linear tendencies. " alt="" coords="980,325,1124,352"/>
+<area shape="rect" id="node4" href="$structtensor__def_1_1tensor.html" title="General class to represent a sparse tensor. " alt="" coords="631,303,757,329"/>
+<area shape="rect" id="node11" href="$structaotensor__def_1_1atmoctensor.html" title="Class to hold the tensor &#160;representation of the tendencies. " alt="" coords="963,275,1141,301"/>
+<area shape="rect" id="node5" href="$structtensor__def_1_1coolist.html" title="Coordinate list. Type used to represent the sparse tensor. " alt="" coords="285,303,415,329"/>
+<area shape="rect" id="node6" href="$structtensor__def_1_1coolistelem.html" title="Coordinate list element type. Elementary elements of the sparse tensors. " alt="" coords="5,303,163,329"/>
+<area shape="rect" id="node7" href="$structparams_1_1modelconfiguration.html" title="The general class holding the model configuration. " alt="" coords="603,181,785,208"/>
+<area shape="rect" id="node14" href="$structinprod__analytic_1_1innerproducts.html" title="Global class for the inner products. Contains also the modes informations. " alt="" coords="955,89,1149,116"/>
+<area shape="rect" id="node8" href="$structparams_1_1modesconfiguration.html" title="The subclass containing the modes parameters. " alt="" coords="257,181,443,208"/>
+<area shape="rect" id="node9" href="$structparams_1_1integrationparameters.html" title="The subclass containing the integration parameters. " alt="" coords="251,232,449,259"/>
+<area shape="rect" id="node10" href="$structparams_1_1physicsconfiguration.html" title="The subclass containing the physical parameters of the model. " alt="" coords="254,131,446,157"/>
+<area shape="rect" id="node12" href="$structtl__ad__tensor_1_1adtensor.html" title="Tensor representation of the Adjoint tendencies. " alt="" coords="977,376,1127,403"/>
+<area shape="rect" id="node17" href="$structinprod__analytic_1_1atmosphereinnerproducts.html" title="Class holding the atmospheric inner products functions. " alt="" coords="1287,21,1549,48"/>
+<area shape="rect" id="node18" href="$structinprod__analytic_1_1oceaninnerproducts.html" title="Class holding the oceanic inner products functions. " alt="" coords="1303,92,1533,119"/>
+<area shape="rect" id="node15" href="$structinprod__analytic_1_1oceanicwavenumber.html" title="Oceanic bloc specification object. " alt="" coords="576,61,812,88"/>
+<area shape="rect" id="node16" href="$structinprod__analytic_1_1atmosphericwavenumber.html" title="Atmospheric bloc specification object. " alt="" coords="563,112,825,139"/>
+</map>

@@ -1,73 +1,100 @@
 
-! integrator.f90
+! rk2_integrator.f90
 !
-!>  Module with the integration routines.
+!>  Module containing the second-order Runge-Kutta (RK2) integration routines.
 !
 !> @copyright                                                               
-!> 2015 Lesley De Cruz & Jonathan Demaeyer.
+!> 2015-2020 Lesley De Cruz & Jonathan Demaeyer.
 !> See LICENSE.txt for license information.                                  
 !
 !---------------------------------------------------------------------------!
-!                                                                           
-!>  @remark                                                                 
+!
+!>  @remark
 !>  This module actually contains the Heun algorithm routines.
-!>  The user can modify it according to its preferred integration scheme.
-!>  For higher-order schemes, additional buffers will probably have to be defined.
 !                                                                           
 !---------------------------------------------------------------------------
 
-MODULE integrator
-  USE params, only: ndim
-  USE tensor, only:sparse_mul3
-  USE aotensor_def, only: aotensor
+MODULE rk2_integrator
+  USE model_def
+  USE integrator_def
   IMPLICIT NONE
 
   PRIVATE
 
-  REAL(KIND=8), DIMENSION(:), ALLOCATABLE :: buf_y1 !< Buffer to hold the intermediate position (Heun algorithm)
-  REAL(KIND=8), DIMENSION(:), ALLOCATABLE :: buf_f0 !< Buffer to hold tendencies at the initial position
-  REAL(KIND=8), DIMENSION(:), ALLOCATABLE :: buf_f1 !< Buffer to hold tendencies at the intermediate position
-
-  PUBLIC :: init_integrator, step
+  !> Class for the Heun (RK2) integrator object.
+  TYPE, EXTENDS(Integrator), PUBLIC :: RK2Integrator
+    REAL(KIND=8), DIMENSION(:), ALLOCATABLE :: buf_y1 !< Buffer to hold the intermediate position (Heun algorithm)
+    REAL(KIND=8), DIMENSION(:), ALLOCATABLE :: buf_f0 !< Buffer to hold tendencies at the initial position
+    REAL(KIND=8), DIMENSION(:), ALLOCATABLE :: buf_f1 !< Buffer to hold tendencies at the intermediate position
+  CONTAINS
+    PROCEDURE :: init
+    PROCEDURE :: step
+    PROCEDURE :: clean
+  END TYPE RK2Integrator
 
 CONTAINS
   
   !> Routine to initialise the integration buffers.
-  SUBROUTINE init_integrator
+  !> @param[in,out] integr Integrator object to initialize.
+  !> @param[in] imodel Model object to initialize the integrator with.
+  SUBROUTINE init(integr, imodel)
+    CLASS(RK2Integrator), INTENT(INOUT) :: integr
+    CLASS(Model), INTENT(IN), TARGET :: imodel
     INTEGER :: AllocStat
-    ALLOCATE(buf_y1(0:ndim),buf_f0(0:ndim),buf_f1(0:ndim) ,STAT=AllocStat)
-    IF (AllocStat /= 0) STOP "*** Not enough memory ! ***"
-  END SUBROUTINE init_integrator
-  
-  !> Routine computing the tendencies of the model
-  !> @param t Time at which the tendencies have to be computed. Actually not needed for autonomous systems.
-  !> @param y Point at which the tendencies have to be computed.
-  !> @param res vector to store the result.
-  !> @remark Note that it is NOT safe to pass `y` as a result buffer, 
-  !> as this operation does multiple passes.
-  SUBROUTINE tendencies(t,y,res)
-    REAL(KIND=8), INTENT(IN) :: t
-    REAL(KIND=8), DIMENSION(0:ndim), INTENT(IN) :: y
-    REAL(KIND=8), DIMENSION(0:ndim), INTENT(OUT) :: res
-    CALL sparse_mul3(aotensor, y, y, res)
-  END SUBROUTINE tendencies
+    IF (.NOT.imodel%initialized) THEN
+      PRINT*, 'Model not yet initialized, impossible to associate an integrator to an empty model!'
+      RETURN
+    END IF
+
+    integr%pmodel => imodel
+    integr%dt => imodel%model_configuration%integration%dt
+    integr%ndim => imodel%model_configuration%modes%ndim
+
+    ALLOCATE(integr%buf_y1(0:integr%ndim) ,STAT=AllocStat)
+    IF (AllocStat /= 0) THEN
+      PRINT*, "*** rk2integrator%init: Problem with allocation! ***"
+      STOP "Exiting ..."
+    END IF
+    ALLOCATE(integr%buf_f0(0:integr%ndim) ,STAT=AllocStat)
+    IF (AllocStat /= 0) THEN
+      PRINT*, "*** rk2integrator%init: Problem with allocation! ***"
+      STOP "Exiting ..."
+    END IF
+    ALLOCATE(integr%buf_f1(0:integr%ndim) ,STAT=AllocStat)
+    IF (AllocStat /= 0) THEN
+      PRINT*, "*** rk2integrator%init: Problem with allocation! ***"
+      STOP "Exiting ..."
+    END IF
+
+  END SUBROUTINE init
 
   !> Routine to perform an integration step (Heun algorithm). The incremented time is returned.
-  !> @param y Initial point.
-  !> @param t Actual integration time
-  !> @param dt Integration timestep.
-  !> @param res Final point after the step.
-  SUBROUTINE step(y,t,dt,res)
-    REAL(KIND=8), DIMENSION(0:ndim), INTENT(IN) :: y
+  !> @param[in,out] integr Integrator object to perform the step with.
+  !> @param[in] y Initial point.
+  !> @param[in] t Actual integration time
+  !> @param[out] res Final point after the step.
+  SUBROUTINE step(integr, y,t,res)
+    CLASS(RK2Integrator), INTENT(INOUT) :: integr
+    REAL(KIND=8), DIMENSION(0:integr%ndim), INTENT(IN) :: y
     REAL(KIND=8), INTENT(INOUT) :: t
-    REAL(KIND=8), INTENT(IN) :: dt
-    REAL(KIND=8), DIMENSION(0:ndim), INTENT(OUT) :: res
+    REAL(KIND=8), DIMENSION(0:integr%ndim), INTENT(OUT) :: res
     
-    CALL tendencies(t,y,buf_f0)
-    buf_y1 = y+dt*buf_f0
-    CALL tendencies(t+dt,buf_y1,buf_f1)
-    res=y+0.5*(buf_f0+buf_f1)*dt
-    t=t+dt
+    CALL integr%pmodel%tendencies(t,y,integr%buf_f0)
+    integr%buf_y1 = y+integr%dt*integr%buf_f0
+    CALL integr%pmodel%tendencies(t+integr%dt,integr%buf_y1,integr%buf_f1)
+    res=y+0.5*(integr%buf_f0+integr%buf_f1)*integr%dt
+    t=t+integr%dt
   END SUBROUTINE step
 
-END MODULE integrator
+  !> Routine to clean the integrator
+  !> @param[in,out] integr Integrator object to clean.
+  SUBROUTINE clean(integr)
+      CLASS(RK2Integrator), INTENT(INOUT) :: integr
+
+      IF (allocated(integr%buf_y1)) DEALLOCATE(integr%buf_y1)
+      IF (allocated(integr%buf_f1)) DEALLOCATE(integr%buf_f1)
+      IF (allocated(integr%buf_f0)) DEALLOCATE(integr%buf_f0)
+
+  END SUBROUTINE clean
+
+END MODULE rk2_integrator

@@ -1,0 +1,543 @@
+\hypertarget{namespacemodel__def}{}\section{model\+\_\+def Module Reference}
+\label{namespacemodel__def}\index{model\+\_\+def@{model\+\_\+def}}
+
+
+Module to articulate the model classes and define a model version.  
+
+
+\subsection*{Data Types}
+\begin{DoxyCompactItemize}
+\item 
+type \hyperlink{structmodel__def_1_1model}{model}
+\begin{DoxyCompactList}\small\item\em Class to hold the components of a model version. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+type(\hyperlink{structtensor__def_1_1tensor}{tensor}) function \hyperlink{namespacemodel__def_a85b43017a210edd78223c2557f67bbd5}{jacobian} (imodel, ystar)
+\begin{DoxyCompactList}\small\item\em Compute the Jacobian of M\+A\+O\+O\+AM in point $\boldsymbol{y}^\ast$ and return a tensor object. \end{DoxyCompactList}\item 
+real(kind=8) function, dimension(imodel\%ndim, imodel\%ndim) \hyperlink{namespacemodel__def_a755e953898ae980e1a45275b6eea8216}{jacobian\+\_\+mat} (imodel, ystar)
+\begin{DoxyCompactList}\small\item\em Compute the Jacobian of M\+A\+O\+O\+AM in point $\boldsymbol{y}^\ast$ and return a tensor object. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacemodel__def_a9bca821e60fe70e58bf9eca53ebb0805}{tendencies} (imodel, t, y, res)
+\begin{DoxyCompactList}\small\item\em Routine computing the tendencies of the model. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacemodel__def_a1622350bace311440f39acb8dc647059}{ad\+\_\+tendencies} (imodel, t, ystar, deltay, res)
+\begin{DoxyCompactList}\small\item\em Tendencies for the AD model of M\+A\+O\+O\+AM in point $\boldsymbol{y}^\ast$ for a perturbation $\boldsymbol{\delta y}$. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacemodel__def_a77f89a429fafffdb6341feda8ff43274}{tl\+\_\+tendencies} (imodel, t, ystar, deltay, res)
+\begin{DoxyCompactList}\small\item\em Tendencies for the TL model of M\+A\+O\+O\+AM in point $\boldsymbol{y}^\ast$ for a perturbation $\boldsymbol{\delta y}$. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacemodel__def_a05a17769a10efe2dd18b5dfb94ac75a2}{init\+\_\+model} (imodel, physics\+\_\+nml, mode\+\_\+nml, int\+\_\+nml)
+\begin{DoxyCompactList}\small\item\em Subroutine to initialize the model object from N\+ML files. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacemodel__def_a10069ccd104ed80ae4ba13bedd1e57e2}{delete\+\_\+model} (imodel)
+\begin{DoxyCompactList}\small\item\em Subroutine to clean a model object. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacemodel__def_a70a2babf6e9897311a4177e864cc5a9e}{init\+\_\+tl\+\_\+model} (imodel)
+\begin{DoxyCompactList}\small\item\em Subroutine to initialize the TL tendencies tensor of a model. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacemodel__def_a0eb49b66f98539511b388dabbf00586c}{init\+\_\+ad\+\_\+model} (imodel)
+\begin{DoxyCompactList}\small\item\em Subroutine to initialize the AD tendencies tensor of a model. \end{DoxyCompactList}\item 
+real(kind=8) function, dimension(0\+:imodel\%ndim) \hyperlink{namespacemodel__def_aff217ae0244a4b5f7039eb1e6f728cea}{load\+\_\+ic} (imodel, filename)
+\begin{DoxyCompactList}\small\item\em Subroutine to initialize the AD tendencies tensor of a model. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Module to articulate the model classes and define a model version. 
+
+\begin{DoxyCopyright}{Copyright}
+2020 Lesley De Cruz \& Jonathan Demaeyer. See L\+I\+C\+E\+N\+S\+E.\+txt for license information. 
+\end{DoxyCopyright}
+
+
+\subsection{Function/\+Subroutine Documentation}
+\mbox{\Hypertarget{namespacemodel__def_a1622350bace311440f39acb8dc647059}\label{namespacemodel__def_a1622350bace311440f39acb8dc647059}} 
+\index{model\+\_\+def@{model\+\_\+def}!ad\+\_\+tendencies@{ad\+\_\+tendencies}}
+\index{ad\+\_\+tendencies@{ad\+\_\+tendencies}!model\+\_\+def@{model\+\_\+def}}
+\subsubsection{\texorpdfstring{ad\+\_\+tendencies()}{ad\_tendencies()}}
+{\footnotesize\ttfamily subroutine model\+\_\+def\+::ad\+\_\+tendencies (\begin{DoxyParamCaption}\item[{class(\hyperlink{structmodel__def_1_1model}{model}), intent(in)}]{imodel,  }\item[{real(kind=8), intent(in)}]{t,  }\item[{real(kind=8), dimension(0\+:imodel\%ndim), intent(in)}]{ystar,  }\item[{real(kind=8), dimension(0\+:imodel\%ndim), intent(in)}]{deltay,  }\item[{real(kind=8), dimension(0\+:imodel\%ndim), intent(out)}]{res }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Tendencies for the AD model of M\+A\+O\+O\+AM in point $\boldsymbol{y}^\ast$ for a perturbation $\boldsymbol{\delta y}$. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em imodel} & Model to compute the AD tendencies of. \\
+\hline
+\mbox{\tt in}  & {\em t} & time \\
+\hline
+\mbox{\tt in}  & {\em ystar} & Vector $\boldsymbol{y}^\ast$ (current point in model\textquotesingle{}s trajectory). \\
+\hline
+\mbox{\tt in}  & {\em deltay} & Vector $\boldsymbol{\delta y}$, i.\+e. the perturbation of the variables at time t. \\
+\hline
+\mbox{\tt out}  & {\em res} & Vector to store the tendencies. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 99 of file model\+\_\+def.\+f90.
+
+
+\begin{DoxyCode}
+99     \textcolor{keywordtype}{CLASS}(model), \textcolor{keywordtype}{INTENT(IN)} :: imodel
+100     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(IN)} :: t
+101     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:imodel%ndim)}, \textcolor{keywordtype}{INTENT(IN)} :: ystar,deltay
+102     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:imodel%ndim)}, \textcolor{keywordtype}{INTENT(OUT)} :: res
+103     \textcolor{keyword}{CALL }imodel%adtensor%tensor%sparse\_mul3(deltay, ystar, res)
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacemodel__def_a10069ccd104ed80ae4ba13bedd1e57e2}\label{namespacemodel__def_a10069ccd104ed80ae4ba13bedd1e57e2}} 
+\index{model\+\_\+def@{model\+\_\+def}!delete\+\_\+model@{delete\+\_\+model}}
+\index{delete\+\_\+model@{delete\+\_\+model}!model\+\_\+def@{model\+\_\+def}}
+\subsubsection{\texorpdfstring{delete\+\_\+model()}{delete\_model()}}
+{\footnotesize\ttfamily subroutine model\+\_\+def\+::delete\+\_\+model (\begin{DoxyParamCaption}\item[{class(\hyperlink{structmodel__def_1_1model}{model}), intent(inout)}]{imodel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Subroutine to clean a model object. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em imodel} & Model object to clean. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 152 of file model\+\_\+def.\+f90.
+
+
+\begin{DoxyCode}
+152     \textcolor{keywordtype}{CLASS}(model), \textcolor{keywordtype}{INTENT(INOUT)} :: imodel
+153 
+154     \textcolor{keyword}{NULLIFY}(imodel%ndim)
+155 
+156     \textcolor{keyword}{CALL }imodel%model\_configuration%clean
+157     \textcolor{keyword}{CALL }imodel%inner\_products%clean
+158     \textcolor{keyword}{CALL }imodel%aotensor%clean
+159 
+160     \textcolor{keyword}{CALL }imodel%tltensor%clean
+161     \textcolor{keyword}{CALL }imodel%adtensor%clean
+162 
+163     imodel%initialized = .false.
+164 
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacemodel__def_a0eb49b66f98539511b388dabbf00586c}\label{namespacemodel__def_a0eb49b66f98539511b388dabbf00586c}} 
+\index{model\+\_\+def@{model\+\_\+def}!init\+\_\+ad\+\_\+model@{init\+\_\+ad\+\_\+model}}
+\index{init\+\_\+ad\+\_\+model@{init\+\_\+ad\+\_\+model}!model\+\_\+def@{model\+\_\+def}}
+\subsubsection{\texorpdfstring{init\+\_\+ad\+\_\+model()}{init\_ad\_model()}}
+{\footnotesize\ttfamily subroutine model\+\_\+def\+::init\+\_\+ad\+\_\+model (\begin{DoxyParamCaption}\item[{class(\hyperlink{structmodel__def_1_1model}{model}), intent(inout), target}]{imodel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Subroutine to initialize the AD tendencies tensor of a model. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em imodel} & Model object to initialize. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 186 of file model\+\_\+def.\+f90.
+
+
+\begin{DoxyCode}
+186     \textcolor{keywordtype}{CLASS}(model), \textcolor{keywordtype}{INTENT(INOUT)}, \textcolor{keywordtype}{TARGET} :: imodel
+187 
+188     \textcolor{keyword}{CALL }imodel%adtensor%clean
+189 
+190     \textcolor{keywordflow}{IF} (.NOT.imodel%initialized) \textcolor{keywordflow}{THEN}
+191       print*, \textcolor{stringliteral}{"*** init\_ad\_model: Trying to initialize AD model of an uninitialized model ! ***"}
+192       print*, \textcolor{stringliteral}{"Please first initialize the model before trying to initialize the AD model."}
+193       print*, \textcolor{stringliteral}{"Aborting operation."}
+194       \textcolor{keywordflow}{RETURN}
+195 \textcolor{keywordflow}{    END IF}
+196     \textcolor{keyword}{CALL }imodel%adtensor%init(imodel%aotensor)
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacemodel__def_a05a17769a10efe2dd18b5dfb94ac75a2}\label{namespacemodel__def_a05a17769a10efe2dd18b5dfb94ac75a2}} 
+\index{model\+\_\+def@{model\+\_\+def}!init\+\_\+model@{init\+\_\+model}}
+\index{init\+\_\+model@{init\+\_\+model}!model\+\_\+def@{model\+\_\+def}}
+\subsubsection{\texorpdfstring{init\+\_\+model()}{init\_model()}}
+{\footnotesize\ttfamily subroutine model\+\_\+def\+::init\+\_\+model (\begin{DoxyParamCaption}\item[{class(\hyperlink{structmodel__def_1_1model}{model}), intent(inout), target}]{imodel,  }\item[{character(len=$\ast$), intent(in), optional}]{physics\+\_\+nml,  }\item[{character(len=$\ast$), intent(in), optional}]{mode\+\_\+nml,  }\item[{character(len=$\ast$), intent(in), optional}]{int\+\_\+nml }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Subroutine to initialize the model object from N\+ML files. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em imodel} & Model object to initialize. \\
+\hline
+\mbox{\tt in}  & {\em physics\+\_\+nml} & Physical parameters namelist filename \\
+\hline
+\mbox{\tt in}  & {\em mode\+\_\+nml} & Modes configuration namelist filename \\
+\hline
+\mbox{\tt in}  & {\em int\+\_\+nml} & Numerical integration parameters namelist filename \\
+\hline
+\end{DoxyParams}
+\begin{DoxyRemark}{Remarks}
+If no N\+ML filenames are provided, it will assume that the standard filenames of the model N\+ML have to be used (e.\+g. \char`\"{}params.\+nml\char`\"{}, \char`\"{}modeselection.\+nml\char`\"{} and \char`\"{}int\+\_\+params.\+nml\char`\"{}). 
+\end{DoxyRemark}
+
+
+Definition at line 127 of file model\+\_\+def.\+f90.
+
+
+\begin{DoxyCode}
+127     \textcolor{keywordtype}{CLASS}(model), \textcolor{keywordtype}{INTENT(INOUT)}, \textcolor{keywordtype}{TARGET} :: imodel
+128     \textcolor{keywordtype}{CHARACTER(LEN=*)}, \textcolor{keywordtype}{INTENT(IN)}, \textcolor{keywordtype}{OPTIONAL} :: physics\_nml
+129     \textcolor{keywordtype}{CHARACTER(LEN=*)}, \textcolor{keywordtype}{INTENT(IN)}, \textcolor{keywordtype}{OPTIONAL} :: mode\_nml
+130     \textcolor{keywordtype}{CHARACTER(LEN=*)}, \textcolor{keywordtype}{INTENT(IN)}, \textcolor{keywordtype}{OPTIONAL} :: int\_nml
+131     \textcolor{keywordtype}{LOGICAL} :: ok
+132 
+133     \textcolor{keyword}{CALL }imodel%model\_configuration%clean
+134     \textcolor{keyword}{CALL }imodel%inner\_products%clean
+135     \textcolor{keyword}{CALL }imodel%aotensor%clean
+136 
+137     \textcolor{keyword}{CALL }imodel%model\_configuration%init(physics\_nml=physics\_nml, mode\_nml=mode\_nml, int\_nml=int\_nml)
+138     \textcolor{keyword}{CALL }imodel%inner\_products%init(imodel%model\_configuration)
+139     \textcolor{keyword}{CALL }imodel%aotensor%init(imodel%model\_configuration, imodel%inner\_products)
+140 
+141     imodel%ndim => imodel%model\_configuration%modes%ndim
+142 
+143     ok = imodel%model\_configuration%initialized .AND. imodel%inner\_products%initialized .AND. imodel
+      %aotensor%initialized
+144 
+145     \textcolor{keywordflow}{if} (ok) imodel%initialized = .true.
+146 
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacemodel__def_a70a2babf6e9897311a4177e864cc5a9e}\label{namespacemodel__def_a70a2babf6e9897311a4177e864cc5a9e}} 
+\index{model\+\_\+def@{model\+\_\+def}!init\+\_\+tl\+\_\+model@{init\+\_\+tl\+\_\+model}}
+\index{init\+\_\+tl\+\_\+model@{init\+\_\+tl\+\_\+model}!model\+\_\+def@{model\+\_\+def}}
+\subsubsection{\texorpdfstring{init\+\_\+tl\+\_\+model()}{init\_tl\_model()}}
+{\footnotesize\ttfamily subroutine model\+\_\+def\+::init\+\_\+tl\+\_\+model (\begin{DoxyParamCaption}\item[{class(\hyperlink{structmodel__def_1_1model}{model}), intent(inout), target}]{imodel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Subroutine to initialize the TL tendencies tensor of a model. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em imodel} & Model object to initialize. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 170 of file model\+\_\+def.\+f90.
+
+
+\begin{DoxyCode}
+170     \textcolor{keywordtype}{CLASS}(model), \textcolor{keywordtype}{INTENT(INOUT)}, \textcolor{keywordtype}{TARGET} :: imodel
+171 
+172     \textcolor{keyword}{CALL }imodel%tltensor%clean
+173 
+174     \textcolor{keywordflow}{IF} (.NOT.imodel%initialized) \textcolor{keywordflow}{THEN}
+175       print*, \textcolor{stringliteral}{"*** init\_tl\_model: Trying to initialize TL model of an uninitialized model ! ***"}
+176       print*, \textcolor{stringliteral}{"Please first initialize the model before trying to initialize the TL model."}
+177       print*, \textcolor{stringliteral}{"Aborting operation."}
+178       \textcolor{keywordflow}{RETURN}
+179 \textcolor{keywordflow}{    END IF}
+180     \textcolor{keyword}{CALL }imodel%tltensor%init(imodel%aotensor)
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacemodel__def_a85b43017a210edd78223c2557f67bbd5}\label{namespacemodel__def_a85b43017a210edd78223c2557f67bbd5}} 
+\index{model\+\_\+def@{model\+\_\+def}!jacobian@{jacobian}}
+\index{jacobian@{jacobian}!model\+\_\+def@{model\+\_\+def}}
+\subsubsection{\texorpdfstring{jacobian()}{jacobian()}}
+{\footnotesize\ttfamily type(\hyperlink{structtensor__def_1_1tensor}{tensor}) function model\+\_\+def\+::jacobian (\begin{DoxyParamCaption}\item[{class(\hyperlink{structmodel__def_1_1model}{model}), intent(in)}]{imodel,  }\item[{real(kind=8), dimension(0\+:imodel\%ndim), intent(in)}]{ystar }\end{DoxyParamCaption})}
+
+
+
+Compute the Jacobian of M\+A\+O\+O\+AM in point $\boldsymbol{y}^\ast$ and return a tensor object. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em imodel} & Model to return the Jacobian of. \\
+\hline
+\mbox{\tt in}  & {\em ystar} & Vector $\boldsymbol{y}^\ast$ at which the jacobian should be evaluated. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Jacobian in tensor form (table of tuples \{i,j,0,value\}). 
+\end{DoxyReturn}
+
+
+Definition at line 59 of file model\+\_\+def.\+f90.
+
+
+\begin{DoxyCode}
+59     \textcolor{keywordtype}{CLASS}(model), \textcolor{keywordtype}{INTENT(IN)} :: imodel
+60     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:imodel%ndim)}, \textcolor{keywordtype}{INTENT(IN)} :: ystar
+61     \textcolor{keywordtype}{TYPE}(tensor) :: jacobian
+62     \textcolor{keyword}{CALL }jacobian%init(imodel%ndim)
+63     \textcolor{keyword}{CALL }imodel%aotensor%tensor%jsparse\_mul(ystar,jacobian)
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacemodel__def_a755e953898ae980e1a45275b6eea8216}\label{namespacemodel__def_a755e953898ae980e1a45275b6eea8216}} 
+\index{model\+\_\+def@{model\+\_\+def}!jacobian\+\_\+mat@{jacobian\+\_\+mat}}
+\index{jacobian\+\_\+mat@{jacobian\+\_\+mat}!model\+\_\+def@{model\+\_\+def}}
+\subsubsection{\texorpdfstring{jacobian\+\_\+mat()}{jacobian\_mat()}}
+{\footnotesize\ttfamily real(kind=8) function, dimension(imodel\%ndim,imodel\%ndim) model\+\_\+def\+::jacobian\+\_\+mat (\begin{DoxyParamCaption}\item[{class(\hyperlink{structmodel__def_1_1model}{model}), intent(in)}]{imodel,  }\item[{real(kind=8), dimension(0\+:imodel\%ndim), intent(in)}]{ystar }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Compute the Jacobian of M\+A\+O\+O\+AM in point $\boldsymbol{y}^\ast$ and return a tensor object. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em imodel} & Model to return the Jacobian of. \\
+\hline
+\mbox{\tt in}  & {\em ystar} & Vector $\boldsymbol{y}^\ast$ at which the jacobian should be evaluated. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Jacobian in matrix form. 
+\end{DoxyReturn}
+
+
+Definition at line 71 of file model\+\_\+def.\+f90.
+
+
+\begin{DoxyCode}
+71     \textcolor{keywordtype}{CLASS}(model), \textcolor{keywordtype}{INTENT(IN)} :: imodel
+72     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:imodel%ndim)}, \textcolor{keywordtype}{INTENT(IN)} :: ystar
+73     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(imodel%ndim,imodel%ndim)} :: jacobian\_mat
+74     \textcolor{keyword}{CALL }imodel%aotensor%tensor%jsparse\_mul\_mat(ystar,jacobian\_mat)
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacemodel__def_aff217ae0244a4b5f7039eb1e6f728cea}\label{namespacemodel__def_aff217ae0244a4b5f7039eb1e6f728cea}} 
+\index{model\+\_\+def@{model\+\_\+def}!load\+\_\+ic@{load\+\_\+ic}}
+\index{load\+\_\+ic@{load\+\_\+ic}!model\+\_\+def@{model\+\_\+def}}
+\subsubsection{\texorpdfstring{load\+\_\+ic()}{load\_ic()}}
+{\footnotesize\ttfamily real(kind=8) function, dimension(0\+:imodel\%ndim) model\+\_\+def\+::load\+\_\+ic (\begin{DoxyParamCaption}\item[{class(\hyperlink{structmodel__def_1_1model}{model}), intent(in), target}]{imodel,  }\item[{character(len=$\ast$), intent(in), optional}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Subroutine to initialize the AD tendencies tensor of a model. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em imodel} & Model object for wich to load the initial condition. \\
+\hline
+\mbox{\tt in}  & {\em filename} & Filename of the initial condition N\+ML file. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A vector with the initial condition. 
+\end{DoxyReturn}
+
+
+Definition at line 204 of file model\+\_\+def.\+f90.
+
+
+\begin{DoxyCode}
+204     \textcolor{keywordtype}{CLASS}(model), \textcolor{keywordtype}{INTENT(IN)}, \textcolor{keywordtype}{TARGET} :: imodel
+205     \textcolor{keywordtype}{CHARACTER(LEN=*)}, \textcolor{keywordtype}{INTENT(IN)}, \textcolor{keywordtype}{OPTIONAL} :: filename
+206     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:imodel%ndim)} :: ic
+207 
+208     \textcolor{keywordtype}{INTEGER} :: i,allocstat,j
+209     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{POINTER} :: ndim, natm, noc
+210     \textcolor{keywordtype}{CHARACTER(len=20)} :: fm
+211     \textcolor{keywordtype}{REAL(KIND=8)} :: size\_of\_random\_noise
+212     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE} :: seed
+213     \textcolor{keywordtype}{CHARACTER(LEN=4)} :: init\_type
+214     \textcolor{keywordtype}{LOGICAL} :: exists, std
+215     namelist /iclist/ ic
+216     namelist /rand/ init\_type,size\_of\_random\_noise,seed
+217 
+218     fm(1:6)=\textcolor{stringliteral}{'(F3.1)'}
+219 
+220     \textcolor{keywordflow}{IF} (.NOT.imodel%initialized) \textcolor{keywordflow}{THEN}
+221       print*, \textcolor{stringliteral}{'Model not yet initialized, impossible to load any initial condition!'}
+222       \textcolor{keywordflow}{RETURN}
+223 \textcolor{keywordflow}{    END IF}
+224 
+225     \textcolor{keyword}{CALL }random\_seed(size=j)
+226 
+227     ndim => imodel%model\_configuration%modes%ndim
+228     natm => imodel%model\_configuration%modes%natm
+229     noc => imodel%model\_configuration%modes%noc
+230 
+231     \textcolor{keyword}{ALLOCATE}(seed(j), \hyperlink{namespacestat}{stat}=allocstat)
+232     \textcolor{keywordflow}{IF} (allocstat /= 0) \textcolor{keywordflow}{THEN}
+233       print*, \textcolor{stringliteral}{"*** load\_ic: Problem with allocation! ***"}
+234       stop \textcolor{stringliteral}{"Exiting ..."}
+235 \textcolor{keywordflow}{    END IF}
+236 
+237 
+238     \textcolor{keywordflow}{IF} (\textcolor{keyword}{present}(filename)) \textcolor{keywordflow}{THEN}
+239       \textcolor{keyword}{INQUIRE}(file=filename,exist=exists)
+240       std = .false.
+241     \textcolor{keywordflow}{ELSE}
+242       print*, \textcolor{stringliteral}{"Warning: IC filename not provided."}
+243       print*, \textcolor{stringliteral}{"Trying to load the standard file IC.nml instead ..."}
+244       \textcolor{keyword}{INQUIRE}(file=\textcolor{stringliteral}{'./IC.nml'},exist=exists)
+245       std = .true.
+246 \textcolor{keywordflow}{    END IF}
+247 
+248     \textcolor{keywordflow}{IF} (exists) \textcolor{keywordflow}{THEN}
+249       \textcolor{keywordflow}{IF} (std) \textcolor{keywordflow}{THEN}
+250         \textcolor{keyword}{OPEN}(8, file=\textcolor{stringliteral}{"IC.nml"}, status=\textcolor{stringliteral}{'OLD'}, recl=80, delim=\textcolor{stringliteral}{'APOSTROPHE'})
+251       \textcolor{keywordflow}{ELSE}
+252         \textcolor{keyword}{OPEN}(8, file=filename, status=\textcolor{stringliteral}{'OLD'}, recl=80, delim=\textcolor{stringliteral}{'APOSTROPHE'})
+253 \textcolor{keywordflow}{      END IF}
+254       \textcolor{keyword}{READ}(8,nml=iclist)
+255       \textcolor{keyword}{READ}(8,nml=rand)
+256       \textcolor{keyword}{CLOSE}(8)
+257       \textcolor{keywordflow}{SELECT CASE} (init\_type)
+258         \textcolor{keywordflow}{CASE} (\textcolor{stringliteral}{'seed'})
+259           \textcolor{keyword}{CALL }random\_seed(put=seed)
+260           \textcolor{keyword}{CALL }random\_number(ic)
+261           ic=2*(ic-0.5)
+262           ic=ic*size\_of\_random\_noise*10.d0
+263           ic(0)=1.0d0
+264           \textcolor{keyword}{WRITE}(6,*) \textcolor{stringliteral}{"*** Namelist file written. Starting with 'seeded' random initial condition !***"}
+265         \textcolor{keywordflow}{CASE} (\textcolor{stringliteral}{'rand'})
+266           \textcolor{keyword}{CALL }init\_random\_seed()
+267           \textcolor{keyword}{CALL }random\_seed(get=seed)
+268           \textcolor{keyword}{CALL }random\_number(ic)
+269           ic=2*(ic-0.5)
+270           ic=ic*size\_of\_random\_noise*10.d0
+271           ic(0)=1.0d0
+272           \textcolor{keyword}{WRITE}(6,*) \textcolor{stringliteral}{"*** Namelist file written. Starting with random initial condition !***"}
+273         \textcolor{keywordflow}{CASE} (\textcolor{stringliteral}{'zero'})
+274           \textcolor{keyword}{CALL }init\_random\_seed()
+275           \textcolor{keyword}{CALL }random\_seed(get=seed)
+276           ic=0
+277           ic(0)=1.0d0
+278           \textcolor{keyword}{WRITE}(6,*) \textcolor{stringliteral}{"*** Namelist file written. Starting with initial condition in IC.nml !***"}
+279         \textcolor{keywordflow}{CASE} (\textcolor{stringliteral}{'read'})
+280           \textcolor{keyword}{CALL }init\_random\_seed()
+281           \textcolor{keyword}{CALL }random\_seed(get=seed)
+282           ic(0)=1.0d0
+283           \textcolor{comment}{! except IC(0), nothing has to be done IC has already the right values}
+284           \textcolor{keyword}{WRITE}(6,*) \textcolor{stringliteral}{"*** Namelist file written. Starting with initial condition in IC.nml !***"}
+285 \textcolor{keywordflow}{      END SELECT}
+286     \textcolor{keywordflow}{ELSE}
+287       \textcolor{keyword}{CALL }init\_random\_seed()
+288       \textcolor{keyword}{CALL }random\_seed(get=seed)
+289       ic=0
+290       ic(0)=1.0d0
+291       init\_type=\textcolor{stringliteral}{"zero"}
+292       size\_of\_random\_noise=0.d0
+293       \textcolor{keyword}{WRITE}(6,*) \textcolor{stringliteral}{"*** Namelist file written. Starting with 0 as initial condition !***"}
+294 \textcolor{keywordflow}{    END IF}
+295     \textcolor{keywordflow}{IF} (std) \textcolor{keywordflow}{THEN}
+296       \textcolor{keyword}{OPEN}(8, file=\textcolor{stringliteral}{"IC.nml"}, status=\textcolor{stringliteral}{'REPLACE'})
+297     \textcolor{keywordflow}{ELSE}
+298       \textcolor{keyword}{OPEN}(8, file=filename, status=\textcolor{stringliteral}{'REPLACE'})
+299 \textcolor{keywordflow}{    END IF}
+300     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"!------------------------------------------------------------------------------!"}
+301     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"! Namelist file :                                                              !"}
+302     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"! Initial condition.                                                           !"}
+303     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"!------------------------------------------------------------------------------!"}
+304     \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{""}
+305     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"&ICLIST"}
+306     \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{" ! psi variables"}
+307     \textcolor{keywordflow}{DO} i=1,natm
+308       \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{" IC("}//trim(str(i))//\textcolor{stringliteral}{") = "},ic(i),\textcolor{stringliteral}{"   ! typ= "}&
+309         &//imodel%inner\_products%awavenum(i)%typ//\textcolor{stringliteral}{", Nx= "}//trim(rstr(imodel%inner\_products%awavenum(i)&
+310         &%Nx,fm))//\textcolor{stringliteral}{", Ny= "}//trim(rstr(imodel%inner\_products%awavenum(i)%Ny,fm))
+311 \textcolor{keywordflow}{    END DO}
+312     \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{" ! theta variables"}
+313     \textcolor{keywordflow}{DO} i=1,natm
+314       \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{" IC("}//trim(str(i+natm))//\textcolor{stringliteral}{") = "},ic(i+natm),\textcolor{stringliteral}{"   ! typ= "}&
+315         &//imodel%inner\_products%awavenum(i)%typ//\textcolor{stringliteral}{", Nx= "}//trim(rstr(imodel%inner\_products%awavenum(i)&
+316         &%Nx,fm))//\textcolor{stringliteral}{", Ny= "}//trim(rstr(imodel%inner\_products%awavenum(i)%Ny,fm))
+317 \textcolor{keywordflow}{    END DO}
+318 
+319     \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{" ! A variables"}
+320     \textcolor{keywordflow}{DO} i=1,noc
+321       \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{" IC("}//trim(str(i+2*natm))//\textcolor{stringliteral}{") = "},ic(i+2*natm),\textcolor{stringliteral}{"   ! Nx&}
+322 \textcolor{stringliteral}{}\textcolor{stringliteral}{            &= "}      //trim(rstr(imodel%inner\_products%owavenum(i)%Nx,fm))//\textcolor{stringliteral}{", Ny= "}&
+323         &//trim(rstr(imodel%inner\_products%owavenum(i)%Ny,fm))
+324 \textcolor{keywordflow}{    END DO}
+325     \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{" ! T variables"}
+326     \textcolor{keywordflow}{DO} i=1,noc
+327       \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{" IC("}//trim(str(i+noc+2*natm))//\textcolor{stringliteral}{") = "},ic(i+2*natm+noc),\textcolor{stringliteral}{"   &}
+328 \textcolor{stringliteral}{}\textcolor{stringliteral}{            &! Nx= "}      //trim(rstr(imodel%inner\_products%owavenum(i)%Nx,fm))//\textcolor{stringliteral}{", Ny= "}&
+329         &//trim(rstr(imodel%inner\_products%owavenum(i)%Ny,fm))
+330 \textcolor{keywordflow}{    END DO}
+331 
+332     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"&END"}
+333     \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{""}
+334     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"!------------------------------------------------------------------------------!"}
+335     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"! Initialisation type.                                                         !"}
+336     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"!------------------------------------------------------------------------------!"}
+337     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"! type = 'read': use IC above (will generate a new seed);"}
+338     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"!        'rand': random state (will generate a new seed);"}
+339     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"!        'zero': zero IC (will generate a new seed);"}
+340     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"!        'seed': use the seed below (generate the same IC)"}
+341     \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{""}
+342     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"&RAND"}
+343     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"  init\_type= '"}//init\_type//\textcolor{stringliteral}{"'"}
+344     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a,d15.7)'}) \textcolor{stringliteral}{"  size\_of\_random\_noise = "},size\_of\_random\_noise
+345     \textcolor{keywordflow}{DO} i=1,j
+346       \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{" seed("}//trim(str(i))//\textcolor{stringliteral}{") = "},seed(i)
+347 \textcolor{keywordflow}{    END DO}
+348     \textcolor{keyword}{WRITE}(8,\textcolor{stringliteral}{'(a)'}) \textcolor{stringliteral}{"&END"}
+349     \textcolor{keyword}{WRITE}(8,*) \textcolor{stringliteral}{""}
+350     \textcolor{keyword}{CLOSE}(8)
+351 
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacemodel__def_a9bca821e60fe70e58bf9eca53ebb0805}\label{namespacemodel__def_a9bca821e60fe70e58bf9eca53ebb0805}} 
+\index{model\+\_\+def@{model\+\_\+def}!tendencies@{tendencies}}
+\index{tendencies@{tendencies}!model\+\_\+def@{model\+\_\+def}}
+\subsubsection{\texorpdfstring{tendencies()}{tendencies()}}
+{\footnotesize\ttfamily subroutine model\+\_\+def\+::tendencies (\begin{DoxyParamCaption}\item[{class(\hyperlink{structmodel__def_1_1model}{model}), intent(in)}]{imodel,  }\item[{real(kind=8), intent(in)}]{t,  }\item[{real(kind=8), dimension(0\+:imodel\%ndim), intent(in)}]{y,  }\item[{real(kind=8), dimension(0\+:imodel\%ndim), intent(out)}]{res }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Routine computing the tendencies of the model. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em imodel} & Model to compute the tendencies of. \\
+\hline
+\mbox{\tt in}  & {\em t} & Time at which the tendencies have to be computed. Actually not needed for autonomous systems. \\
+\hline
+\mbox{\tt in}  & {\em y} & Point at which the tendencies have to be computed. \\
+\hline
+\mbox{\tt out}  & {\em res} & Vector to store the tendencies. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyRemark}{Remarks}
+Note that it is N\+OT safe to pass {\ttfamily y} as a result buffer, as this operation does multiple passes. 
+\end{DoxyRemark}
+
+
+Definition at line 85 of file model\+\_\+def.\+f90.
+
+
+\begin{DoxyCode}
+85     \textcolor{keywordtype}{CLASS}(model), \textcolor{keywordtype}{INTENT(IN)} :: imodel
+86     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(IN)} :: t
+87     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:imodel%ndim)}, \textcolor{keywordtype}{INTENT(IN)} :: y
+88     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:imodel%ndim)}, \textcolor{keywordtype}{INTENT(OUT)} :: res
+89     \textcolor{keyword}{CALL }imodel%aotensor%tensor%sparse\_mul3(y, y, res)
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacemodel__def_a77f89a429fafffdb6341feda8ff43274}\label{namespacemodel__def_a77f89a429fafffdb6341feda8ff43274}} 
+\index{model\+\_\+def@{model\+\_\+def}!tl\+\_\+tendencies@{tl\+\_\+tendencies}}
+\index{tl\+\_\+tendencies@{tl\+\_\+tendencies}!model\+\_\+def@{model\+\_\+def}}
+\subsubsection{\texorpdfstring{tl\+\_\+tendencies()}{tl\_tendencies()}}
+{\footnotesize\ttfamily subroutine model\+\_\+def\+::tl\+\_\+tendencies (\begin{DoxyParamCaption}\item[{class(\hyperlink{structmodel__def_1_1model}{model}), intent(in)}]{imodel,  }\item[{real(kind=8), intent(in)}]{t,  }\item[{real(kind=8), dimension(0\+:imodel\%ndim), intent(in)}]{ystar,  }\item[{real(kind=8), dimension(0\+:imodel\%ndim), intent(in)}]{deltay,  }\item[{real(kind=8), dimension(0\+:imodel\%ndim), intent(out)}]{res }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Tendencies for the TL model of M\+A\+O\+O\+AM in point $\boldsymbol{y}^\ast$ for a perturbation $\boldsymbol{\delta y}$. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em imodel} & Model to compute the TL tendencies of. \\
+\hline
+\mbox{\tt in}  & {\em t} & time \\
+\hline
+\mbox{\tt in}  & {\em ystar} & Vector $\boldsymbol{y}^\ast$ (current point in model\textquotesingle{}s trajectory). \\
+\hline
+\mbox{\tt in}  & {\em deltay} & Vector $\boldsymbol{\delta y}$, i.\+e. the perturbation of the variables at time t. \\
+\hline
+\mbox{\tt out}  & {\em res} & Vector to store the tendencies. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 113 of file model\+\_\+def.\+f90.
+
+
+\begin{DoxyCode}
+113     \textcolor{keywordtype}{CLASS}(model), \textcolor{keywordtype}{INTENT(IN)} :: imodel
+114     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(IN)} :: t
+115     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:imodel%ndim)}, \textcolor{keywordtype}{INTENT(IN)} :: ystar,deltay
+116     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:imodel%ndim)}, \textcolor{keywordtype}{INTENT(OUT)} :: res
+117     \textcolor{keyword}{CALL }imodel%tltensor%tensor%sparse\_mul3(deltay,ystar,res)
+\end{DoxyCode}

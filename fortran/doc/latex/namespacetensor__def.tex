@@ -1,0 +1,845 @@
+\hypertarget{namespacetensor__def}{}\section{tensor\+\_\+def Module Reference}
+\label{namespacetensor__def}\index{tensor\+\_\+def@{tensor\+\_\+def}}
+
+
+Tensor utility module. Contains class to represent sparse tensors.  
+
+
+\subsection*{Data Types}
+\begin{DoxyCompactItemize}
+\item 
+type \hyperlink{structtensor__def_1_1coolist}{coolist}
+\begin{DoxyCompactList}\small\item\em Coordinate list. Type used to represent the sparse tensor. \end{DoxyCompactList}\item 
+type \hyperlink{structtensor__def_1_1coolistelem}{coolistelem}
+\begin{DoxyCompactList}\small\item\em Coordinate list element type. Elementary elements of the sparse tensors. \end{DoxyCompactList}\item 
+type \hyperlink{structtensor__def_1_1tensor}{tensor}
+\begin{DoxyCompactList}\small\item\em General class to represent a sparse tensor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+logical function \hyperlink{namespacetensor__def_a165f6b711a4448ec8aa9cee9873fd2f6}{test\+\_\+alloc} (mtensor)
+\begin{DoxyCompactList}\small\item\em Function to test if the tensor is allocated. \end{DoxyCompactList}\item 
+logical function \hyperlink{namespacetensor__def_aca6b576f087813d386fbffb32e91d8ac}{empty} (mtensor)
+\begin{DoxyCompactList}\small\item\em Function to test if the tensor is empty. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacetensor__def_af79f2660341042dd72c06b26a5343e4a}{clean} (mtensor)
+\begin{DoxyCompactList}\small\item\em Routine to clean (deallocate) a tensor. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacetensor__def_a50a9d9f20c71b946ee184f5cfc84ee1e}{init} (mtensor, ndim)
+\begin{DoxyCompactList}\small\item\em Routine to initialize a tensor. \end{DoxyCompactList}\item 
+integer function \hyperlink{namespacetensor__def_a3769fac49d59b368e9e5a80767868791}{tensor\+\_\+size} (mtensor)
+\item 
+subroutine \hyperlink{namespacetensor__def_a87ebfed55ba017fb76695b269c9441c5}{copy} (src, dst)
+\begin{DoxyCompactList}\small\item\em Routine to copy a tensor into another one. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacetensor__def_ac4dacee1ea274a06f049f6133edaaf30}{from\+\_\+mat} (src, dst)
+\begin{DoxyCompactList}\small\item\em Routine to convert a matrix to a tensor, using only the fist two indices of the rank-\/3 tensor. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacetensor__def_af2cb03d54dfb5547017314a7d5ecd779}{sparse\+\_\+mul3} (mtensor, arr\+\_\+j, arr\+\_\+k, res)
+\begin{DoxyCompactList}\small\item\em Sparse multiplication of a tensor with two vectors\+: ${\displaystyle \sum_{j,k=0}^{ndim}} \mathcal{T}_{i,j,k} \, a_j \,b_k$. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacetensor__def_a6b590b8ef8f8e8ce5638dcb08e6fe4f6}{simplify} (mtensor)
+\begin{DoxyCompactList}\small\item\em Routine to simplify a coolist (sparse tensor). For each index $i$, it upper triangularize the matrix \[\mathcal{T}_{i,j,k} \qquad 0 \leq j,k \leq ndim.\]. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacetensor__def_a7b8ab1f82d103857f506b11c56ff444b}{jsparse\+\_\+mul} (mtensor, arr\+\_\+j, jtensor)
+\begin{DoxyCompactList}\small\item\em Sparse multiplication of two tensors to determine the Jacobian\+: \[J_{i,j} = {\displaystyle \sum_{k=0}^{ndim}} \left( \mathcal{T}_{i,j,k} + \mathcal{T}_{i,k,j} \right) \, a_k.\] It\textquotesingle{}s implemented slightly differently\+: for every $\mathcal{T}_{i,j,k}$, we add to $J_{i,j}$ as follows\+: \[J_{i,j} = J_{i,j} + \mathcal{T}_{i,j,k} \, a_k \\ J_{i,k} = J_{i,k} + \mathcal{T}_{i,j,k} \, a_j\] This version return a sparse tensor. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacetensor__def_af2aaece65d0d7b093d5043d708e81c9e}{jsparse\+\_\+mul\+\_\+mat} (mtensor, arr\+\_\+j, jmatrix)
+\begin{DoxyCompactList}\small\item\em Sparse multiplication of two tensors to determine the Jacobian\+: \[J_{i,j} = {\displaystyle \sum_{k=0}^{ndim}} \left( \mathcal{T}_{i,j,k} + \mathcal{T}_{i,k,j} \right) \, a_k.\] It\textquotesingle{}s implemented slightly differently\+: for every $\mathcal{T}_{i,j,k}$, we add to $J_{i,j}$ as follows\+: \[J_{i,j} = J_{i,j} + \mathcal{T}_{i,j,k} \, a_k \\ J_{i,k} = J_{i,k} + \mathcal{T}_{i,j,k} \, a_j\] This version return a matrix. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacetensor__def_a71cbdf082bb9e4661e5568b4bf7606ff}{sparse\+\_\+mul2} (mtensor, arr\+\_\+j, res)
+\begin{DoxyCompactList}\small\item\em Sparse multiplication of a 2d sparse tensor with a vector\+: ${\displaystyle \sum_{j=0}^{ndim}} \mathcal{T}_{i,j,k} \, a_j $. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacetensor__def_aaea5186b8b83264be2a539c0c67d0711}{add\+\_\+elem} (mtensor, i, j, k, v)
+\begin{DoxyCompactList}\small\item\em Subroutine to add element to a coolist. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacetensor__def_ac262d3198b5af39310aaf35219489037}{add\+\_\+from\+\_\+tensor} (src, dst)
+\begin{DoxyCompactList}\small\item\em Routine to add the entries of a rank-\/3 tensor to another one. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacetensor__def_a45166fa9f93ed0223c38c38231650e40}{print\+\_\+tensor} (mtensor, s)
+\begin{DoxyCompactList}\small\item\em Routine to print a rank-\/3 tensor. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacetensor__def_a711a4192fe0e7266f20220c7393d1715}{write\+\_\+tensor\+\_\+to\+\_\+file} (mtensor, s)
+\begin{DoxyCompactList}\small\item\em Write a rank-\/3 tensor coolist to a file. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacetensor__def_a5b0b21c7d1fa8232c32167923ec9dac6}{load\+\_\+tensor\+\_\+from\+\_\+file} (mtensor, s)
+\begin{DoxyCompactList}\small\item\em Load a rank-\/3 tensor coolist from a file definition. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Tensor utility module. Contains class to represent sparse tensors. 
+
+\begin{DoxyCopyright}{Copyright}
+2015-\/2020 Lesley De Cruz \& Jonathan Demaeyer. See L\+I\+C\+E\+N\+S\+E.\+txt for license information. 
+\end{DoxyCopyright}
+
+
+\subsection{Function/\+Subroutine Documentation}
+\mbox{\Hypertarget{namespacetensor__def_aaea5186b8b83264be2a539c0c67d0711}\label{namespacetensor__def_aaea5186b8b83264be2a539c0c67d0711}} 
+\index{tensor\+\_\+def@{tensor\+\_\+def}!add\+\_\+elem@{add\+\_\+elem}}
+\index{add\+\_\+elem@{add\+\_\+elem}!tensor\+\_\+def@{tensor\+\_\+def}}
+\subsubsection{\texorpdfstring{add\+\_\+elem()}{add\_elem()}}
+{\footnotesize\ttfamily subroutine tensor\+\_\+def\+::add\+\_\+elem (\begin{DoxyParamCaption}\item[{class(\hyperlink{structtensor__def_1_1tensor}{tensor}), intent(inout)}]{mtensor,  }\item[{integer, intent(in)}]{i,  }\item[{integer, intent(in)}]{j,  }\item[{integer, intent(in)}]{k,  }\item[{real(kind=8), intent(in)}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Subroutine to add element to a coolist. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em mtensor} & A tensor to add the element to. \\
+\hline
+\mbox{\tt in}  & {\em i} & tensor $i$ index \\
+\hline
+\mbox{\tt in}  & {\em j} & tensor $j$ index \\
+\hline
+\mbox{\tt in}  & {\em k} & tensor $k$ index \\
+\hline
+\mbox{\tt in}  & {\em v} & value to add \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 377 of file tensor\+\_\+def.\+f90.
+
+
+\begin{DoxyCode}
+377     \textcolor{keywordtype}{CLASS}(tensor), \textcolor{keywordtype}{INTENT(INOUT)} :: mtensor
+378     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)} :: i,j,k
+379     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(IN)} :: v
+380     \textcolor{keywordtype}{INTEGER} :: n
+381     \textcolor{keywordflow}{IF} (abs(v) .ge. real\_eps) \textcolor{keywordflow}{THEN}
+382        n=(mtensor%t(i)%nelems)+1
+383        mtensor%t(i)%elems(n)%j=j
+384        mtensor%t(i)%elems(n)%k=k
+385        mtensor%t(i)%elems(n)%v=v
+386        mtensor%t(i)%nelems=n
+387 \textcolor{keywordflow}{    END IF}
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacetensor__def_ac262d3198b5af39310aaf35219489037}\label{namespacetensor__def_ac262d3198b5af39310aaf35219489037}} 
+\index{tensor\+\_\+def@{tensor\+\_\+def}!add\+\_\+from\+\_\+tensor@{add\+\_\+from\+\_\+tensor}}
+\index{add\+\_\+from\+\_\+tensor@{add\+\_\+from\+\_\+tensor}!tensor\+\_\+def@{tensor\+\_\+def}}
+\subsubsection{\texorpdfstring{add\+\_\+from\+\_\+tensor()}{add\_from\_tensor()}}
+{\footnotesize\ttfamily subroutine tensor\+\_\+def\+::add\+\_\+from\+\_\+tensor (\begin{DoxyParamCaption}\item[{class(\hyperlink{structtensor__def_1_1tensor}{tensor}), intent(in)}]{src,  }\item[{class(\hyperlink{structtensor__def_1_1tensor}{tensor}), intent(inout)}]{dst }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Routine to add the entries of a rank-\/3 tensor to another one. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em src} & Tensor to add \\
+\hline
+\mbox{\tt in,out}  & {\em dst} & Destination tensor \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 417 of file tensor\+\_\+def.\+f90.
+
+
+\begin{DoxyCode}
+417     \textcolor{keywordtype}{CLASS}(tensor), \textcolor{keywordtype}{INTENT(IN)} :: src
+418     \textcolor{keywordtype}{CLASS}(tensor), \textcolor{keywordtype}{INTENT(INOUT)} :: dst
+419     \textcolor{keywordtype}{TYPE}(coolistelem), \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE} :: celems
+420     \textcolor{keywordtype}{INTEGER} :: i,j,n,allocstat
+421 
+422     \textcolor{keywordflow}{DO} i=1,dst%ndim()
+423        \textcolor{keywordflow}{IF} (src%t(i)%nelems/=0) \textcolor{keywordflow}{THEN}
+424           \textcolor{keywordflow}{IF} (dst%t(i)%nelems==0) \textcolor{keywordflow}{THEN}
+425              \textcolor{keywordflow}{IF} (\textcolor{keyword}{allocated}(dst%t(i)%elems)) \textcolor{keywordflow}{THEN}
+426                 \textcolor{keyword}{DEALLOCATE}(dst%t(i)%elems, \hyperlink{namespacestat}{stat}=allocstat)
+427                 \textcolor{keywordflow}{IF} (allocstat /= 0) \textcolor{keywordflow}{THEN}
+428                   print*, \textcolor{stringliteral}{"*** tensor%add\_from\_tensor: Problem with allocation! ***"}
+429                   stop \textcolor{stringliteral}{"Exiting ..."}
+430 \textcolor{keywordflow}{                END IF}
+431 \textcolor{keywordflow}{             END IF}
+432              \textcolor{keyword}{ALLOCATE}(dst%t(i)%elems(src%t(i)%nelems), \hyperlink{namespacestat}{stat}=allocstat)
+433              \textcolor{keywordflow}{IF} (allocstat /= 0) \textcolor{keywordflow}{THEN}
+434                   print*, \textcolor{stringliteral}{"*** tensor%add\_from\_tensor: Problem with allocation! ***"}
+435                   stop \textcolor{stringliteral}{"Exiting ..."}
+436 \textcolor{keywordflow}{             END IF}
+437              n=0
+438           \textcolor{keywordflow}{ELSE}
+439              n=dst%t(i)%nelems
+440              \textcolor{keyword}{ALLOCATE}(celems(n), \hyperlink{namespacestat}{stat}=allocstat)
+441              \textcolor{keywordflow}{DO} j=1,n
+442                 celems(j)%j=dst%t(i)%elems(j)%j
+443                 celems(j)%k=dst%t(i)%elems(j)%k
+444                 celems(j)%v=dst%t(i)%elems(j)%v
+445 \textcolor{keywordflow}{             ENDDO}
+446              \textcolor{keywordflow}{IF} (\textcolor{keyword}{allocated}(dst%t(i)%elems)) \textcolor{keyword}{DEALLOCATE}(dst%t(i)%elems, \hyperlink{namespacestat}{stat}=allocstat)
+447              \textcolor{keyword}{ALLOCATE}(dst%t(i)%elems(src%t(i)%nelems+n), \hyperlink{namespacestat}{stat}=allocstat)
+448              \textcolor{keywordflow}{IF} (allocstat /= 0) \textcolor{keywordflow}{THEN}
+449                   print*, \textcolor{stringliteral}{"*** tensor%add\_from\_tensor: Problem with allocation! ***"}
+450                   stop \textcolor{stringliteral}{"Exiting ..."}
+451 \textcolor{keywordflow}{             END IF}
+452              \textcolor{keywordflow}{DO} j=1,n
+453                 dst%t(i)%elems(j)%j=celems(j)%j
+454                 dst%t(i)%elems(j)%k=celems(j)%k
+455                 dst%t(i)%elems(j)%v=celems(j)%v
+456 \textcolor{keywordflow}{             ENDDO}
+457              \textcolor{keywordflow}{IF} (\textcolor{keyword}{allocated}(celems)) \textcolor{keyword}{DEALLOCATE}(celems, \hyperlink{namespacestat}{stat}=allocstat)
+458 \textcolor{keywordflow}{          ENDIF}
+459           \textcolor{keywordflow}{DO} j=1,src%t(i)%nelems
+460              dst%t(i)%elems(n+j)%j=src%t(i)%elems(j)%j
+461              dst%t(i)%elems(n+j)%k=src%t(i)%elems(j)%k
+462              dst%t(i)%elems(n+j)%v=src%t(i)%elems(j)%v
+463 \textcolor{keywordflow}{          ENDDO}
+464           dst%t(i)%nelems=src%t(i)%nelems+n
+465 \textcolor{keywordflow}{       ENDIF}
+466 \textcolor{keywordflow}{    ENDDO}
+467 
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacetensor__def_af79f2660341042dd72c06b26a5343e4a}\label{namespacetensor__def_af79f2660341042dd72c06b26a5343e4a}} 
+\index{tensor\+\_\+def@{tensor\+\_\+def}!clean@{clean}}
+\index{clean@{clean}!tensor\+\_\+def@{tensor\+\_\+def}}
+\subsubsection{\texorpdfstring{clean()}{clean()}}
+{\footnotesize\ttfamily subroutine tensor\+\_\+def\+::clean (\begin{DoxyParamCaption}\item[{class(\hyperlink{structtensor__def_1_1tensor}{tensor}), intent(inout)}]{mtensor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Routine to clean (deallocate) a tensor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em mtensor} & The tensor to clean. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 92 of file tensor\+\_\+def.\+f90.
+
+
+\begin{DoxyCode}
+92     \textcolor{keywordtype}{CLASS}(tensor), \textcolor{keywordtype}{INTENT(INOUT)} :: mtensor
+93 
+94     \textcolor{keywordflow}{IF} (mtensor%allocated()) \textcolor{keyword}{DEALLOCATE}(mtensor%t)
+95 
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacetensor__def_a87ebfed55ba017fb76695b269c9441c5}\label{namespacetensor__def_a87ebfed55ba017fb76695b269c9441c5}} 
+\index{tensor\+\_\+def@{tensor\+\_\+def}!copy@{copy}}
+\index{copy@{copy}!tensor\+\_\+def@{tensor\+\_\+def}}
+\subsubsection{\texorpdfstring{copy()}{copy()}}
+{\footnotesize\ttfamily subroutine tensor\+\_\+def\+::copy (\begin{DoxyParamCaption}\item[{class(\hyperlink{structtensor__def_1_1tensor}{tensor}), intent(in)}]{src,  }\item[{class(\hyperlink{structtensor__def_1_1tensor}{tensor}), intent(out)}]{dst }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Routine to copy a tensor into another one. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em src} & Source tensor. \\
+\hline
+\mbox{\tt out}  & {\em dst} & Destination tensor. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+The destination tensor will be reinitialized, erasing all previous content! Use with care... 
+\end{DoxyWarning}
+
+
+Definition at line 130 of file tensor\+\_\+def.\+f90.
+
+
+\begin{DoxyCode}
+130     \textcolor{keywordtype}{CLASS}(tensor), \textcolor{keywordtype}{INTENT(IN)} :: src
+131     \textcolor{keywordtype}{CLASS}(tensor), \textcolor{keywordtype}{INTENT(OUT)} :: dst
+132     \textcolor{keywordtype}{INTEGER} :: i,j,allocstat
+133     
+134     \textcolor{keyword}{CALL }dst%init(src%ndim())
+135     \textcolor{keywordflow}{DO} i=1,src%ndim()
+136       \textcolor{keyword}{ALLOCATE}(dst%t(i)%elems(src%t(i)%nelems), \hyperlink{namespacestat}{stat}=allocstat)
+137       \textcolor{keywordflow}{IF} (allocstat /= 0) \textcolor{keywordflow}{THEN}
+138         print*, \textcolor{stringliteral}{"*** tensor%copy: Problem with allocation! ***"}
+139         stop \textcolor{stringliteral}{"Exiting ..."}
+140 \textcolor{keywordflow}{      END IF}
+141       \textcolor{keywordflow}{DO} j=1,src%t(i)%nelems
+142         dst%t(i)%elems(j)%j=src%t(i)%elems(j)%j
+143         dst%t(i)%elems(j)%k=src%t(i)%elems(j)%k
+144         dst%t(i)%elems(j)%v=src%t(i)%elems(j)%v
+145 \textcolor{keywordflow}{      ENDDO}
+146       dst%t(i)%nelems=src%t(i)%nelems
+147 \textcolor{keywordflow}{    ENDDO}
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacetensor__def_aca6b576f087813d386fbffb32e91d8ac}\label{namespacetensor__def_aca6b576f087813d386fbffb32e91d8ac}} 
+\index{tensor\+\_\+def@{tensor\+\_\+def}!empty@{empty}}
+\index{empty@{empty}!tensor\+\_\+def@{tensor\+\_\+def}}
+\subsubsection{\texorpdfstring{empty()}{empty()}}
+{\footnotesize\ttfamily logical function tensor\+\_\+def\+::empty (\begin{DoxyParamCaption}\item[{class(\hyperlink{structtensor__def_1_1tensor}{tensor})}]{mtensor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Function to test if the tensor is empty. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mtensor} & The tensor to test. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A boolean indicating if the tensor is empty. 
+\end{DoxyReturn}
+
+
+Definition at line 75 of file tensor\+\_\+def.\+f90.
+
+
+\begin{DoxyCode}
+75     \textcolor{keywordtype}{CLASS}(tensor) :: mtensor
+76     \textcolor{keywordtype}{LOGICAL} :: empty
+77     \textcolor{keywordtype}{INTEGER} :: i
+78 
+79     empty = .true.
+80 
+81     \textcolor{keywordflow}{IF} (.NOT. mtensor%allocated()) \textcolor{keywordflow}{RETURN}
+82 
+83     \textcolor{keywordflow}{DO} i=1,mtensor%ndim()
+84       \textcolor{keywordflow}{IF} (mtensor%t(i)%nelems/=0) empty = .false.
+85 \textcolor{keywordflow}{    END DO}
+86 
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacetensor__def_ac4dacee1ea274a06f049f6133edaaf30}\label{namespacetensor__def_ac4dacee1ea274a06f049f6133edaaf30}} 
+\index{tensor\+\_\+def@{tensor\+\_\+def}!from\+\_\+mat@{from\+\_\+mat}}
+\index{from\+\_\+mat@{from\+\_\+mat}!tensor\+\_\+def@{tensor\+\_\+def}}
+\subsubsection{\texorpdfstring{from\+\_\+mat()}{from\_mat()}}
+{\footnotesize\ttfamily subroutine tensor\+\_\+def\+::from\+\_\+mat (\begin{DoxyParamCaption}\item[{real(kind=8), dimension(\+:,\+:), intent(in)}]{src,  }\item[{class(\hyperlink{structtensor__def_1_1tensor}{tensor}), intent(inout)}]{dst }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Routine to convert a matrix to a tensor, using only the fist two indices of the rank-\/3 tensor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em src} & Source matrix \\
+\hline
+\mbox{\tt out}  & {\em dst} & Destination tensor. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+The destination tensor will be reinitialized, erasing all previous content! Use with care... 
+\end{DoxyWarning}
+
+
+Definition at line 155 of file tensor\+\_\+def.\+f90.
+
+
+\begin{DoxyCode}
+155     \textcolor{keywordtype}{CLASS}(tensor), \textcolor{keywordtype}{INTENT(INOUT)} :: dst
+156     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:,:)}, \textcolor{keywordtype}{INTENT(IN)} :: src
+157     \textcolor{keywordtype}{INTEGER} :: i,j,n,allocstat
+158     \textcolor{keywordtype}{INTEGER} :: ndim
+159     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{DIMENSION(2)} :: sh
+160 
+161     sh = shape(src)
+162     ndim = sh(1)
+163     \textcolor{keyword}{CALL }dst%init(ndim)
+164 
+165     \textcolor{keywordflow}{DO} i=1,ndim
+166       n=0
+167       \textcolor{keywordflow}{DO} j=1,ndim
+168         \textcolor{keywordflow}{IF} (abs(src(i,j))>real\_eps) n=n+1
+169 \textcolor{keywordflow}{      ENDDO}
+170       \textcolor{keyword}{ALLOCATE}(dst%t(i)%elems(n), \hyperlink{namespacestat}{stat}=allocstat)
+171       \textcolor{keywordflow}{IF} (allocstat /= 0) \textcolor{keywordflow}{THEN}
+172         print*, \textcolor{stringliteral}{"*** tensor%from\_mat: Problem with allocation! ***"}
+173         stop \textcolor{stringliteral}{"Exiting ..."}
+174 \textcolor{keywordflow}{      END IF}
+175       n=0
+176       \textcolor{keywordflow}{DO} j=1,ndim
+177         \textcolor{keywordflow}{IF} (abs(src(i,j))>real\_eps) \textcolor{keywordflow}{THEN}
+178           n=n+1
+179           dst%t(i)%elems(n)%j=j
+180           dst%t(i)%elems(n)%k=0
+181           dst%t(i)%elems(n)%v=src(i,j)
+182 \textcolor{keywordflow}{        ENDIF}
+183 \textcolor{keywordflow}{      ENDDO}
+184       dst%t(i)%nelems=n
+185 \textcolor{keywordflow}{    ENDDO}
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacetensor__def_a50a9d9f20c71b946ee184f5cfc84ee1e}\label{namespacetensor__def_a50a9d9f20c71b946ee184f5cfc84ee1e}} 
+\index{tensor\+\_\+def@{tensor\+\_\+def}!init@{init}}
+\index{init@{init}!tensor\+\_\+def@{tensor\+\_\+def}}
+\subsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily subroutine tensor\+\_\+def\+::init (\begin{DoxyParamCaption}\item[{class(\hyperlink{structtensor__def_1_1tensor}{tensor}), intent(inout)}]{mtensor,  }\item[{integer, intent(in)}]{ndim }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Routine to initialize a tensor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em mtensor} & The tensor to clean. \\
+\hline
+\mbox{\tt in}  & {\em ndim} & The first dimension of the tensor. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 102 of file tensor\+\_\+def.\+f90.
+
+
+\begin{DoxyCode}
+102     \textcolor{keywordtype}{CLASS}(tensor), \textcolor{keywordtype}{INTENT(INOUT)} :: mtensor
+103     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)} :: ndim
+104     \textcolor{keywordtype}{INTEGER} :: allocstat
+105 
+106     \textcolor{keyword}{CALL }mtensor%clean
+107     \textcolor{keyword}{ALLOCATE}(mtensor%t(ndim), \hyperlink{namespacestat}{stat}=allocstat)
+108     \textcolor{keywordflow}{IF} (allocstat /= 0) \textcolor{keywordflow}{THEN}
+109         print*, \textcolor{stringliteral}{"*** tensor%init: Problem with allocation! ***"}
+110         stop \textcolor{stringliteral}{"Exiting ..."}
+111 \textcolor{keywordflow}{    END IF}
+112 
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacetensor__def_a7b8ab1f82d103857f506b11c56ff444b}\label{namespacetensor__def_a7b8ab1f82d103857f506b11c56ff444b}} 
+\index{tensor\+\_\+def@{tensor\+\_\+def}!jsparse\+\_\+mul@{jsparse\+\_\+mul}}
+\index{jsparse\+\_\+mul@{jsparse\+\_\+mul}!tensor\+\_\+def@{tensor\+\_\+def}}
+\subsubsection{\texorpdfstring{jsparse\+\_\+mul()}{jsparse\_mul()}}
+{\footnotesize\ttfamily subroutine tensor\+\_\+def\+::jsparse\+\_\+mul (\begin{DoxyParamCaption}\item[{class(\hyperlink{structtensor__def_1_1tensor}{tensor}), intent(in)}]{mtensor,  }\item[{real(kind=8), dimension(0\+:size(mtensor\%t)), intent(in)}]{arr\+\_\+j,  }\item[{type(\hyperlink{structtensor__def_1_1tensor}{tensor}), intent(inout)}]{jtensor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Sparse multiplication of two tensors to determine the Jacobian\+: \[J_{i,j} = {\displaystyle \sum_{k=0}^{ndim}} \left( \mathcal{T}_{i,j,k} + \mathcal{T}_{i,k,j} \right) \, a_k.\] It\textquotesingle{}s implemented slightly differently\+: for every $\mathcal{T}_{i,j,k}$, we add to $J_{i,j}$ as follows\+: \[J_{i,j} = J_{i,j} + \mathcal{T}_{i,j,k} \, a_k \\ J_{i,k} = J_{i,k} + \mathcal{T}_{i,j,k} \, a_j\] This version return a sparse tensor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em mtensor} & A sparse tensor of which index 2 or 3 will be contracted. \\
+\hline
+\mbox{\tt in}  & {\em arr\+\_\+j} & The vector $\boldsymbol{a}$ to be contracted with. \\
+\hline
+\mbox{\tt out}  & {\em jtensor} & A sparse tensor to store the result of the contraction \\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+The output jtensor will be reinitialized, erasing all previous content! Use with care... 
+\end{DoxyWarning}
+
+
+Definition at line 288 of file tensor\+\_\+def.\+f90.
+
+
+\begin{DoxyCode}
+288     \textcolor{keywordtype}{CLASS}(tensor), \textcolor{keywordtype}{INTENT(IN)} :: mtensor
+289     \textcolor{keywordtype}{TYPE}(tensor), \textcolor{keywordtype}{INTENT(INOUT)}:: jtensor
+290     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:size(mtensor%t))}, \textcolor{keywordtype}{INTENT(IN)}  :: arr\_j
+291     \textcolor{keywordtype}{REAL(KIND=8)} :: v
+292     \textcolor{keywordtype}{INTEGER} :: i,j,k,n,nj,allocstat
+293     \textcolor{keyword}{CALL }jtensor%init(mtensor%ndim())
+294     \textcolor{keywordflow}{DO} i=1,mtensor%ndim()
+295        nj=2*jtensor%t(i)%nelems
+296        \textcolor{keyword}{ALLOCATE}(jtensor%t(i)%elems(nj), \hyperlink{namespacestat}{stat}=allocstat)
+297        \textcolor{keywordflow}{IF} (allocstat /= 0) \textcolor{keywordflow}{THEN}
+298          print*, \textcolor{stringliteral}{"*** tensor%jsparse\_mul: Problem with allocation! ***"}
+299          stop \textcolor{stringliteral}{"Exiting ..."}
+300 \textcolor{keywordflow}{       END IF}
+301        nj=0
+302        \textcolor{keywordflow}{DO} n=1,mtensor%t(i)%nelems
+303           j=mtensor%t(i)%elems(n)%j
+304           k=mtensor%t(i)%elems(n)%k
+305           v=mtensor%t(i)%elems(n)%v
+306           \textcolor{keywordflow}{IF} (j /=0) \textcolor{keywordflow}{THEN}
+307              nj=nj+1
+308              jtensor%t(i)%elems(nj)%j=j
+309              jtensor%t(i)%elems(nj)%k=0
+310              jtensor%t(i)%elems(nj)%v=v*arr\_j(k)
+311 \textcolor{keywordflow}{          END IF}
+312 
+313           \textcolor{keywordflow}{IF} (k /=0) \textcolor{keywordflow}{THEN}
+314              nj=nj+1
+315              jtensor%t(i)%elems(nj)%j=k
+316              jtensor%t(i)%elems(nj)%k=0
+317              jtensor%t(i)%elems(nj)%v=v*arr\_j(j)
+318 \textcolor{keywordflow}{          END IF}
+319 \textcolor{keywordflow}{       END DO}
+320        jtensor%t(i)%nelems=nj
+321 \textcolor{keywordflow}{    END DO}
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacetensor__def_af2aaece65d0d7b093d5043d708e81c9e}\label{namespacetensor__def_af2aaece65d0d7b093d5043d708e81c9e}} 
+\index{tensor\+\_\+def@{tensor\+\_\+def}!jsparse\+\_\+mul\+\_\+mat@{jsparse\+\_\+mul\+\_\+mat}}
+\index{jsparse\+\_\+mul\+\_\+mat@{jsparse\+\_\+mul\+\_\+mat}!tensor\+\_\+def@{tensor\+\_\+def}}
+\subsubsection{\texorpdfstring{jsparse\+\_\+mul\+\_\+mat()}{jsparse\_mul\_mat()}}
+{\footnotesize\ttfamily subroutine tensor\+\_\+def\+::jsparse\+\_\+mul\+\_\+mat (\begin{DoxyParamCaption}\item[{class(\hyperlink{structtensor__def_1_1tensor}{tensor}), intent(in)}]{mtensor,  }\item[{real(kind=8), dimension(0\+:size(mtensor\%t)), intent(in)}]{arr\+\_\+j,  }\item[{real(kind=8), dimension(size(mtensor\%t),size(mtensor\%t)), intent(out)}]{jmatrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Sparse multiplication of two tensors to determine the Jacobian\+: \[J_{i,j} = {\displaystyle \sum_{k=0}^{ndim}} \left( \mathcal{T}_{i,j,k} + \mathcal{T}_{i,k,j} \right) \, a_k.\] It\textquotesingle{}s implemented slightly differently\+: for every $\mathcal{T}_{i,j,k}$, we add to $J_{i,j}$ as follows\+: \[J_{i,j} = J_{i,j} + \mathcal{T}_{i,j,k} \, a_k \\ J_{i,k} = J_{i,k} + \mathcal{T}_{i,j,k} \, a_j\] This version return a matrix. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em mtensor} & A sparse tensor of which index 2 or 3 will be contracted. \\
+\hline
+\mbox{\tt in}  & {\em arr\+\_\+j} & The vector $\boldsymbol{a}$ to be contracted with. \\
+\hline
+\mbox{\tt out}  & {\em jmatrix} & A matrix to store the result of the contraction. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 333 of file tensor\+\_\+def.\+f90.
+
+
+\begin{DoxyCode}
+333     \textcolor{keywordtype}{CLASS}(tensor), \textcolor{keywordtype}{INTENT(IN)} :: mtensor
+334     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(size(mtensor%t),size(mtensor%t))}, \textcolor{keywordtype}{INTENT(OUT)}:: jmatrix
+335     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:size(mtensor%t))}, \textcolor{keywordtype}{INTENT(IN)}  :: arr\_j
+336     \textcolor{keywordtype}{REAL(KIND=8)} :: v
+337     \textcolor{keywordtype}{INTEGER} :: i,j,k,n
+338     jmatrix=0.d0
+339     \textcolor{keywordflow}{DO} i=1,mtensor%ndim()
+340        \textcolor{keywordflow}{DO} n=1,mtensor%t(i)%nelems
+341           j=mtensor%t(i)%elems(n)%j
+342           k=mtensor%t(i)%elems(n)%k
+343           v=mtensor%t(i)%elems(n)%v
+344           \textcolor{keywordflow}{IF} (j /=0) jmatrix(i,j)=jmatrix(i,j)+v*arr\_j(k)
+345           \textcolor{keywordflow}{IF} (k /=0) jmatrix(i,k)=jmatrix(i,k)+v*arr\_j(j)
+346 \textcolor{keywordflow}{       END DO}
+347 \textcolor{keywordflow}{    END DO}
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacetensor__def_a5b0b21c7d1fa8232c32167923ec9dac6}\label{namespacetensor__def_a5b0b21c7d1fa8232c32167923ec9dac6}} 
+\index{tensor\+\_\+def@{tensor\+\_\+def}!load\+\_\+tensor\+\_\+from\+\_\+file@{load\+\_\+tensor\+\_\+from\+\_\+file}}
+\index{load\+\_\+tensor\+\_\+from\+\_\+file@{load\+\_\+tensor\+\_\+from\+\_\+file}!tensor\+\_\+def@{tensor\+\_\+def}}
+\subsubsection{\texorpdfstring{load\+\_\+tensor\+\_\+from\+\_\+file()}{load\_tensor\_from\_file()}}
+{\footnotesize\ttfamily subroutine tensor\+\_\+def\+::load\+\_\+tensor\+\_\+from\+\_\+file (\begin{DoxyParamCaption}\item[{class(\hyperlink{structtensor__def_1_1tensor}{tensor}), intent(inout)}]{mtensor,  }\item[{character (len=$\ast$), intent(in)}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Load a rank-\/3 tensor coolist from a file definition. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em mtensor} & The tensor to load to. \\
+\hline
+\mbox{\tt in}  & {\em s} & Filename of the tensor definition file. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyRemark}{Remarks}
+The destination tensor have to be an empty tensor, i.\+e. with unallocated list of elements and nelems set to 0. 
+\end{DoxyRemark}
+
+
+Definition at line 522 of file tensor\+\_\+def.\+f90.
+
+
+\begin{DoxyCode}
+522     \textcolor{keywordtype}{CLASS}(tensor), \textcolor{keywordtype}{INTENT(INOUT)} :: mtensor
+523     \textcolor{keywordtype}{CHARACTER (LEN=*)}, \textcolor{keywordtype}{INTENT(IN)} :: s
+524     \textcolor{keywordtype}{INTEGER} :: i,ir,j,k,n,allocstat, ndim
+525     \textcolor{keywordtype}{REAL(KIND=8)} :: v
+526     \textcolor{keyword}{OPEN}(30,file=s,status=\textcolor{stringliteral}{'old'})
+527     \textcolor{keyword}{READ}(30, *) ndim
+528     \textcolor{keyword}{ALLOCATE}(mtensor%t(ndim), \hyperlink{namespacestat}{stat}=allocstat)
+529     \textcolor{keywordflow}{IF} (allocstat /= 0) \textcolor{keywordflow}{THEN}
+530       print*, \textcolor{stringliteral}{"*** tensor%load\_tensor\_from\_file: Problem with allocation! ***"}
+531       stop \textcolor{stringliteral}{"Exiting ..."}
+532 \textcolor{keywordflow}{    END IF}
+533     \textcolor{keywordflow}{DO} i=1,ndim
+534        \textcolor{keyword}{READ}(30,*) ir,n
+535        \textcolor{keywordflow}{IF} (n /= 0) \textcolor{keywordflow}{THEN}
+536           \textcolor{keyword}{ALLOCATE}(mtensor%t(i)%elems(n), \hyperlink{namespacestat}{stat}=allocstat)
+537           \textcolor{keywordflow}{IF} (allocstat /= 0) \textcolor{keywordflow}{THEN}
+538             print*, \textcolor{stringliteral}{"*** tensor%load\_tensor\_from\_file: Problem with allocation! ***"}
+539             stop \textcolor{stringliteral}{"Exiting ..."}
+540 \textcolor{keywordflow}{          END IF}
+541           mtensor%t(i)%nelems=n
+542 \textcolor{keywordflow}{       ENDIF}
+543        \textcolor{keywordflow}{DO} n=1,mtensor%t(i)%nelems
+544           \textcolor{keyword}{READ}(30,*) ir,j,k,v
+545           mtensor%t(i)%elems(n)%j=j
+546           mtensor%t(i)%elems(n)%k=k
+547           mtensor%t(i)%elems(n)%v=v
+548 \textcolor{keywordflow}{       ENDDO}
+549 \textcolor{keywordflow}{    END DO}
+550     \textcolor{keyword}{CLOSE}(30)
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacetensor__def_a45166fa9f93ed0223c38c38231650e40}\label{namespacetensor__def_a45166fa9f93ed0223c38c38231650e40}} 
+\index{tensor\+\_\+def@{tensor\+\_\+def}!print\+\_\+tensor@{print\+\_\+tensor}}
+\index{print\+\_\+tensor@{print\+\_\+tensor}!tensor\+\_\+def@{tensor\+\_\+def}}
+\subsubsection{\texorpdfstring{print\+\_\+tensor()}{print\_tensor()}}
+{\footnotesize\ttfamily subroutine tensor\+\_\+def\+::print\+\_\+tensor (\begin{DoxyParamCaption}\item[{class(\hyperlink{structtensor__def_1_1tensor}{tensor}), intent(in)}]{mtensor,  }\item[{character(len=$\ast$), intent(in), optional, target}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Routine to print a rank-\/3 tensor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em mtensor} & Tensor to print. \\
+\hline
+\mbox{\tt in}  & {\em s} & String to put before tensor entries. Default to \char`\"{}t\char`\"{}. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 474 of file tensor\+\_\+def.\+f90.
+
+
+\begin{DoxyCode}
+474     \textcolor{keywordtype}{CLASS}(tensor), \textcolor{keywordtype}{INTENT(IN)} :: mtensor
+475     \textcolor{keywordtype}{CHARACTER(LEN=*)}, \textcolor{keywordtype}{INTENT(IN)}, \textcolor{keywordtype}{TARGET}, \textcolor{keywordtype}{OPTIONAL} :: s
+476 
+477     \textcolor{keywordtype}{CHARACTER}, \textcolor{keywordtype}{TARGET} :: sr = \textcolor{stringliteral}{"t"}
+478     \textcolor{keywordtype}{CHARACTER}, \textcolor{keywordtype}{POINTER} :: r
+479     \textcolor{keywordtype}{INTEGER} :: i,n,j,k
+480     \textcolor{keywordflow}{IF} (\textcolor{keyword}{present}(s)) \textcolor{keywordflow}{THEN}
+481        r => s
+482     \textcolor{keywordflow}{ELSE}
+483        r => sr
+484 \textcolor{keywordflow}{    END IF}
+485     \textcolor{keywordflow}{DO} i=1,mtensor%ndim()
+486        \textcolor{keywordflow}{DO} n=1,mtensor%t(i)%nelems
+487           j=mtensor%t(i)%elems(n)%j
+488           k=mtensor%t(i)%elems(n)%k
+489           \textcolor{keywordflow}{IF}( abs(mtensor%t(i)%elems(n)%v) .GE. real\_eps) \textcolor{keywordflow}{THEN}
+490              \textcolor{keyword}{write}(*,\textcolor{stringliteral}{"(A,ES12.5)"}) r//\textcolor{stringliteral}{"["}//trim(str(i))//\textcolor{stringliteral}{"]["}//trim(str(j)) &
+491                   &//\textcolor{stringliteral}{"]["}//trim(str(k))//\textcolor{stringliteral}{"] = "},mtensor%t(i)%elems(n)%v
+492 \textcolor{keywordflow}{          END IF}
+493 \textcolor{keywordflow}{       END DO}
+494 \textcolor{keywordflow}{    END DO}
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacetensor__def_a6b590b8ef8f8e8ce5638dcb08e6fe4f6}\label{namespacetensor__def_a6b590b8ef8f8e8ce5638dcb08e6fe4f6}} 
+\index{tensor\+\_\+def@{tensor\+\_\+def}!simplify@{simplify}}
+\index{simplify@{simplify}!tensor\+\_\+def@{tensor\+\_\+def}}
+\subsubsection{\texorpdfstring{simplify()}{simplify()}}
+{\footnotesize\ttfamily subroutine tensor\+\_\+def\+::simplify (\begin{DoxyParamCaption}\item[{class(\hyperlink{structtensor__def_1_1tensor}{tensor}), intent(inout)}]{mtensor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Routine to simplify a coolist (sparse tensor). For each index $i$, it upper triangularize the matrix \[\mathcal{T}_{i,j,k} \qquad 0 \leq j,k \leq ndim.\]. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em mtensor} & A sparse tensor which will be simplified. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 214 of file tensor\+\_\+def.\+f90.
+
+
+\begin{DoxyCode}
+214     \textcolor{keywordtype}{CLASS}(tensor), \textcolor{keywordtype}{INTENT(INOUT)} :: mtensor
+215     \textcolor{keywordtype}{INTEGER} :: i,j,k
+216     \textcolor{keywordtype}{INTEGER} :: li,lii,liii,n
+217     \textcolor{keywordflow}{DO} i= 1,mtensor%ndim()
+218       n=mtensor%t(i)%nelems
+219       \textcolor{keywordflow}{DO} li=n,2,-1
+220         j=mtensor%t(i)%elems(li)%j
+221         k=mtensor%t(i)%elems(li)%k
+222         \textcolor{keywordflow}{DO} lii=li-1,1,-1
+223           \textcolor{keywordflow}{IF} (((j==mtensor%t(i)%elems(lii)%j).AND.(k==mtensor%t(i)&
+224             &%elems(lii)%k)).OR.((j==mtensor%t(i)%elems(lii)%k).AND.(k==mtensor%t(i)%elems(lii)%j))) \textcolor{keywordflow}{THEN}
+225             \textcolor{comment}{! Found another entry with the same i,j,k: merge both into}
+226             \textcolor{comment}{! the one listed first (of those two).}
+227             mtensor%t(i)%elems(lii)%v=mtensor%t(i)%elems(lii)%v+mtensor%t(i)%elems(li)%v
+228             \textcolor{keywordflow}{IF} (j>k) \textcolor{keywordflow}{THEN}
+229               mtensor%t(i)%elems(lii)%j=mtensor%t(i)%elems(li)%k
+230               mtensor%t(i)%elems(lii)%k=mtensor%t(i)%elems(li)%j
+231 \textcolor{keywordflow}{            ENDIF}
+232 
+233             \textcolor{comment}{! Shift the rest of the items one place down.}
+234             \textcolor{keywordflow}{DO} liii=li+1,n
+235               mtensor%t(i)%elems(liii-1)%j=mtensor%t(i)%elems(liii)%j
+236               mtensor%t(i)%elems(liii-1)%k=mtensor%t(i)%elems(liii)%k
+237               mtensor%t(i)%elems(liii-1)%v=mtensor%t(i)%elems(liii)%v
+238 \textcolor{keywordflow}{            END DO}
+239             mtensor%t(i)%nelems=mtensor%t(i)%nelems-1
+240             \textcolor{comment}{! Here we should stop because the li no longer points to the}
+241             \textcolor{comment}{! original i,j,k element}
+242             \textcolor{keywordflow}{EXIT}
+243 \textcolor{keywordflow}{          ENDIF}
+244 \textcolor{keywordflow}{        ENDDO}
+245 \textcolor{keywordflow}{      ENDDO}
+246       n=mtensor%t(i)%nelems
+247       li=1
+248       \textcolor{keywordflow}{DO} \textcolor{keywordflow}{WHILE} (li<=mtensor%t(i)%nelems)
+249         \textcolor{comment}{! Clear new "almost" zero entries and shift rest of the items one place down.}
+250         \textcolor{comment}{! Make sure not to skip any entries while shifting!}
+251         \textcolor{keywordflow}{DO} \textcolor{keywordflow}{WHILE} (abs(mtensor%t(i)%elems(li)%v) < real\_eps)
+252           \textcolor{keywordflow}{DO} liii=li+1,n
+253             mtensor%t(i)%elems(liii-1)%j=mtensor%t(i)%elems(liii)%j
+254             mtensor%t(i)%elems(liii-1)%k=mtensor%t(i)%elems(liii)%k
+255             mtensor%t(i)%elems(liii-1)%v=mtensor%t(i)%elems(liii)%v
+256 \textcolor{keywordflow}{          ENDDO}
+257           mtensor%t(i)%nelems=mtensor%t(i)%nelems-1
+258           \textcolor{keywordflow}{if} (li > mtensor%t(i)%nelems) \textcolor{keywordflow}{THEN}
+259             \textcolor{keywordflow}{EXIT}
+260 \textcolor{keywordflow}{          ENDIF}
+261 \textcolor{keywordflow}{        ENDDO}
+262         li=li+1
+263 \textcolor{keywordflow}{      ENDDO}
+264 
+265       n=mtensor%t(i)%nelems
+266       \textcolor{keywordflow}{DO} li=1,n
+267         \textcolor{comment}{! Upper triangularize}
+268         j=mtensor%t(i)%elems(li)%j
+269         k=mtensor%t(i)%elems(li)%k
+270         \textcolor{keywordflow}{IF} (j>k) \textcolor{keywordflow}{THEN}
+271           mtensor%t(i)%elems(li)%j=k
+272           mtensor%t(i)%elems(li)%k=j
+273 \textcolor{keywordflow}{        ENDIF}
+274 \textcolor{keywordflow}{      ENDDO}
+275 \textcolor{keywordflow}{    ENDDO}
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacetensor__def_a71cbdf082bb9e4661e5568b4bf7606ff}\label{namespacetensor__def_a71cbdf082bb9e4661e5568b4bf7606ff}} 
+\index{tensor\+\_\+def@{tensor\+\_\+def}!sparse\+\_\+mul2@{sparse\+\_\+mul2}}
+\index{sparse\+\_\+mul2@{sparse\+\_\+mul2}!tensor\+\_\+def@{tensor\+\_\+def}}
+\subsubsection{\texorpdfstring{sparse\+\_\+mul2()}{sparse\_mul2()}}
+{\footnotesize\ttfamily subroutine tensor\+\_\+def\+::sparse\+\_\+mul2 (\begin{DoxyParamCaption}\item[{class(\hyperlink{structtensor__def_1_1tensor}{tensor}), intent(in)}]{mtensor,  }\item[{real(kind=8), dimension(0\+:size(mtensor\%t)), intent(in)}]{arr\+\_\+j,  }\item[{real(kind=8), dimension(0\+:size(mtensor\%t)), intent(out)}]{res }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Sparse multiplication of a 2d sparse tensor with a vector\+: ${\displaystyle \sum_{j=0}^{ndim}} \mathcal{T}_{i,j,k} \, a_j $. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em mtensor} & A sparse tensor of which index 2 will be contracted. \\
+\hline
+\mbox{\tt in}  & {\em arr\+\_\+j} & The vector $\boldsymbol{a}$ to be contracted with. \\
+\hline
+\mbox{\tt out}  & {\em res} & vector (buffer) to store the result of the contraction \\
+\hline
+\end{DoxyParams}
+\begin{DoxyRemark}{Remarks}
+Note that it is N\+OT safe to pass {\ttfamily arr\+\_\+j} as a result buffer, as this operation does multiple passes. 
+\end{DoxyRemark}
+
+
+Definition at line 357 of file tensor\+\_\+def.\+f90.
+
+
+\begin{DoxyCode}
+357     \textcolor{keywordtype}{CLASS}(tensor), \textcolor{keywordtype}{INTENT(IN)} :: mtensor
+358     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:size(mtensor%t))}, \textcolor{keywordtype}{INTENT(IN)}  :: arr\_j
+359     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:size(mtensor%t))}, \textcolor{keywordtype}{INTENT(OUT)} :: res
+360     \textcolor{keywordtype}{INTEGER} :: i,j,n
+361     res=0.d0
+362     \textcolor{keywordflow}{DO} i=1,mtensor%ndim()
+363       \textcolor{keywordflow}{DO} n=1,mtensor%t(i)%nelems
+364          j=mtensor%t(i)%elems(n)%j
+365          res(i) = res(i) + mtensor%t(i)%elems(n)%v * arr\_j(j)
+366 \textcolor{keywordflow}{      END DO}
+367 \textcolor{keywordflow}{    END DO}
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacetensor__def_af2cb03d54dfb5547017314a7d5ecd779}\label{namespacetensor__def_af2cb03d54dfb5547017314a7d5ecd779}} 
+\index{tensor\+\_\+def@{tensor\+\_\+def}!sparse\+\_\+mul3@{sparse\+\_\+mul3}}
+\index{sparse\+\_\+mul3@{sparse\+\_\+mul3}!tensor\+\_\+def@{tensor\+\_\+def}}
+\subsubsection{\texorpdfstring{sparse\+\_\+mul3()}{sparse\_mul3()}}
+{\footnotesize\ttfamily subroutine tensor\+\_\+def\+::sparse\+\_\+mul3 (\begin{DoxyParamCaption}\item[{class(\hyperlink{structtensor__def_1_1tensor}{tensor}), intent(in)}]{mtensor,  }\item[{real(kind=8), dimension(0\+:size(mtensor\%t)), intent(in)}]{arr\+\_\+j,  }\item[{real(kind=8), dimension(0\+:size(mtensor\%t)), intent(in)}]{arr\+\_\+k,  }\item[{real(kind=8), dimension(0\+:size(mtensor\%t)), intent(out)}]{res }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Sparse multiplication of a tensor with two vectors\+: ${\displaystyle \sum_{j,k=0}^{ndim}} \mathcal{T}_{i,j,k} \, a_j \,b_k$. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em mtensor} & A sparse tensor of which index 2 and 3 will be contracted. \\
+\hline
+\mbox{\tt in}  & {\em arr\+\_\+j} & The vector $\boldsymbol{a}$ to be contracted with index 2 of the tensor. \\
+\hline
+\mbox{\tt in}  & {\em arr\+\_\+k} & The vector $\boldsymbol{b}$ to be contracted with index 3 of the tensor. \\
+\hline
+\mbox{\tt out}  & {\em res} & Vector to store the result of the contraction. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyRemark}{Remarks}
+Note that it is N\+OT safe to pass {\ttfamily arr\+\_\+j} or {\ttfamily arr\+\_\+k} as a result buffer, as this operation does multiple passes. However, passsing the same vector as {\ttfamily arr\+\_\+j} and {\ttfamily arr\+\_\+k} is safe. 
+\end{DoxyRemark}
+
+
+Definition at line 196 of file tensor\+\_\+def.\+f90.
+
+
+\begin{DoxyCode}
+196     \textcolor{keywordtype}{CLASS}(tensor), \textcolor{keywordtype}{INTENT(IN)} :: mtensor
+197     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:size(mtensor%t))}, \textcolor{keywordtype}{INTENT(IN)}  :: arr\_j, arr\_k
+198     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:size(mtensor%t))}, \textcolor{keywordtype}{INTENT(OUT)} :: res
+199     \textcolor{keywordtype}{INTEGER} :: i,j,k,n
+200     res=0.d0
+201     \textcolor{keywordflow}{DO} i=1,mtensor%ndim()
+202       \textcolor{keywordflow}{DO} n=1,mtensor%t(i)%nelems
+203         j=mtensor%t(i)%elems(n)%j
+204         k=mtensor%t(i)%elems(n)%k
+205         res(i) = res(i) + mtensor%t(i)%elems(n)%v * arr\_j(j)*arr\_k(k)
+206 \textcolor{keywordflow}{      END DO}
+207 \textcolor{keywordflow}{    END DO}
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacetensor__def_a3769fac49d59b368e9e5a80767868791}\label{namespacetensor__def_a3769fac49d59b368e9e5a80767868791}} 
+\index{tensor\+\_\+def@{tensor\+\_\+def}!tensor\+\_\+size@{tensor\+\_\+size}}
+\index{tensor\+\_\+size@{tensor\+\_\+size}!tensor\+\_\+def@{tensor\+\_\+def}}
+\subsubsection{\texorpdfstring{tensor\+\_\+size()}{tensor\_size()}}
+{\footnotesize\ttfamily integer function tensor\+\_\+def\+::tensor\+\_\+size (\begin{DoxyParamCaption}\item[{class(\hyperlink{structtensor__def_1_1tensor}{tensor})}]{mtensor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em mtensor} & The tensor to return the size of. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The size of the tensor 
+\end{DoxyReturn}
+
+
+Definition at line 119 of file tensor\+\_\+def.\+f90.
+
+
+\begin{DoxyCode}
+119     \textcolor{keywordtype}{CLASS}(tensor) :: mtensor
+120     \textcolor{keywordtype}{INTEGER} :: ndim
+121     ndim = \textcolor{keyword}{size}(mtensor%t)
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacetensor__def_a165f6b711a4448ec8aa9cee9873fd2f6}\label{namespacetensor__def_a165f6b711a4448ec8aa9cee9873fd2f6}} 
+\index{tensor\+\_\+def@{tensor\+\_\+def}!test\+\_\+alloc@{test\+\_\+alloc}}
+\index{test\+\_\+alloc@{test\+\_\+alloc}!tensor\+\_\+def@{tensor\+\_\+def}}
+\subsubsection{\texorpdfstring{test\+\_\+alloc()}{test\_alloc()}}
+{\footnotesize\ttfamily logical function tensor\+\_\+def\+::test\+\_\+alloc (\begin{DoxyParamCaption}\item[{class(\hyperlink{structtensor__def_1_1tensor}{tensor})}]{mtensor }\end{DoxyParamCaption})}
+
+
+
+Function to test if the tensor is allocated. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mtensor} & The tensor to test. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A boolean indicating if the tensor is allocated. 
+\end{DoxyReturn}
+
+
+Definition at line 64 of file tensor\+\_\+def.\+f90.
+
+
+\begin{DoxyCode}
+64     \textcolor{keywordtype}{CLASS}(tensor) :: mtensor
+65     \textcolor{keywordtype}{LOGICAL} :: test\_alloc
+66 
+67     test\_alloc = \textcolor{keyword}{allocated}(mtensor%t)
+68 
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacetensor__def_a711a4192fe0e7266f20220c7393d1715}\label{namespacetensor__def_a711a4192fe0e7266f20220c7393d1715}} 
+\index{tensor\+\_\+def@{tensor\+\_\+def}!write\+\_\+tensor\+\_\+to\+\_\+file@{write\+\_\+tensor\+\_\+to\+\_\+file}}
+\index{write\+\_\+tensor\+\_\+to\+\_\+file@{write\+\_\+tensor\+\_\+to\+\_\+file}!tensor\+\_\+def@{tensor\+\_\+def}}
+\subsubsection{\texorpdfstring{write\+\_\+tensor\+\_\+to\+\_\+file()}{write\_tensor\_to\_file()}}
+{\footnotesize\ttfamily subroutine tensor\+\_\+def\+::write\+\_\+tensor\+\_\+to\+\_\+file (\begin{DoxyParamCaption}\item[{class(\hyperlink{structtensor__def_1_1tensor}{tensor}), intent(in)}]{mtensor,  }\item[{character (len=$\ast$), intent(in)}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Write a rank-\/3 tensor coolist to a file. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em mtensor} & The tensor to write \\
+\hline
+\mbox{\tt in}  & {\em s} & Filename \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 501 of file tensor\+\_\+def.\+f90.
+
+
+\begin{DoxyCode}
+501     \textcolor{keywordtype}{CLASS}(tensor), \textcolor{keywordtype}{INTENT(IN)} :: mtensor
+502     \textcolor{keywordtype}{CHARACTER (LEN=*)}, \textcolor{keywordtype}{INTENT(IN)} :: s
+503     \textcolor{keywordtype}{INTEGER} :: i,j,k,n
+504     \textcolor{keyword}{OPEN}(30,file=s)
+505     \textcolor{keyword}{WRITE}(30,*) mtensor%ndim()
+506     \textcolor{keywordflow}{DO} i=1,mtensor%ndim()
+507        \textcolor{keyword}{WRITE}(30,*) i,mtensor%t(i)%nelems
+508        \textcolor{keywordflow}{DO} n=1,mtensor%t(i)%nelems
+509           j=mtensor%t(i)%elems(n)%j
+510           k=mtensor%t(i)%elems(n)%k
+511           \textcolor{keyword}{WRITE}(30,*) i,j,k,mtensor%t(i)%elems(n)%v
+512 \textcolor{keywordflow}{       END DO}
+513 \textcolor{keywordflow}{    END DO}
+514     \textcolor{keyword}{CLOSE}(30)
+\end{DoxyCode}

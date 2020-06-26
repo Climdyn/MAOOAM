@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['stat',['stat',['../namespacestat.html',1,'']]]
+  ['params',['params',['../namespaceparams.html',1,'']]]
 ];

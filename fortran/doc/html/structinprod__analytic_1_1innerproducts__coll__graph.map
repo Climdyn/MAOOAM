@@ -1,0 +1,10 @@
+<map id="inprod_analytic::innerproducts" name="inprod_analytic::innerproducts">
+<area shape="rect" id="node4" href="$structinprod__analytic_1_1atmosphereinnerproducts.html" title="Class holding the atmospheric inner products functions. " alt="" coords="1041,21,1304,48"/>
+<area shape="rect" id="node9" href="$structinprod__analytic_1_1oceaninnerproducts.html" title="Class holding the oceanic inner products functions. " alt="" coords="1057,92,1288,119"/>
+<area shape="rect" id="node2" href="$structinprod__analytic_1_1oceanicwavenumber.html" title="Oceanic bloc specification object. " alt="" coords="331,5,567,32"/>
+<area shape="rect" id="node3" href="$structinprod__analytic_1_1atmosphericwavenumber.html" title="Atmospheric bloc specification object. " alt="" coords="317,56,580,83"/>
+<area shape="rect" id="node5" href="$structparams_1_1modelconfiguration.html" title="The general class holding the model configuration. " alt="" coords="357,107,540,133"/>
+<area shape="rect" id="node6" href="$structparams_1_1modesconfiguration.html" title="The subclass containing the modes parameters. " alt="" coords="11,56,198,83"/>
+<area shape="rect" id="node7" href="$structparams_1_1integrationparameters.html" title="The subclass containing the integration parameters. " alt="" coords="5,107,204,133"/>
+<area shape="rect" id="node8" href="$structparams_1_1physicsconfiguration.html" title="The subclass containing the physical parameters of the model. " alt="" coords="9,157,201,184"/>
+</map>

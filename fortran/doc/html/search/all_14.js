@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['v',['v',['../structtensor_1_1coolist__elem.html#ac569057f08f5f8ea171b87aa7b9dd428',1,'tensor::coolist_elem::v()'],['../namespacestat.html#ab2a3ce8c90189fdbd6bb313c75876473',1,'stat::v()']]],
-  ['var',['var',['../namespacestat.html#a32f0c1c215da5a0f2b92672ddb53dd13',1,'stat']]]
+  ['v',['v',['../structstat_1_1stataccumulator.html#a627af0d1895f670679a77742ac974c1c',1,'stat::stataccumulator::v()'],['../structtensor__def_1_1coolistelem.html#a67b9432a8f7621a51129b48e3749bdf0',1,'tensor_def::coolistelem::v()']]],
+  ['var',['var',['../namespacestat.html#aa03a5f469d96e4b6448153de00af9d08',1,'stat']]]
 ];

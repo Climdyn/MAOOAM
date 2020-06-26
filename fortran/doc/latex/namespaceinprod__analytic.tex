@@ -2,857 +2,615 @@
 \label{namespaceinprod__analytic}\index{inprod\+\_\+analytic@{inprod\+\_\+analytic}}
 
 
-Inner products between the truncated set of basis functions for the ocean and atmosphere streamfunction fields. These are partly calculated using the analytical expressions from Cehelsky, P., \& Tung, K. K. \+: Theories of multiple equilibria and weather regimes-\/A critical reexamination. Part II\+: Baroclinic two-\/layer models. Journal of the atmospheric sciences, 44(21), 3282-\/3303, 1987.  
+Inner products between the truncated set of basis functions for the ocean and atmosphere streamfunction fields.  
 
 
 \subsection*{Data Types}
 \begin{DoxyCompactItemize}
 \item 
-type \hyperlink{structinprod__analytic_1_1atm__tensors}{atm\+\_\+tensors}
-\begin{DoxyCompactList}\small\item\em Type holding the atmospheric inner products tensors. \end{DoxyCompactList}\item 
-type \hyperlink{structinprod__analytic_1_1atm__wavenum}{atm\+\_\+wavenum}
-\begin{DoxyCompactList}\small\item\em Atmospheric bloc specification type. \end{DoxyCompactList}\item 
-type \hyperlink{structinprod__analytic_1_1ocean__tensors}{ocean\+\_\+tensors}
-\begin{DoxyCompactList}\small\item\em Type holding the oceanic inner products tensors. \end{DoxyCompactList}\item 
-type \hyperlink{structinprod__analytic_1_1ocean__wavenum}{ocean\+\_\+wavenum}
-\begin{DoxyCompactList}\small\item\em Oceanic bloc specification type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+type \hyperlink{structinprod__analytic_1_1atmosphereinnerproducts}{atmosphereinnerproducts}
+\begin{DoxyCompactList}\small\item\em Class holding the atmospheric inner products functions. \end{DoxyCompactList}\item 
+type \hyperlink{structinprod__analytic_1_1atmosphericwavenumber}{atmosphericwavenumber}
+\begin{DoxyCompactList}\small\item\em Atmospheric bloc specification object. \end{DoxyCompactList}\item 
+type \hyperlink{structinprod__analytic_1_1innerproducts}{innerproducts}
+\begin{DoxyCompactList}\small\item\em Global class for the inner products. Contains also the modes informations. \end{DoxyCompactList}\item 
+type \hyperlink{structinprod__analytic_1_1oceanicwavenumber}{oceanicwavenumber}
+\begin{DoxyCompactList}\small\item\em Oceanic bloc specification object. \end{DoxyCompactList}\item 
+type \hyperlink{structinprod__analytic_1_1oceaninnerproducts}{oceaninnerproducts}
+\begin{DoxyCompactList}\small\item\em Class holding the oceanic inner products functions. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Functions/\+Subroutines}
 \begin{DoxyCompactItemize}
 \item 
-real(kind=8) function \hyperlink{namespaceinprod__analytic_a65ce3c65ea7e796a09b702d3c0f63fe0}{b1} (Pi, Pj, Pk)
-\begin{DoxyCompactList}\small\item\em Cehelsky \& Tung Helper functions. \end{DoxyCompactList}\item 
-real(kind=8) function \hyperlink{namespaceinprod__analytic_ac3804db9421130d611b222d8b12c1882}{b2} (Pi, Pj, Pk)
-\begin{DoxyCompactList}\small\item\em Cehelsky \& Tung Helper functions. \end{DoxyCompactList}\item 
-real(kind=8) function \hyperlink{namespaceinprod__analytic_ac500ef2ae885d78a4f4558392a92fd0c}{delta} (r)
-\begin{DoxyCompactList}\small\item\em Integer Dirac delta function. \end{DoxyCompactList}\item 
-real(kind=8) function \hyperlink{namespaceinprod__analytic_a7e49045b5dd4cf8d0a4eb096570e8f5c}{flambda} (r)
-\begin{DoxyCompactList}\small\item\em \char`\"{}\+Odd or even\char`\"{} function \end{DoxyCompactList}\item 
-real(kind=8) function \hyperlink{namespaceinprod__analytic_a90a2b9840d6c77f13aaadd7e0537800c}{s1} (Pj, Pk, Mj, Hk)
-\begin{DoxyCompactList}\small\item\em Cehelsky \& Tung Helper functions. \end{DoxyCompactList}\item 
-real(kind=8) function \hyperlink{namespaceinprod__analytic_a319a35a215ad426474c9a2beb4d85bbb}{s2} (Pj, Pk, Mj, Hk)
-\begin{DoxyCompactList}\small\item\em Cehelsky \& Tung Helper functions. \end{DoxyCompactList}\item 
-real(kind=8) function \hyperlink{namespaceinprod__analytic_a671ca8c3aae1db0a453a13e94462baa0}{s3} (Pj, Pk, Hj, Hk)
-\begin{DoxyCompactList}\small\item\em Cehelsky \& Tung Helper functions. \end{DoxyCompactList}\item 
-real(kind=8) function \hyperlink{namespaceinprod__analytic_a8dacf930ffdf8fd09da0a77bfd4d3a4b}{s4} (Pj, Pk, Hj, Hk)
-\begin{DoxyCompactList}\small\item\em Cehelsky \& Tung Helper functions. \end{DoxyCompactList}\item 
-real(kind=8) function \hyperlink{namespaceinprod__analytic_afc3e503e1fd9774693f02e0fe87ec63a}{calculate\+\_\+a} (i, j)
+real(kind=8) function \hyperlink{namespaceinprod__analytic_a64153fea3801b0768d3b5122da23b324}{calculate\+\_\+a} (self, i, j)
 \begin{DoxyCompactList}\small\item\em Eigenvalues of the Laplacian (atmospheric) \end{DoxyCompactList}\item 
-real(kind=8) function \hyperlink{namespaceinprod__analytic_a63625452db6424cf46aa93bb9ce3e2f2}{calculate\+\_\+b} (i, j, k)
+real(kind=8) function \hyperlink{namespaceinprod__analytic_a5608ef2b86882c7055455fbd785a8f84}{calculate\+\_\+b} (self, i, j, k)
 \begin{DoxyCompactList}\small\item\em Streamfunction advection terms (atmospheric) \end{DoxyCompactList}\item 
-real(kind=8) function \hyperlink{namespaceinprod__analytic_aa242adb49ed57168cfd281c90ddd6490}{calculate\+\_\+c\+\_\+atm} (i, j)
+real(kind=8) function \hyperlink{namespaceinprod__analytic_aa0b310b730d6df3d09a565a09aa62a22}{calculate\+\_\+c\+\_\+atm} (self, i, j)
 \begin{DoxyCompactList}\small\item\em Beta term for the atmosphere. \end{DoxyCompactList}\item 
-real(kind=8) function \hyperlink{namespaceinprod__analytic_a519a70cc6ad55be09a56df9753e43e61}{calculate\+\_\+d} (i, j)
+real(kind=8) function \hyperlink{namespaceinprod__analytic_ab270711bbfe233c1182dca363f80ec41}{calculate\+\_\+d} (self, i, j)
 \begin{DoxyCompactList}\small\item\em Forcing of the ocean on the atmosphere. \end{DoxyCompactList}\item 
-real(kind=8) function \hyperlink{namespaceinprod__analytic_afa66e718a91ec595e483cb20befce6a6}{calculate\+\_\+g} (i, j, k)
+real(kind=8) function \hyperlink{namespaceinprod__analytic_ae90415e2fe9f94483e4b353afc11d245}{calculate\+\_\+g} (self, i, j, k)
 \begin{DoxyCompactList}\small\item\em Temperature advection terms (atmospheric) \end{DoxyCompactList}\item 
-real(kind=8) function \hyperlink{namespaceinprod__analytic_a5cdb72e3766b95108cef81b2cff503f9}{calculate\+\_\+s} (i, j)
+real(kind=8) function \hyperlink{namespaceinprod__analytic_a3ca3072c7041b05f960b841dbcc51979}{calculate\+\_\+s} (self, i, j)
 \begin{DoxyCompactList}\small\item\em Forcing (thermal) of the ocean on the atmosphere. \end{DoxyCompactList}\item 
-real(kind=8) function \hyperlink{namespaceinprod__analytic_a084d554f278704061269b6bdf0b85053}{calculate\+\_\+k} (i, j)
+real(kind=8) function \hyperlink{namespaceinprod__analytic_a25c4aee768622508f24ea32ce9258618}{calculate\+\_\+k} (self, i, j)
 \begin{DoxyCompactList}\small\item\em Forcing of the atmosphere on the ocean. \end{DoxyCompactList}\item 
-real(kind=8) function \hyperlink{namespaceinprod__analytic_a745462230d6120d9486aa7cb724322f5}{calculate\+\_\+m} (i, j)
+real(kind=8) function \hyperlink{namespaceinprod__analytic_a04bacbacbd212ad46418336455c30fb4}{calculate\+\_\+m} (self, i, j)
 \begin{DoxyCompactList}\small\item\em Forcing of the ocean fields on the ocean. \end{DoxyCompactList}\item 
-real(kind=8) function \hyperlink{namespaceinprod__analytic_af3507292836d9e87909740e9d8a0f9bc}{calculate\+\_\+n} (i, j)
+real(kind=8) function \hyperlink{namespaceinprod__analytic_a83197d7b47ce78f414762a1d8fe410bf}{calculate\+\_\+n} (self, i, j)
 \begin{DoxyCompactList}\small\item\em Beta term for the ocean. \end{DoxyCompactList}\item 
-real(kind=8) function \hyperlink{namespaceinprod__analytic_ac8f50f326a84d5b206ed4cf5c86c4301}{calculate\+\_\+o} (i, j, k)
+real(kind=8) function \hyperlink{namespaceinprod__analytic_ad8d3f48abb40cd01056bbb15c4c52be6}{calculate\+\_\+o} (self, i, j, k)
 \begin{DoxyCompactList}\small\item\em Temperature advection term (passive scalar) \end{DoxyCompactList}\item 
-real(kind=8) function \hyperlink{namespaceinprod__analytic_aaa451a1ceea496bac284d4b71c06b4ee}{calculate\+\_\+c\+\_\+oc} (i, j, k)
+real(kind=8) function \hyperlink{namespaceinprod__analytic_a4040642a04e9a16f23b51fcff998c513}{calculate\+\_\+c\+\_\+oc} (self, i, j, k)
 \begin{DoxyCompactList}\small\item\em Streamfunction advection terms (oceanic) \end{DoxyCompactList}\item 
-real(kind=8) function \hyperlink{namespaceinprod__analytic_a3ce2bc9a209cef35849d78e829cfbe5a}{calculate\+\_\+w} (i, j)
+real(kind=8) function \hyperlink{namespaceinprod__analytic_a2d96b61d6e18b90638227c6f82042281}{calculate\+\_\+w} (self, i, j)
 \begin{DoxyCompactList}\small\item\em Short-\/wave radiative forcing of the ocean. \end{DoxyCompactList}\item 
-subroutine, public \hyperlink{namespaceinprod__analytic_a7491dd2b8ba26eb10d160eb0bf072e56}{init\+\_\+inprod}
-\begin{DoxyCompactList}\small\item\em Initialisation of the inner product. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Variables}
-\begin{DoxyCompactItemize}
-\item 
-type(\hyperlink{structinprod__analytic_1_1atm__wavenum}{atm\+\_\+wavenum}), dimension(\+:), allocatable, public \hyperlink{namespaceinprod__analytic_aa6b6ebedac44495720ffe649bc937a56}{awavenum}
-\begin{DoxyCompactList}\small\item\em Atmospheric blocs specification. \end{DoxyCompactList}\item 
-type(\hyperlink{structinprod__analytic_1_1ocean__wavenum}{ocean\+\_\+wavenum}), dimension(\+:), allocatable, public \hyperlink{namespaceinprod__analytic_a7273713c6b1a079e1c653e8b8d2fe089}{owavenum}
-\begin{DoxyCompactList}\small\item\em Oceanic blocs specification. \end{DoxyCompactList}\item 
-type(\hyperlink{structinprod__analytic_1_1atm__tensors}{atm\+\_\+tensors}), public \hyperlink{namespaceinprod__analytic_a6f4fe9aa292d78b871e5498e411d1297}{atmos}
-\begin{DoxyCompactList}\small\item\em Atmospheric tensors. \end{DoxyCompactList}\item 
-type(\hyperlink{structinprod__analytic_1_1ocean__tensors}{ocean\+\_\+tensors}), public \hyperlink{namespaceinprod__analytic_ac691a1258fb0a341e2ba5b4811be1c0b}{ocean}
-\begin{DoxyCompactList}\small\item\em Oceanic tensors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+subroutine \hyperlink{namespaceinprod__analytic_ad2e5c28272f877bf96af8ee821004386}{init\+\_\+inner\+\_\+products} (inner\+\_\+products, model\+\_\+config)
+\begin{DoxyCompactList}\small\item\em Initialization routine for the inner products functions. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespaceinprod__analytic_a1319e98f839daff8d840469929c349fb}{delete\+\_\+inner\+\_\+products} (inner\+\_\+products)
+\begin{DoxyCompactList}\small\item\em Routine to clean a inner products global object. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-Inner products between the truncated set of basis functions for the ocean and atmosphere streamfunction fields. These are partly calculated using the analytical expressions from Cehelsky, P., \& Tung, K. K. \+: Theories of multiple equilibria and weather regimes-\/A critical reexamination. Part II\+: Baroclinic two-\/layer models. Journal of the atmospheric sciences, 44(21), 3282-\/3303, 1987. 
+Inner products between the truncated set of basis functions for the ocean and atmosphere streamfunction fields. 
 
-\begin{DoxyCopyright}{Copyright}
-2015 Lesley De Cruz \& Jonathan Demaeyer. See \hyperlink{LICENSE_8txt}{L\+I\+C\+E\+N\+S\+E.\+txt} for license information. 
-\end{DoxyCopyright}
 \begin{DoxyRemark}{Remarks}
-Generated Fortran90/95 code from inprod\+\_\+analytic.\+lua 
+These are partly calculated using the analytical expressions from Cehelsky, P., \& Tung, K. K. \+: Theories of multiple equilibria and weather regimes-\/A critical reexamination. Part II\+: Baroclinic two-\/layer models. Journal of the atmospheric sciences, 44(21), 3282-\/3303, 1987. 
 \end{DoxyRemark}
+\begin{DoxyCopyright}{Copyright}
+2015-\/2020 Lesley De Cruz \& Jonathan Demaeyer. See L\+I\+C\+E\+N\+S\+E.\+txt for license information. 
+\end{DoxyCopyright}
 
 
 \subsection{Function/\+Subroutine Documentation}
-\index{inprod\+\_\+analytic@{inprod\+\_\+analytic}!b1@{b1}}
-\index{b1@{b1}!inprod\+\_\+analytic@{inprod\+\_\+analytic}}
-\subsubsection[{\texorpdfstring{b1(\+Pi, Pj, Pk)}{b1(Pi, Pj, Pk)}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8) function inprod\+\_\+analytic\+::b1 (
-\begin{DoxyParamCaption}
-\item[{integer}]{Pi, }
-\item[{integer}]{Pj, }
-\item[{integer}]{Pk}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespaceinprod__analytic_a65ce3c65ea7e796a09b702d3c0f63fe0}{}\label{namespaceinprod__analytic_a65ce3c65ea7e796a09b702d3c0f63fe0}
-
-
-Cehelsky \& Tung Helper functions. 
-
-
-
-Definition at line 100 of file inprod\+\_\+analytic.\+f90.
-
-
-\begin{DoxyCode}
-100     \textcolor{keywordtype}{INTEGER} :: pi,pj,pk
-101     b1 = (pk + pj) / \textcolor{keywordtype}{REAL}(pi)
-\end{DoxyCode}
-\index{inprod\+\_\+analytic@{inprod\+\_\+analytic}!b2@{b2}}
-\index{b2@{b2}!inprod\+\_\+analytic@{inprod\+\_\+analytic}}
-\subsubsection[{\texorpdfstring{b2(\+Pi, Pj, Pk)}{b2(Pi, Pj, Pk)}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8) function inprod\+\_\+analytic\+::b2 (
-\begin{DoxyParamCaption}
-\item[{integer}]{Pi, }
-\item[{integer}]{Pj, }
-\item[{integer}]{Pk}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespaceinprod__analytic_ac3804db9421130d611b222d8b12c1882}{}\label{namespaceinprod__analytic_ac3804db9421130d611b222d8b12c1882}
-
-
-Cehelsky \& Tung Helper functions. 
-
-
-
-Definition at line 106 of file inprod\+\_\+analytic.\+f90.
-
-
-\begin{DoxyCode}
-106     \textcolor{keywordtype}{INTEGER} :: pi,pj,pk
-107     b2 = (pk - pj) / \textcolor{keywordtype}{REAL}(pi)
-\end{DoxyCode}
+\mbox{\Hypertarget{namespaceinprod__analytic_a64153fea3801b0768d3b5122da23b324}\label{namespaceinprod__analytic_a64153fea3801b0768d3b5122da23b324}} 
 \index{inprod\+\_\+analytic@{inprod\+\_\+analytic}!calculate\+\_\+a@{calculate\+\_\+a}}
 \index{calculate\+\_\+a@{calculate\+\_\+a}!inprod\+\_\+analytic@{inprod\+\_\+analytic}}
-\subsubsection[{\texorpdfstring{calculate\+\_\+a(i, j)}{calculate_a(i, j)}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8) function inprod\+\_\+analytic\+::calculate\+\_\+a (
-\begin{DoxyParamCaption}
-\item[{integer, intent(in)}]{i, }
-\item[{integer, intent(in)}]{j}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespaceinprod__analytic_afc3e503e1fd9774693f02e0fe87ec63a}{}\label{namespaceinprod__analytic_afc3e503e1fd9774693f02e0fe87ec63a}
+\subsubsection{\texorpdfstring{calculate\+\_\+a()}{calculate\_a()}}
+{\footnotesize\ttfamily real(kind=8) function inprod\+\_\+analytic\+::calculate\+\_\+a (\begin{DoxyParamCaption}\item[{class(\hyperlink{structinprod__analytic_1_1atmosphereinnerproducts}{atmosphereinnerproducts}), intent(in)}]{self,  }\item[{integer, intent(in)}]{i,  }\item[{integer, intent(in)}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
 
 
 Eigenvalues of the Laplacian (atmospheric) 
 
 $ a_{i,j} = (F_i, \nabla^2 F_j)$ . 
 
-Definition at line 164 of file inprod\+\_\+analytic.\+f90.
+Definition at line 179 of file inprod\+\_\+analytic.\+f90.
 
 
 \begin{DoxyCode}
-164     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)} :: i,j
-165     \textcolor{keywordtype}{TYPE}(atm\_wavenum) :: ti
-166     
-167     calculate\_a = 0.d0
-168     \textcolor{keywordflow}{IF} (i==j) \textcolor{keywordflow}{THEN}
-169        ti = awavenum(i)
-170        calculate\_a = -(n**2) * ti%Nx**2 - ti%Ny**2
-171 \textcolor{keywordflow}{    END IF}
+179     \textcolor{keywordtype}{CLASS}(atmosphereinnerproducts), \textcolor{keywordtype}{INTENT(IN)} :: self
+180     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)} :: i,j
+181     \textcolor{keywordtype}{TYPE}(atmosphericwavenumber) :: ti
+182     
+183     calculate\_a = 0.d0
+184     \textcolor{keywordflow}{IF} (i==j) \textcolor{keywordflow}{THEN}
+185       ti = self%inner\_products%awavenum(i)
+186       calculate\_a = -(self%inner\_products%model\_config%physics%n**2) * ti%Nx**2 - ti%Ny**2
+187 \textcolor{keywordflow}{    END IF}
 \end{DoxyCode}
+\mbox{\Hypertarget{namespaceinprod__analytic_a5608ef2b86882c7055455fbd785a8f84}\label{namespaceinprod__analytic_a5608ef2b86882c7055455fbd785a8f84}} 
 \index{inprod\+\_\+analytic@{inprod\+\_\+analytic}!calculate\+\_\+b@{calculate\+\_\+b}}
 \index{calculate\+\_\+b@{calculate\+\_\+b}!inprod\+\_\+analytic@{inprod\+\_\+analytic}}
-\subsubsection[{\texorpdfstring{calculate\+\_\+b(i, j, k)}{calculate_b(i, j, k)}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8) function inprod\+\_\+analytic\+::calculate\+\_\+b (
-\begin{DoxyParamCaption}
-\item[{integer, intent(in)}]{i, }
-\item[{integer, intent(in)}]{j, }
-\item[{integer, intent(in)}]{k}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespaceinprod__analytic_a63625452db6424cf46aa93bb9ce3e2f2}{}\label{namespaceinprod__analytic_a63625452db6424cf46aa93bb9ce3e2f2}
+\subsubsection{\texorpdfstring{calculate\+\_\+b()}{calculate\_b()}}
+{\footnotesize\ttfamily real(kind=8) function inprod\+\_\+analytic\+::calculate\+\_\+b (\begin{DoxyParamCaption}\item[{class(\hyperlink{structinprod__analytic_1_1atmosphereinnerproducts}{atmosphereinnerproducts}), intent(in)}]{self,  }\item[{integer, intent(in)}]{i,  }\item[{integer, intent(in)}]{j,  }\item[{integer, intent(in)}]{k }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
 
 
 Streamfunction advection terms (atmospheric) 
 
 $ b_{i,j,k} = (F_i, J(F_j, \nabla^2 F_k))$ . 
 
-Definition at line 178 of file inprod\+\_\+analytic.\+f90.
+Definition at line 194 of file inprod\+\_\+analytic.\+f90.
 
 
 \begin{DoxyCode}
-178     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)} :: i,j,k
-179 
-180     calculate\_b = calculate\_a(k,k) * calculate\_g(i,j,k)
-181 
+194     \textcolor{keywordtype}{CLASS}(atmosphereinnerproducts), \textcolor{keywordtype}{INTENT(IN)} :: self
+195     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)} :: i,j,k
+196 
+197     calculate\_b = self%a(k,k) * self%g(i,j,k)
+198 
 \end{DoxyCode}
+\mbox{\Hypertarget{namespaceinprod__analytic_aa0b310b730d6df3d09a565a09aa62a22}\label{namespaceinprod__analytic_aa0b310b730d6df3d09a565a09aa62a22}} 
 \index{inprod\+\_\+analytic@{inprod\+\_\+analytic}!calculate\+\_\+c\+\_\+atm@{calculate\+\_\+c\+\_\+atm}}
 \index{calculate\+\_\+c\+\_\+atm@{calculate\+\_\+c\+\_\+atm}!inprod\+\_\+analytic@{inprod\+\_\+analytic}}
-\subsubsection[{\texorpdfstring{calculate\+\_\+c\+\_\+atm(i, j)}{calculate_c_atm(i, j)}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8) function inprod\+\_\+analytic\+::calculate\+\_\+c\+\_\+atm (
-\begin{DoxyParamCaption}
-\item[{integer, intent(in)}]{i, }
-\item[{integer, intent(in)}]{j}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespaceinprod__analytic_aa242adb49ed57168cfd281c90ddd6490}{}\label{namespaceinprod__analytic_aa242adb49ed57168cfd281c90ddd6490}
+\subsubsection{\texorpdfstring{calculate\+\_\+c\+\_\+atm()}{calculate\_c\_atm()}}
+{\footnotesize\ttfamily real(kind=8) function inprod\+\_\+analytic\+::calculate\+\_\+c\+\_\+atm (\begin{DoxyParamCaption}\item[{class(\hyperlink{structinprod__analytic_1_1atmosphereinnerproducts}{atmosphereinnerproducts}), intent(in)}]{self,  }\item[{integer, intent(in)}]{i,  }\item[{integer, intent(in)}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
 
 
 Beta term for the atmosphere. 
 
 $ c_{i,j} = (F_i, \partial_x F_j)$ . 
 
-Definition at line 188 of file inprod\+\_\+analytic.\+f90.
+Definition at line 205 of file inprod\+\_\+analytic.\+f90.
 
 
 \begin{DoxyCode}
-188     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)} :: i,j
-189     \textcolor{keywordtype}{TYPE}(atm\_wavenum) :: ti, tj
-190 
-191     ti = awavenum(i)
-192     tj = awavenum(j)
-193     calculate\_c\_atm = 0.d0
-194     \textcolor{keywordflow}{IF} ((ti%typ == \textcolor{stringliteral}{"K"}) .AND. (tj%typ == \textcolor{stringliteral}{"L"})) \textcolor{keywordflow}{THEN} 
-195        calculate\_c\_atm = n * ti%M * delta(ti%M - tj%H) * delta(ti%P - tj%P)
-196     \textcolor{keywordflow}{ELSE} \textcolor{keywordflow}{IF} ((ti%typ == \textcolor{stringliteral}{"L"}) .AND. (tj%typ == \textcolor{stringliteral}{"K"})) \textcolor{keywordflow}{THEN}
-197        ti = awavenum(j)
-198        tj = awavenum(i)
-199        calculate\_c\_atm = - n * ti%M * delta(ti%M - tj%H) * delta(ti%P - tj%P)
-200 \textcolor{keywordflow}{    END IF}
-201     
+205     \textcolor{keywordtype}{CLASS}(atmosphereinnerproducts), \textcolor{keywordtype}{INTENT(IN)} :: self
+206     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)} :: i,j
+207     \textcolor{keywordtype}{TYPE}(atmosphericwavenumber) :: ti, tj
+208 
+209     ti = self%inner\_products%awavenum(i)
+210     tj = self%inner\_products%awavenum(j)
+211     calculate\_c\_atm = 0.d0
+212     \textcolor{keywordflow}{IF} ((ti%typ == \textcolor{stringliteral}{"K"}) .AND. (tj%typ == \textcolor{stringliteral}{"L"})) \textcolor{keywordflow}{THEN} 
+213       calculate\_c\_atm = ti%M * delta(ti%M - tj%H) * delta(ti%P - tj%P)
+214     \textcolor{keywordflow}{ELSE} \textcolor{keywordflow}{IF} ((ti%typ == \textcolor{stringliteral}{"L"}) .AND. (tj%typ == \textcolor{stringliteral}{"K"})) \textcolor{keywordflow}{THEN}
+215       ti = self%inner\_products%awavenum(j)
+216       tj = self%inner\_products%awavenum(i)
+217       calculate\_c\_atm = - ti%M * delta(ti%M - tj%H) * delta(ti%P - tj%P)
+218 \textcolor{keywordflow}{    END IF}
+219     calculate\_c\_atm = self%inner\_products%model\_config%physics%n * calculate\_c\_atm
 \end{DoxyCode}
+\mbox{\Hypertarget{namespaceinprod__analytic_a4040642a04e9a16f23b51fcff998c513}\label{namespaceinprod__analytic_a4040642a04e9a16f23b51fcff998c513}} 
 \index{inprod\+\_\+analytic@{inprod\+\_\+analytic}!calculate\+\_\+c\+\_\+oc@{calculate\+\_\+c\+\_\+oc}}
 \index{calculate\+\_\+c\+\_\+oc@{calculate\+\_\+c\+\_\+oc}!inprod\+\_\+analytic@{inprod\+\_\+analytic}}
-\subsubsection[{\texorpdfstring{calculate\+\_\+c\+\_\+oc(i, j, k)}{calculate_c_oc(i, j, k)}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8) function inprod\+\_\+analytic\+::calculate\+\_\+c\+\_\+oc (
-\begin{DoxyParamCaption}
-\item[{integer, intent(in)}]{i, }
-\item[{integer, intent(in)}]{j, }
-\item[{integer, intent(in)}]{k}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespaceinprod__analytic_aaa451a1ceea496bac284d4b71c06b4ee}{}\label{namespaceinprod__analytic_aaa451a1ceea496bac284d4b71c06b4ee}
+\subsubsection{\texorpdfstring{calculate\+\_\+c\+\_\+oc()}{calculate\_c\_oc()}}
+{\footnotesize\ttfamily real(kind=8) function inprod\+\_\+analytic\+::calculate\+\_\+c\+\_\+oc (\begin{DoxyParamCaption}\item[{class(\hyperlink{structinprod__analytic_1_1oceaninnerproducts}{oceaninnerproducts}), intent(in)}]{self,  }\item[{integer, intent(in)}]{i,  }\item[{integer, intent(in)}]{j,  }\item[{integer, intent(in)}]{k }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
 
 
 Streamfunction advection terms (oceanic) 
 
 $ C_{i,j,k} = (\eta_i, J(\eta_j,\nabla^2 \eta_k))$ . 
 
-Definition at line 412 of file inprod\+\_\+analytic.\+f90.
+Definition at line 438 of file inprod\+\_\+analytic.\+f90.
 
 
 \begin{DoxyCode}
-412     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)} :: i,j,k
-413 
-414     calculate\_c\_oc = calculate\_m(k,k) * calculate\_o(i,j,k)
-415 
+438     \textcolor{keywordtype}{CLASS}(oceaninnerproducts), \textcolor{keywordtype}{INTENT(IN)} :: self
+439     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)} :: i,j,k
+440 
+441     calculate\_c\_oc = self%M(k,k) * self%O(i,j,k)
+442 
 \end{DoxyCode}
+\mbox{\Hypertarget{namespaceinprod__analytic_ab270711bbfe233c1182dca363f80ec41}\label{namespaceinprod__analytic_ab270711bbfe233c1182dca363f80ec41}} 
 \index{inprod\+\_\+analytic@{inprod\+\_\+analytic}!calculate\+\_\+d@{calculate\+\_\+d}}
 \index{calculate\+\_\+d@{calculate\+\_\+d}!inprod\+\_\+analytic@{inprod\+\_\+analytic}}
-\subsubsection[{\texorpdfstring{calculate\+\_\+d(i, j)}{calculate_d(i, j)}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8) function inprod\+\_\+analytic\+::calculate\+\_\+d (
-\begin{DoxyParamCaption}
-\item[{integer, intent(in)}]{i, }
-\item[{integer, intent(in)}]{j}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespaceinprod__analytic_a519a70cc6ad55be09a56df9753e43e61}{}\label{namespaceinprod__analytic_a519a70cc6ad55be09a56df9753e43e61}
+\subsubsection{\texorpdfstring{calculate\+\_\+d()}{calculate\_d()}}
+{\footnotesize\ttfamily real(kind=8) function inprod\+\_\+analytic\+::calculate\+\_\+d (\begin{DoxyParamCaption}\item[{class(\hyperlink{structinprod__analytic_1_1atmosphereinnerproducts}{atmosphereinnerproducts}), intent(in)}]{self,  }\item[{integer, intent(in)}]{i,  }\item[{integer, intent(in)}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
 
 
 Forcing of the ocean on the atmosphere. 
 
 $ d_{i,j} = (F_i, \nabla^2 \eta_j)$ . 
 
-Definition at line 208 of file inprod\+\_\+analytic.\+f90.
+Definition at line 226 of file inprod\+\_\+analytic.\+f90.
 
 
 \begin{DoxyCode}
-208     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)} :: i,j
-209 
-210     calculate\_d=calculate\_s(i,j) * calculate\_m(j,j)
-211 
+226     \textcolor{keywordtype}{CLASS}(atmosphereinnerproducts), \textcolor{keywordtype}{INTENT(IN)} :: self
+227     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)} :: i,j
+228 
+229     calculate\_d=self%s(i,j) * self%inner\_products%ocean%M(j,j)
+230 
 \end{DoxyCode}
+\mbox{\Hypertarget{namespaceinprod__analytic_ae90415e2fe9f94483e4b353afc11d245}\label{namespaceinprod__analytic_ae90415e2fe9f94483e4b353afc11d245}} 
 \index{inprod\+\_\+analytic@{inprod\+\_\+analytic}!calculate\+\_\+g@{calculate\+\_\+g}}
 \index{calculate\+\_\+g@{calculate\+\_\+g}!inprod\+\_\+analytic@{inprod\+\_\+analytic}}
-\subsubsection[{\texorpdfstring{calculate\+\_\+g(i, j, k)}{calculate_g(i, j, k)}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8) function inprod\+\_\+analytic\+::calculate\+\_\+g (
-\begin{DoxyParamCaption}
-\item[{integer, intent(in)}]{i, }
-\item[{integer, intent(in)}]{j, }
-\item[{integer, intent(in)}]{k}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespaceinprod__analytic_afa66e718a91ec595e483cb20befce6a6}{}\label{namespaceinprod__analytic_afa66e718a91ec595e483cb20befce6a6}
+\subsubsection{\texorpdfstring{calculate\+\_\+g()}{calculate\_g()}}
+{\footnotesize\ttfamily real(kind=8) function inprod\+\_\+analytic\+::calculate\+\_\+g (\begin{DoxyParamCaption}\item[{class(\hyperlink{structinprod__analytic_1_1atmosphereinnerproducts}{atmosphereinnerproducts}), intent(in)}]{self,  }\item[{integer, intent(in)}]{i,  }\item[{integer, intent(in)}]{j,  }\item[{integer, intent(in)}]{k }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
 
 
 Temperature advection terms (atmospheric) 
 
 $ g_{i,j,k} = (F_i, J(F_j, F_k))$ . 
 
-Definition at line 218 of file inprod\+\_\+analytic.\+f90.
+Definition at line 237 of file inprod\+\_\+analytic.\+f90.
 
 
 \begin{DoxyCode}
-218     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)} :: i,j,k
-219     \textcolor{keywordtype}{TYPE}(atm\_wavenum) :: ti,tj,tk
-220     \textcolor{keywordtype}{REAL(KIND=8)} :: val,vb1, vb2, vs1, vs2, vs3, vs4
-221     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{DIMENSION(3)} :: a,b
-222     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{DIMENSION(3,3)} :: w
-223     \textcolor{keywordtype}{CHARACTER}, \textcolor{keywordtype}{DIMENSION(3)} :: s
-224     \textcolor{keywordtype}{INTEGER} :: par
-225 
-226     ti = awavenum(i)
-227     tj = awavenum(j)
-228     tk = awavenum(k)
-229 
-230     a(1)=i
-231     a(2)=j
-232     a(3)=k
-233 
-234     val=0.d0
-235 
-236     \textcolor{keywordflow}{IF} ((ti%typ == \textcolor{stringliteral}{"L"}) .AND. (tj%typ == \textcolor{stringliteral}{"L"}) .AND. (tk%typ == \textcolor{stringliteral}{"L"})) \textcolor{keywordflow}{THEN}
-237        
-238        \textcolor{keyword}{CALL }piksrt(3,a,par)
-239 
-240        ti = awavenum(a(1))
-241        tj = awavenum(a(2))
-242        tk = awavenum(a(3))
-243 
-244        vs3 = s3(tj%P,tk%P,tj%H,tk%H)
-245        vs4 = s4(tj%P,tk%P,tj%H,tk%H)
-246        val = vs3 * ((delta(tk%H - tj%H - ti%H) - delta(tk%H &
-247             &- tj%H + ti%H)) * delta(tk%P + tj%P - ti%P) +&
-248             & delta(tk%H + tj%H - ti%H) * (delta(tk%P - tj%P&
-249             & + ti%P) - delta(tk%P - tj%P - ti%P))) + vs4 *&
-250             & ((delta(tk%H + tj%H - ti%H) * delta(tk%P - tj&
-251             &%P - ti%P)) + (delta(tk%H - tj%H + ti%H) -&
-252             & delta(tk%H - tj%H - ti%H)) * (delta(tk%P - tj&
-253             &%P - ti%P) - delta(tk%P - tj%P + ti%P)))
-254     \textcolor{keywordflow}{ELSE}
+237     \textcolor{keywordtype}{CLASS}(atmosphereinnerproducts), \textcolor{keywordtype}{INTENT(IN)} :: self
+238     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)} :: i,j,k
+239     \textcolor{keywordtype}{TYPE}(atmosphericwavenumber) :: ti,tj,tk
+240     \textcolor{keywordtype}{REAL(KIND=8)} :: val,vb1, vb2, vs1, vs2, vs3, vs4
+241     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{DIMENSION(3)} :: a,b
+242     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{DIMENSION(3,3)} :: w
+243     \textcolor{keywordtype}{CHARACTER}, \textcolor{keywordtype}{DIMENSION(3)} :: s
+244     \textcolor{keywordtype}{INTEGER} :: par
+245 
+246     ti = self%inner\_products%awavenum(i)
+247     tj = self%inner\_products%awavenum(j)
+248     tk = self%inner\_products%awavenum(k)
+249 
+250     a(1)=i
+251     a(2)=j
+252     a(3)=k
+253 
+254     val=0.d0
 255 
-256        s(1)=ti%typ
-257        s(2)=tj%typ
-258        s(3)=tk%typ
+256     \textcolor{keywordflow}{IF} ((ti%typ == \textcolor{stringliteral}{"L"}) .AND. (tj%typ == \textcolor{stringliteral}{"L"}) .AND. (tk%typ == \textcolor{stringliteral}{"L"})) \textcolor{keywordflow}{THEN}
+257        
+258       \textcolor{keyword}{CALL }piksrt(3,a,par)
 259 
-260        w(1,:)=isin(\textcolor{stringliteral}{"A"},s)
-261        w(2,:)=isin(\textcolor{stringliteral}{"K"},s)
-262        w(3,:)=isin(\textcolor{stringliteral}{"L"},s)
+260       ti = self%inner\_products%awavenum(a(1))
+261       tj = self%inner\_products%awavenum(a(2))
+262       tk = self%inner\_products%awavenum(a(3))
 263 
-264        \textcolor{keywordflow}{IF} (any(w(1,:)/=0) .AND. any(w(2,:)/=0) .AND. any(w(3,:)/=0)) \textcolor{keywordflow}{THEN}
-265           b=w(:,1)
-266           ti = awavenum(a(b(1)))
-267           tj = awavenum(a(b(2)))
-268           tk = awavenum(a(b(3)))
-269           \textcolor{keyword}{call }piksrt(3,b,par)
-270           vb1 = b1(ti%P,tj%P,tk%P)
-271           vb2 = b2(ti%P,tj%P,tk%P)
-272           val = -2 * sqrt(2.) / pi * tj%M * delta(tj%M - tk%H) * flambda(ti%P + tj%P + tk%P)
-273           \textcolor{keywordflow}{IF} (val /= 0.d0) val = val * (vb1**2 / (vb1**2 - 1) - vb2**2 / (vb2**2 - 1))
-274        \textcolor{keywordflow}{ELSEIF} ((w(2,2)/=0) .AND. (w(2,3)==0) .AND. any(w(3,:)/=0)) \textcolor{keywordflow}{THEN}
-275           ti = awavenum(a(w(2,1)))
-276           tj = awavenum(a(w(2,2)))
-277           tk = awavenum(a(w(3,1)))
-278           b(1)=w(2,1)
-279           b(2)=w(2,2)
-280           b(3)=w(3,1)
-281           \textcolor{keyword}{call }piksrt(3,b,par)
-282           vs1 = s1(tj%P,tk%P,tj%M,tk%H)
-283           vs2 = s2(tj%P,tk%P,tj%M,tk%H)
-284           val = vs1 * (delta(ti%M - tk%H - tj%M) * delta(ti%P -&
-285                & tk%P + tj%P) - delta(ti%M- tk%H - tj%M) *&
-286                & delta(ti%P + tk%P - tj%P) + (delta(tk%H - tj%M&
-287                & + ti%M) + delta(tk%H - tj%M - ti%M)) *&
-288                & delta(tk%P + tj%P - ti%P)) + vs2 * (delta(ti%M&
-289                & - tk%H - tj%M) * delta(ti%P - tk%P - tj%P) +&
-290                & (delta(tk%H - tj%M - ti%M) + delta(ti%M + tk%H&
-291                & - tj%M)) * (delta(ti%P - tk%P + tj%P) -&
-292                & delta(tk%P - tj%P + ti%P)))
-293 \textcolor{keywordflow}{       ENDIF}
-294 \textcolor{keywordflow}{    ENDIF}
-295     calculate\_g=par*val*n
-296  
+264       vs3 = s3(tj%P,tk%P,tj%H,tk%H)
+265       vs4 = s4(tj%P,tk%P,tj%H,tk%H)
+266       val = vs3 * ((delta(tk%H - tj%H - ti%H) - delta(tk%H &
+267         &- tj%H + ti%H)) * delta(tk%P + tj%P - ti%P) +&
+268         & delta(tk%H + tj%H - ti%H) * (delta(tk%P - tj%P&
+269         & + ti%P) - delta(tk%P - tj%P - ti%P))) + vs4 *&
+270         & ((delta(tk%H + tj%H - ti%H) * delta(tk%P - tj&
+271         &%P - ti%P)) + (delta(tk%H - tj%H + ti%H) -&
+272         & delta(tk%H - tj%H - ti%H)) * (delta(tk%P - tj&
+273         &%P - ti%P) - delta(tk%P - tj%P + ti%P)))
+274     \textcolor{keywordflow}{ELSE}
+275 
+276       s(1)=ti%typ
+277       s(2)=tj%typ
+278       s(3)=tk%typ
+279 
+280       w(1,:)=isin(\textcolor{stringliteral}{"A"},s)
+281       w(2,:)=isin(\textcolor{stringliteral}{"K"},s)
+282       w(3,:)=isin(\textcolor{stringliteral}{"L"},s)
+283 
+284       \textcolor{keywordflow}{IF} (any(w(1,:)/=0) .AND. any(w(2,:)/=0) .AND. any(w(3,:)/=0)) \textcolor{keywordflow}{THEN}
+285         b=w(:,1)
+286         ti = self%inner\_products%awavenum(a(b(1)))
+287         tj = self%inner\_products%awavenum(a(b(2)))
+288         tk = self%inner\_products%awavenum(a(b(3)))
+289         \textcolor{keyword}{call }piksrt(3,b,par)
+290         vb1 = b1(ti%P,tj%P,tk%P)
+291         vb2 = b2(ti%P,tj%P,tk%P)
+292         val = -2 * sqrt(2.) / self%inner\_products%model\_config%physics%pi * tj%M * delta(tj%M - tk%H) * 
+      flambda(ti%P + tj%P + tk%P)
+293         \textcolor{keywordflow}{IF} (val /= 0.d0) val = val * (vb1**2 / (vb1**2 - 1) - vb2**2 / (vb2**2 - 1))
+294       \textcolor{keywordflow}{ELSEIF} ((w(2,2)/=0) .AND. (w(2,3)==0) .AND. any(w(3,:)/=0)) \textcolor{keywordflow}{THEN}
+295         ti = self%inner\_products%awavenum(a(w(2,1)))
+296         tj = self%inner\_products%awavenum(a(w(2,2)))
+297         tk = self%inner\_products%awavenum(a(w(3,1)))
+298         b(1)=w(2,1)
+299         b(2)=w(2,2)
+300         b(3)=w(3,1)
+301         \textcolor{keyword}{call }piksrt(3,b,par)
+302         vs1 = s1(tj%P,tk%P,tj%M,tk%H)
+303         vs2 = s2(tj%P,tk%P,tj%M,tk%H)
+304         val = vs1 * (delta(ti%M - tk%H - tj%M) * delta(ti%P -&
+305           & tk%P + tj%P) - delta(ti%M- tk%H - tj%M) *&
+306           & delta(ti%P + tk%P - tj%P) + (delta(tk%H - tj%M&
+307           & + ti%M) + delta(tk%H - tj%M - ti%M)) *&
+308           & delta(tk%P + tj%P - ti%P)) + vs2 * (delta(ti%M&
+309           & - tk%H - tj%M) * delta(ti%P - tk%P - tj%P) +&
+310           & (delta(tk%H - tj%M - ti%M) + delta(ti%M + tk%H&
+311           & - tj%M)) * (delta(ti%P - tk%P + tj%P) -&
+312           & delta(tk%P - tj%P + ti%P)))
+313 \textcolor{keywordflow}{      ENDIF}
+314 \textcolor{keywordflow}{    ENDIF}
+315     calculate\_g=par*val*self%inner\_products%model\_config%physics%n
+316  
 \end{DoxyCode}
+\mbox{\Hypertarget{namespaceinprod__analytic_a25c4aee768622508f24ea32ce9258618}\label{namespaceinprod__analytic_a25c4aee768622508f24ea32ce9258618}} 
 \index{inprod\+\_\+analytic@{inprod\+\_\+analytic}!calculate\+\_\+k@{calculate\+\_\+k}}
 \index{calculate\+\_\+k@{calculate\+\_\+k}!inprod\+\_\+analytic@{inprod\+\_\+analytic}}
-\subsubsection[{\texorpdfstring{calculate\+\_\+k(i, j)}{calculate_k(i, j)}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8) function inprod\+\_\+analytic\+::calculate\+\_\+k (
-\begin{DoxyParamCaption}
-\item[{integer, intent(in)}]{i, }
-\item[{integer, intent(in)}]{j}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespaceinprod__analytic_a084d554f278704061269b6bdf0b85053}{}\label{namespaceinprod__analytic_a084d554f278704061269b6bdf0b85053}
+\subsubsection{\texorpdfstring{calculate\+\_\+k()}{calculate\_k()}}
+{\footnotesize\ttfamily real(kind=8) function inprod\+\_\+analytic\+::calculate\+\_\+k (\begin{DoxyParamCaption}\item[{class(\hyperlink{structinprod__analytic_1_1oceaninnerproducts}{oceaninnerproducts}), intent(in)}]{self,  }\item[{integer, intent(in)}]{i,  }\item[{integer, intent(in)}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
 
 
 Forcing of the atmosphere on the ocean. 
 
 $ K_{i,j} = (\eta_i, \nabla^2 F_j)$ . 
 
-Definition at line 336 of file inprod\+\_\+analytic.\+f90.
+Definition at line 357 of file inprod\+\_\+analytic.\+f90.
 
 
 \begin{DoxyCode}
-336     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)} :: i,j
-337 
-338     calculate\_k = calculate\_s(j,i) * calculate\_a(j,j)
+357     \textcolor{keywordtype}{CLASS}(oceaninnerproducts), \textcolor{keywordtype}{INTENT(IN)} :: self
+358     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)} :: i,j
+359 
+360     calculate\_k = self%inner\_products%atmos%s(j,i) * self%inner\_products%atmos%a(j,j)
 \end{DoxyCode}
+\mbox{\Hypertarget{namespaceinprod__analytic_a04bacbacbd212ad46418336455c30fb4}\label{namespaceinprod__analytic_a04bacbacbd212ad46418336455c30fb4}} 
 \index{inprod\+\_\+analytic@{inprod\+\_\+analytic}!calculate\+\_\+m@{calculate\+\_\+m}}
 \index{calculate\+\_\+m@{calculate\+\_\+m}!inprod\+\_\+analytic@{inprod\+\_\+analytic}}
-\subsubsection[{\texorpdfstring{calculate\+\_\+m(i, j)}{calculate_m(i, j)}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8) function inprod\+\_\+analytic\+::calculate\+\_\+m (
-\begin{DoxyParamCaption}
-\item[{integer, intent(in)}]{i, }
-\item[{integer, intent(in)}]{j}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespaceinprod__analytic_a745462230d6120d9486aa7cb724322f5}{}\label{namespaceinprod__analytic_a745462230d6120d9486aa7cb724322f5}
+\subsubsection{\texorpdfstring{calculate\+\_\+m()}{calculate\_m()}}
+{\footnotesize\ttfamily real(kind=8) function inprod\+\_\+analytic\+::calculate\+\_\+m (\begin{DoxyParamCaption}\item[{class(\hyperlink{structinprod__analytic_1_1oceaninnerproducts}{oceaninnerproducts}), intent(in)}]{self,  }\item[{integer, intent(in)}]{i,  }\item[{integer, intent(in)}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
 
 
 Forcing of the ocean fields on the ocean. 
 
 $ M_{i,j} = (eta_i, \nabla^2 \eta_j)$ . 
 
-Definition at line 345 of file inprod\+\_\+analytic.\+f90.
+Definition at line 367 of file inprod\+\_\+analytic.\+f90.
 
 
 \begin{DoxyCode}
-345     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)} :: i,j
-346     \textcolor{keywordtype}{TYPE}(ocean\_wavenum) :: di
-347 
-348     calculate\_m=0.d0
-349     \textcolor{keywordflow}{IF} (i==j) \textcolor{keywordflow}{THEN}
-350        di = owavenum(i)
-351        calculate\_m = -(n**2) * di%Nx**2 - di%Ny**2
-352 \textcolor{keywordflow}{    END IF}
+367     \textcolor{keywordtype}{CLASS}(oceaninnerproducts), \textcolor{keywordtype}{INTENT(IN)} :: self
+368     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)} :: i,j
+369     \textcolor{keywordtype}{TYPE}(oceanicwavenumber) :: di
+370 
+371     calculate\_m=0.d0
+372     \textcolor{keywordflow}{IF} (i==j) \textcolor{keywordflow}{THEN}
+373       di = self%inner\_products%owavenum(i)
+374       calculate\_m = -(self%inner\_products%model\_config%physics%n**2) * di%Nx**2 - di%Ny**2
+375 \textcolor{keywordflow}{    END IF}
 \end{DoxyCode}
+\mbox{\Hypertarget{namespaceinprod__analytic_a83197d7b47ce78f414762a1d8fe410bf}\label{namespaceinprod__analytic_a83197d7b47ce78f414762a1d8fe410bf}} 
 \index{inprod\+\_\+analytic@{inprod\+\_\+analytic}!calculate\+\_\+n@{calculate\+\_\+n}}
 \index{calculate\+\_\+n@{calculate\+\_\+n}!inprod\+\_\+analytic@{inprod\+\_\+analytic}}
-\subsubsection[{\texorpdfstring{calculate\+\_\+n(i, j)}{calculate_n(i, j)}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8) function inprod\+\_\+analytic\+::calculate\+\_\+n (
-\begin{DoxyParamCaption}
-\item[{integer, intent(in)}]{i, }
-\item[{integer, intent(in)}]{j}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespaceinprod__analytic_af3507292836d9e87909740e9d8a0f9bc}{}\label{namespaceinprod__analytic_af3507292836d9e87909740e9d8a0f9bc}
+\subsubsection{\texorpdfstring{calculate\+\_\+n()}{calculate\_n()}}
+{\footnotesize\ttfamily real(kind=8) function inprod\+\_\+analytic\+::calculate\+\_\+n (\begin{DoxyParamCaption}\item[{class(\hyperlink{structinprod__analytic_1_1oceaninnerproducts}{oceaninnerproducts}), intent(in)}]{self,  }\item[{integer, intent(in)}]{i,  }\item[{integer, intent(in)}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
 
 
 Beta term for the ocean. 
 
 $ N_{i,j} = (\eta_i, \partial_x \eta_j) $. 
 
-Definition at line 359 of file inprod\+\_\+analytic.\+f90.
+Definition at line 382 of file inprod\+\_\+analytic.\+f90.
 
 
 \begin{DoxyCode}
-359     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)} :: i,j
-360     \textcolor{keywordtype}{TYPE}(ocean\_wavenum) :: di,dj
-361     \textcolor{keywordtype}{REAL(KIND=8)} :: val
-362 
-363     di = owavenum(i)
-364     dj = owavenum(j)
-365     calculate\_n = 0.d0
-366     \textcolor{keywordflow}{IF} (dj%H/=di%H) \textcolor{keywordflow}{THEN}
-367        val = delta(di%P - dj%P) * flambda(di%H + dj%H)
-368        calculate\_n = val * (-2) * dj%H * di%H * n / ((dj%H**2 - di%H**2) * pi)
-369 \textcolor{keywordflow}{    ENDIF}
-370         
+382     \textcolor{keywordtype}{CLASS}(oceaninnerproducts), \textcolor{keywordtype}{INTENT(IN)} :: self
+383     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)} :: i,j
+384     \textcolor{keywordtype}{TYPE}(oceanicwavenumber) :: di,dj
+385     \textcolor{keywordtype}{REAL(KIND=8)} :: val
+386 
+387     di = self%inner\_products%owavenum(i)
+388     dj = self%inner\_products%owavenum(j)
+389     calculate\_n = 0.d0
+390     \textcolor{keywordflow}{IF} (dj%H/=di%H) \textcolor{keywordflow}{THEN}
+391       val = delta(di%P - dj%P) * flambda(di%H + dj%H)
+392       calculate\_n = val * (-2) * dj%H * di%H * self%inner\_products%model\_config%physics%n
+393       calculate\_n = calculate\_n / ((dj%H**2 - di%H**2) * self%inner\_products%model\_config%physics%pi)
+394 \textcolor{keywordflow}{    ENDIF}
+395         
 \end{DoxyCode}
+\mbox{\Hypertarget{namespaceinprod__analytic_ad8d3f48abb40cd01056bbb15c4c52be6}\label{namespaceinprod__analytic_ad8d3f48abb40cd01056bbb15c4c52be6}} 
 \index{inprod\+\_\+analytic@{inprod\+\_\+analytic}!calculate\+\_\+o@{calculate\+\_\+o}}
 \index{calculate\+\_\+o@{calculate\+\_\+o}!inprod\+\_\+analytic@{inprod\+\_\+analytic}}
-\subsubsection[{\texorpdfstring{calculate\+\_\+o(i, j, k)}{calculate_o(i, j, k)}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8) function inprod\+\_\+analytic\+::calculate\+\_\+o (
-\begin{DoxyParamCaption}
-\item[{integer, intent(in)}]{i, }
-\item[{integer, intent(in)}]{j, }
-\item[{integer, intent(in)}]{k}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespaceinprod__analytic_ac8f50f326a84d5b206ed4cf5c86c4301}{}\label{namespaceinprod__analytic_ac8f50f326a84d5b206ed4cf5c86c4301}
+\subsubsection{\texorpdfstring{calculate\+\_\+o()}{calculate\_o()}}
+{\footnotesize\ttfamily real(kind=8) function inprod\+\_\+analytic\+::calculate\+\_\+o (\begin{DoxyParamCaption}\item[{class(\hyperlink{structinprod__analytic_1_1oceaninnerproducts}{oceaninnerproducts}), intent(in)}]{self,  }\item[{integer, intent(in)}]{i,  }\item[{integer, intent(in)}]{j,  }\item[{integer, intent(in)}]{k }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
 
 
 Temperature advection term (passive scalar) 
 
 $ O_{i,j,k} = (\eta_i, J(\eta_j, \eta_k))$ . 
 
-Definition at line 377 of file inprod\+\_\+analytic.\+f90.
+Definition at line 402 of file inprod\+\_\+analytic.\+f90.
 
 
 \begin{DoxyCode}
-377     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)} :: i,j,k
-378     \textcolor{keywordtype}{TYPE}(ocean\_wavenum) :: di,dj,dk
-379     \textcolor{keywordtype}{REAL(KIND=8)} :: vs3,vs4,val
-380     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{DIMENSION(3)} :: a
-381     \textcolor{keywordtype}{INTEGER} :: par
-382 
-383     val=0.d0
-384 
-385     a(1)=i
-386     a(2)=j
-387     a(3)=k
-388 
-389     \textcolor{keyword}{CALL }piksrt(3,a,par)
-390 
-391     di = owavenum(a(1))
-392     dj = owavenum(a(2))
-393     dk = owavenum(a(3))
-394 
-395     vs3 = s3(dj%P,dk%P,dj%H,dk%H)
-396     vs4 = s4(dj%P,dk%P,dj%H,dk%H)
-397     val = vs3*((delta(dk%H - dj%H - di%H) - delta(dk%H - dj&
-398          &%H + di%H)) * delta(dk%P + dj%P - di%P) + delta(dk&
-399          &%H + dj%H - di%H) * (delta(dk%P - dj%P + di%P) -&
-400          & delta(dk%P - dj%P - di%P))) + vs4 * ((delta(dk%H &
-401          &+ dj%H - di%H) * delta(dk%P - dj%P - di%P)) +&
-402          & (delta(dk%H - dj%H + di%H) - delta(dk%H - dj%H -&
-403          & di%H)) * (delta(dk%P - dj%P - di%P) - delta(dk%P &
-404          &- dj%P + di%P)))
-405     calculate\_o = par * val * n / 2
+402     \textcolor{keywordtype}{CLASS}(oceaninnerproducts), \textcolor{keywordtype}{INTENT(IN)} :: self
+403     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)} :: i,j,k
+404     \textcolor{keywordtype}{TYPE}(oceanicwavenumber) :: di,dj,dk
+405     \textcolor{keywordtype}{REAL(KIND=8)} :: vs3,vs4,val
+406     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{DIMENSION(3)} :: a
+407     \textcolor{keywordtype}{INTEGER} :: par
+408 
+409     val=0.d0
+410 
+411     a(1)=i
+412     a(2)=j
+413     a(3)=k
+414 
+415     \textcolor{keyword}{CALL }piksrt(3,a,par)
+416 
+417     di = self%inner\_products%owavenum(a(1))
+418     dj = self%inner\_products%owavenum(a(2))
+419     dk = self%inner\_products%owavenum(a(3))
+420 
+421     vs3 = s3(dj%P,dk%P,dj%H,dk%H)
+422     vs4 = s4(dj%P,dk%P,dj%H,dk%H)
+423     val = vs3*((delta(dk%H - dj%H - di%H) - delta(dk%H - dj&
+424       &%H + di%H)) * delta(dk%P + dj%P - di%P) + delta(dk&
+425       &%H + dj%H - di%H) * (delta(dk%P - dj%P + di%P) -&
+426       & delta(dk%P - dj%P - di%P))) + vs4 * ((delta(dk%H &
+427       &+ dj%H - di%H) * delta(dk%P - dj%P - di%P)) +&
+428       & (delta(dk%H - dj%H + di%H) - delta(dk%H - dj%H -&
+429       & di%H)) * (delta(dk%P - dj%P - di%P) - delta(dk%P &
+430       &- dj%P + di%P)))
+431     calculate\_o = par * val * self%inner\_products%model\_config%physics%n / 2
 \end{DoxyCode}
+\mbox{\Hypertarget{namespaceinprod__analytic_a3ca3072c7041b05f960b841dbcc51979}\label{namespaceinprod__analytic_a3ca3072c7041b05f960b841dbcc51979}} 
 \index{inprod\+\_\+analytic@{inprod\+\_\+analytic}!calculate\+\_\+s@{calculate\+\_\+s}}
 \index{calculate\+\_\+s@{calculate\+\_\+s}!inprod\+\_\+analytic@{inprod\+\_\+analytic}}
-\subsubsection[{\texorpdfstring{calculate\+\_\+s(i, j)}{calculate_s(i, j)}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8) function inprod\+\_\+analytic\+::calculate\+\_\+s (
-\begin{DoxyParamCaption}
-\item[{integer, intent(in)}]{i, }
-\item[{integer, intent(in)}]{j}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespaceinprod__analytic_a5cdb72e3766b95108cef81b2cff503f9}{}\label{namespaceinprod__analytic_a5cdb72e3766b95108cef81b2cff503f9}
+\subsubsection{\texorpdfstring{calculate\+\_\+s()}{calculate\_s()}}
+{\footnotesize\ttfamily real(kind=8) function inprod\+\_\+analytic\+::calculate\+\_\+s (\begin{DoxyParamCaption}\item[{class(\hyperlink{structinprod__analytic_1_1atmosphereinnerproducts}{atmosphereinnerproducts}), intent(in)}]{self,  }\item[{integer, intent(in)}]{i,  }\item[{integer, intent(in)}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
 
 
 Forcing (thermal) of the ocean on the atmosphere. 
 
 $ s_{i,j} = (F_i, \eta_j)$ . 
 
-Definition at line 303 of file inprod\+\_\+analytic.\+f90.
+Definition at line 323 of file inprod\+\_\+analytic.\+f90.
 
 
 \begin{DoxyCode}
-303     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)} :: i,j
-304     \textcolor{keywordtype}{TYPE}(atm\_wavenum) :: ti
-305     \textcolor{keywordtype}{TYPE}(ocean\_wavenum) :: dj
-306     \textcolor{keywordtype}{REAL(KIND=8)} :: val
-307     
-308     ti = awavenum(i)
-309     dj = owavenum(j)
-310     val=0.d0
-311     \textcolor{keywordflow}{IF} (ti%typ == \textcolor{stringliteral}{"A"}) \textcolor{keywordflow}{THEN}
-312        val = flambda(dj%H) * flambda(dj%P + ti%P)
-313        \textcolor{keywordflow}{IF} (val /= 0.d0) \textcolor{keywordflow}{THEN}
-314           val = val*8*sqrt(2.)*dj%P/(pi**2 * (dj%P**2 - ti%P**2) * dj%H)
-315 \textcolor{keywordflow}{       END IF}
-316     \textcolor{keywordflow}{ELSEIF} (ti%typ == \textcolor{stringliteral}{"K"}) \textcolor{keywordflow}{THEN}
-317        val = flambda(2 * ti%M + dj%H) * delta(dj%P - ti%P)
-318        \textcolor{keywordflow}{IF} (val /= 0.d0) \textcolor{keywordflow}{THEN}
-319           val = val*4*dj%H/(pi * (-4 * ti%M**2 + dj%H**2))
-320 \textcolor{keywordflow}{       END IF}
-321     \textcolor{keywordflow}{ELSEIF} (ti%typ == \textcolor{stringliteral}{"L"}) \textcolor{keywordflow}{THEN}
-322        val = delta(dj%P - ti%P) * delta(2 * ti%H - dj%H)
-323 \textcolor{keywordflow}{    END IF}
-324     calculate\_s=val
-325     
+323     \textcolor{keywordtype}{CLASS}(atmosphereinnerproducts), \textcolor{keywordtype}{INTENT(IN)} :: self
+324     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)} :: i,j
+325     \textcolor{keywordtype}{TYPE}(atmosphericwavenumber) :: ti
+326     \textcolor{keywordtype}{TYPE}(oceanicwavenumber) :: dj
+327     \textcolor{keywordtype}{REAL(KIND=8)} :: val
+328     
+329     ti = self%inner\_products%awavenum(i)
+330     dj = self%inner\_products%owavenum(j)
+331     val=0.d0
+332     \textcolor{keywordflow}{IF} (ti%typ == \textcolor{stringliteral}{"A"}) \textcolor{keywordflow}{THEN}
+333       val = flambda(dj%H) * flambda(dj%P + ti%P)
+334       \textcolor{keywordflow}{IF} (val /= 0.d0) \textcolor{keywordflow}{THEN}
+335         val = val*8*sqrt(2.)*dj%P/(self%inner\_products%model\_config%physics%pi**2 * (dj%P**2 - ti%P**2) * 
+      dj%H)
+336 \textcolor{keywordflow}{      END IF}
+337     \textcolor{keywordflow}{ELSEIF} (ti%typ == \textcolor{stringliteral}{"K"}) \textcolor{keywordflow}{THEN}
+338       val = flambda(2 * ti%M + dj%H) * delta(dj%P - ti%P)
+339       \textcolor{keywordflow}{IF} (val /= 0.d0) \textcolor{keywordflow}{THEN}
+340         val = val*4*dj%H/(self%inner\_products%model\_config%physics%pi * (-4 * ti%M**2 + dj%H**2))
+341 \textcolor{keywordflow}{      END IF}
+342     \textcolor{keywordflow}{ELSEIF} (ti%typ == \textcolor{stringliteral}{"L"}) \textcolor{keywordflow}{THEN}
+343       val = delta(dj%P - ti%P) * delta(2 * ti%H - dj%H)
+344 \textcolor{keywordflow}{    END IF}
+345     calculate\_s=val
+346     
 \end{DoxyCode}
+\mbox{\Hypertarget{namespaceinprod__analytic_a2d96b61d6e18b90638227c6f82042281}\label{namespaceinprod__analytic_a2d96b61d6e18b90638227c6f82042281}} 
 \index{inprod\+\_\+analytic@{inprod\+\_\+analytic}!calculate\+\_\+w@{calculate\+\_\+w}}
 \index{calculate\+\_\+w@{calculate\+\_\+w}!inprod\+\_\+analytic@{inprod\+\_\+analytic}}
-\subsubsection[{\texorpdfstring{calculate\+\_\+w(i, j)}{calculate_w(i, j)}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8) function inprod\+\_\+analytic\+::calculate\+\_\+w (
-\begin{DoxyParamCaption}
-\item[{integer, intent(in)}]{i, }
-\item[{integer, intent(in)}]{j}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespaceinprod__analytic_a3ce2bc9a209cef35849d78e829cfbe5a}{}\label{namespaceinprod__analytic_a3ce2bc9a209cef35849d78e829cfbe5a}
+\subsubsection{\texorpdfstring{calculate\+\_\+w()}{calculate\_w()}}
+{\footnotesize\ttfamily real(kind=8) function inprod\+\_\+analytic\+::calculate\+\_\+w (\begin{DoxyParamCaption}\item[{class(\hyperlink{structinprod__analytic_1_1oceaninnerproducts}{oceaninnerproducts}), intent(in)}]{self,  }\item[{integer, intent(in)}]{i,  }\item[{integer, intent(in)}]{j }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
 
 
 Short-\/wave radiative forcing of the ocean. 
 
 $ W_{i,j} = (\eta_i, F_j)$ . 
 
-Definition at line 422 of file inprod\+\_\+analytic.\+f90.
+Definition at line 449 of file inprod\+\_\+analytic.\+f90.
 
 
 \begin{DoxyCode}
-422     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)} :: i,j
-423     
-424     calculate\_w = calculate\_s(j,i)
-425 
+449     \textcolor{keywordtype}{CLASS}(oceaninnerproducts), \textcolor{keywordtype}{INTENT(IN)} :: self
+450     \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(IN)} :: i,j
+451     
+452     calculate\_w = self%inner\_products%atmos%s(j,i)
+453 
 \end{DoxyCode}
-\index{inprod\+\_\+analytic@{inprod\+\_\+analytic}!delta@{delta}}
-\index{delta@{delta}!inprod\+\_\+analytic@{inprod\+\_\+analytic}}
-\subsubsection[{\texorpdfstring{delta(r)}{delta(r)}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8) function inprod\+\_\+analytic\+::delta (
-\begin{DoxyParamCaption}
-\item[{integer}]{r}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespaceinprod__analytic_ac500ef2ae885d78a4f4558392a92fd0c}{}\label{namespaceinprod__analytic_ac500ef2ae885d78a4f4558392a92fd0c}
-
-
-Integer Dirac delta function. 
+\mbox{\Hypertarget{namespaceinprod__analytic_a1319e98f839daff8d840469929c349fb}\label{namespaceinprod__analytic_a1319e98f839daff8d840469929c349fb}} 
+\index{inprod\+\_\+analytic@{inprod\+\_\+analytic}!delete\+\_\+inner\+\_\+products@{delete\+\_\+inner\+\_\+products}}
+\index{delete\+\_\+inner\+\_\+products@{delete\+\_\+inner\+\_\+products}!inprod\+\_\+analytic@{inprod\+\_\+analytic}}
+\subsubsection{\texorpdfstring{delete\+\_\+inner\+\_\+products()}{delete\_inner\_products()}}
+{\footnotesize\ttfamily subroutine inprod\+\_\+analytic\+::delete\+\_\+inner\+\_\+products (\begin{DoxyParamCaption}\item[{class(\hyperlink{structinprod__analytic_1_1innerproducts}{innerproducts}), intent(inout), target}]{inner\+\_\+products }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 112 of file inprod\+\_\+analytic.\+f90.
+Routine to clean a inner products global object. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em inner\+\_\+products} & Inner products global object to initialize \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 558 of file inprod\+\_\+analytic.\+f90.
 
 
 \begin{DoxyCode}
-112     \textcolor{keywordtype}{INTEGER} :: r
-113     \textcolor{keywordflow}{IF} (r==0) \textcolor{keywordflow}{THEN}
-114        delta = 1.d0
-115     \textcolor{keywordflow}{ELSE}
-116        delta = 0.d0
-117 \textcolor{keywordflow}{    ENDIF}
+558     \textcolor{keywordtype}{CLASS}(innerproducts), \textcolor{keywordtype}{INTENT(INOUT)}, \textcolor{keywordtype}{TARGET} :: inner\_products
+559 
+560     \textcolor{keywordflow}{IF} (\textcolor{keyword}{allocated}(inner\_products%owavenum)) \textcolor{keyword}{DEALLOCATE}(inner\_products%owavenum)
+561     \textcolor{keywordflow}{IF} (\textcolor{keyword}{allocated}(inner\_products%awavenum)) \textcolor{keyword}{DEALLOCATE}(inner\_products%awavenum)
+562 
+563     inner\_products%initialized = .false.
+564 
 \end{DoxyCode}
-\index{inprod\+\_\+analytic@{inprod\+\_\+analytic}!flambda@{flambda}}
-\index{flambda@{flambda}!inprod\+\_\+analytic@{inprod\+\_\+analytic}}
-\subsubsection[{\texorpdfstring{flambda(r)}{flambda(r)}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8) function inprod\+\_\+analytic\+::flambda (
-\begin{DoxyParamCaption}
-\item[{integer}]{r}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespaceinprod__analytic_a7e49045b5dd4cf8d0a4eb096570e8f5c}{}\label{namespaceinprod__analytic_a7e49045b5dd4cf8d0a4eb096570e8f5c}
-
-
-\char`\"{}\+Odd or even\char`\"{} function 
+\mbox{\Hypertarget{namespaceinprod__analytic_ad2e5c28272f877bf96af8ee821004386}\label{namespaceinprod__analytic_ad2e5c28272f877bf96af8ee821004386}} 
+\index{inprod\+\_\+analytic@{inprod\+\_\+analytic}!init\+\_\+inner\+\_\+products@{init\+\_\+inner\+\_\+products}}
+\index{init\+\_\+inner\+\_\+products@{init\+\_\+inner\+\_\+products}!inprod\+\_\+analytic@{inprod\+\_\+analytic}}
+\subsubsection{\texorpdfstring{init\+\_\+inner\+\_\+products()}{init\_inner\_products()}}
+{\footnotesize\ttfamily subroutine inprod\+\_\+analytic\+::init\+\_\+inner\+\_\+products (\begin{DoxyParamCaption}\item[{class(\hyperlink{structinprod__analytic_1_1innerproducts}{innerproducts}), intent(inout), target}]{inner\+\_\+products,  }\item[{class(\hyperlink{structparams_1_1modelconfiguration}{modelconfiguration}), intent(in), target}]{model\+\_\+config }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 122 of file inprod\+\_\+analytic.\+f90.
+Initialization routine for the inner products functions. 
 
 
-\begin{DoxyCode}
-122     \textcolor{keywordtype}{INTEGER} :: r
-123     \textcolor{keywordflow}{IF} (mod(r,2)==0) \textcolor{keywordflow}{THEN}
-124        flambda = 0.d0
-125     \textcolor{keywordflow}{ELSE}
-126        flambda = 1.d0
-127 \textcolor{keywordflow}{    ENDIF}
-\end{DoxyCode}
-\index{inprod\+\_\+analytic@{inprod\+\_\+analytic}!init\+\_\+inprod@{init\+\_\+inprod}}
-\index{init\+\_\+inprod@{init\+\_\+inprod}!inprod\+\_\+analytic@{inprod\+\_\+analytic}}
-\subsubsection[{\texorpdfstring{init\+\_\+inprod}{init_inprod}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public inprod\+\_\+analytic\+::init\+\_\+inprod (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}\hypertarget{namespaceinprod__analytic_a7491dd2b8ba26eb10d160eb0bf072e56}{}\label{namespaceinprod__analytic_a7491dd2b8ba26eb10d160eb0bf072e56}
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em inner\+\_\+products} & Inner products global object to initialize \\
+\hline
+\mbox{\tt in}  & {\em model\+\_\+config} & Global model configuration object to initialize the inner products with \\
+\hline
+\end{DoxyParams}
 
 
-Initialisation of the inner product. 
-
-
-
-Definition at line 436 of file inprod\+\_\+analytic.\+f90.
+Definition at line 466 of file inprod\+\_\+analytic.\+f90.
 
 
 \begin{DoxyCode}
-436     \textcolor{keywordtype}{INTEGER} :: i,j
-437     \textcolor{keywordtype}{INTEGER} :: allocstat
-438 
-439     \textcolor{keywordflow}{IF} (natm == 0 ) \textcolor{keywordflow}{THEN}
-440        stop \textcolor{stringliteral}{"*** Problem : natm==0 ! ***"}
-441     \textcolor{keywordflow}{ELSEIF} (noc == 0) \textcolor{keywordflow}{then}
-442        stop \textcolor{stringliteral}{"*** Problem : noc==0 ! ***"}
-443 \textcolor{keywordflow}{    END IF}
-444 
-445 
-446     \textcolor{comment}{! Definition of the types and wave numbers tables}
-447 
-448     \textcolor{keyword}{ALLOCATE}(owavenum(noc),awavenum(natm), \hyperlink{namespacestat}{stat}=allocstat)
-449     \textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{"*** Not enough memory ! ***"}
-450 
-451     j=0
-452     \textcolor{keywordflow}{DO} i=1,nbatm
-453        \textcolor{keywordflow}{IF} (ams(i,1)==1) \textcolor{keywordflow}{THEN}
-454           awavenum(j+1)%typ=\textcolor{stringliteral}{'A'}
-455           awavenum(j+2)%typ=\textcolor{stringliteral}{'K'}
-456           awavenum(j+3)%typ=\textcolor{stringliteral}{'L'}
-457 
-458           awavenum(j+1)%P=ams(i,2)
-459           awavenum(j+2)%M=ams(i,1)
-460           awavenum(j+2)%P=ams(i,2)
-461           awavenum(j+3)%H=ams(i,1)
-462           awavenum(j+3)%P=ams(i,2)
-463 
-464           awavenum(j+1)%Ny=\textcolor{keywordtype}{REAL}(ams(i,2))
-465           awavenum(j+2)%Nx=\textcolor{keywordtype}{REAL}(ams(i,1))
-466           awavenum(j+2)%Ny=\textcolor{keywordtype}{REAL}(ams(i,2))
-467           awavenum(j+3)%Nx=\textcolor{keywordtype}{REAL}(ams(i,1))
-468           awavenum(j+3)%Ny=\textcolor{keywordtype}{REAL}(ams(i,2))
-469 
-470           j=j+3
-471        \textcolor{keywordflow}{ELSE}
-472           awavenum(j+1)%typ=\textcolor{stringliteral}{'K'}
-473           awavenum(j+2)%typ=\textcolor{stringliteral}{'L'}
-474 
-475           awavenum(j+1)%M=ams(i,1)
-476           awavenum(j+1)%P=ams(i,2)
-477           awavenum(j+2)%H=ams(i,1)
-478           awavenum(j+2)%P=ams(i,2)
-479 
-480           awavenum(j+1)%Nx=\textcolor{keywordtype}{REAL}(ams(i,1))
-481           awavenum(j+1)%Ny=\textcolor{keywordtype}{REAL}(ams(i,2))
-482           awavenum(j+2)%Nx=\textcolor{keywordtype}{REAL}(ams(i,1))
-483           awavenum(j+2)%Ny=\textcolor{keywordtype}{REAL}(ams(i,2))
-484 
-485           j=j+2
-486 
-487 \textcolor{keywordflow}{       ENDIF}
-488 \textcolor{keywordflow}{    ENDDO}
-489 
-490     \textcolor{keywordflow}{DO} i=1,noc
-491        owavenum(i)%H=oms(i,1)
-492        owavenum(i)%P=oms(i,2)
-493 
-494        owavenum(i)%Nx=oms(i,1)/2.d0
-495        owavenum(i)%Ny=oms(i,2)
-496 
-497 \textcolor{keywordflow}{    ENDDO}
+466     \textcolor{keywordtype}{CLASS}(innerproducts), \textcolor{keywordtype}{INTENT(INOUT)}, \textcolor{keywordtype}{TARGET} :: inner\_products
+467     \textcolor{keywordtype}{CLASS}(modelconfiguration), \textcolor{keywordtype}{INTENT(IN)}, \textcolor{keywordtype}{TARGET} :: model\_config
+468 
+469     \textcolor{keywordtype}{TYPE}(innerproducts), \textcolor{keywordtype}{POINTER} :: ips
+470 
+471     \textcolor{keywordtype}{INTEGER} :: i,j
+472     \textcolor{keywordtype}{INTEGER} :: allocstat
+473 
+474     ips => inner\_products
+475 
+476     \textcolor{keywordflow}{IF} (.NOT.model\_config%initialized) \textcolor{keywordflow}{THEN}
+477       print*, \textcolor{stringliteral}{"Warning: Model configuration not initialized."}
+478       print*, \textcolor{stringliteral}{"Aborting inner products initialization."}
+479       \textcolor{keywordflow}{RETURN}
+480 \textcolor{keywordflow}{    END IF}
+481 
+482     \textcolor{comment}{! Definition of the types and wave numbers tables}
+483 
+484     \textcolor{keywordflow}{IF} (\textcolor{keyword}{allocated}(ips%owavenum)) \textcolor{keyword}{DEALLOCATE}(ips%owavenum)
+485     \textcolor{keyword}{ALLOCATE}(ips%owavenum(model\_config%modes%noc), \hyperlink{namespacestat}{stat}=allocstat)
+486     \textcolor{keywordflow}{IF} (allocstat /= 0) \textcolor{keywordflow}{THEN}
+487       print*, \textcolor{stringliteral}{"*** init\_inner\_products: Problem with allocation! ***"}
+488       stop \textcolor{stringliteral}{"Exiting ..."}
+489 \textcolor{keywordflow}{    END IF}
+490 
+491 
+492     \textcolor{keywordflow}{IF} (\textcolor{keyword}{allocated}(ips%awavenum)) \textcolor{keyword}{DEALLOCATE}(ips%awavenum)
+493     \textcolor{keyword}{ALLOCATE}(ips%awavenum(model\_config%modes%natm), \hyperlink{namespacestat}{stat}=allocstat)
+494     \textcolor{keywordflow}{IF} (allocstat /= 0) \textcolor{keywordflow}{THEN}
+495       print*, \textcolor{stringliteral}{"*** init\_inner\_products: Problem with allocation! ***"}
+496       stop \textcolor{stringliteral}{"Exiting ..."}
+497 \textcolor{keywordflow}{    END IF}
 498 
-499     \textcolor{comment}{! Pointing to the atmospheric inner products functions}
-500 
-501     atmos%a => calculate\_a
-502     atmos%g => calculate\_g
-503     atmos%s => calculate\_s
-504     atmos%b => calculate\_b
-505     atmos%d => calculate\_d
-506     atmos%c => calculate\_c\_atm
-507 
-508     \textcolor{comment}{! Pointing to the oceanic inner products functions}
-509 
-510     ocean%M => calculate\_m
-511     ocean%N => calculate\_n
-512     ocean%O => calculate\_o
-513     ocean%C => calculate\_c\_oc
-514     ocean%W => calculate\_w
-515     ocean%K => calculate\_k
-516 
-\end{DoxyCode}
-\index{inprod\+\_\+analytic@{inprod\+\_\+analytic}!s1@{s1}}
-\index{s1@{s1}!inprod\+\_\+analytic@{inprod\+\_\+analytic}}
-\subsubsection[{\texorpdfstring{s1(\+Pj, Pk, Mj, Hk)}{s1(Pj, Pk, Mj, Hk)}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8) function inprod\+\_\+analytic\+::s1 (
-\begin{DoxyParamCaption}
-\item[{integer}]{Pj, }
-\item[{integer}]{Pk, }
-\item[{integer}]{Mj, }
-\item[{integer}]{Hk}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespaceinprod__analytic_a90a2b9840d6c77f13aaadd7e0537800c}{}\label{namespaceinprod__analytic_a90a2b9840d6c77f13aaadd7e0537800c}
-
-
-Cehelsky \& Tung Helper functions. 
-
-
-
-Definition at line 132 of file inprod\+\_\+analytic.\+f90.
-
-
-\begin{DoxyCode}
-132     \textcolor{keywordtype}{INTEGER} :: pk,pj,mj,hk
-133     s1 = -((pk * mj + pj * hk)) / 2.d0
-\end{DoxyCode}
-\index{inprod\+\_\+analytic@{inprod\+\_\+analytic}!s2@{s2}}
-\index{s2@{s2}!inprod\+\_\+analytic@{inprod\+\_\+analytic}}
-\subsubsection[{\texorpdfstring{s2(\+Pj, Pk, Mj, Hk)}{s2(Pj, Pk, Mj, Hk)}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8) function inprod\+\_\+analytic\+::s2 (
-\begin{DoxyParamCaption}
-\item[{integer}]{Pj, }
-\item[{integer}]{Pk, }
-\item[{integer}]{Mj, }
-\item[{integer}]{Hk}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespaceinprod__analytic_a319a35a215ad426474c9a2beb4d85bbb}{}\label{namespaceinprod__analytic_a319a35a215ad426474c9a2beb4d85bbb}
-
-
-Cehelsky \& Tung Helper functions. 
-
-
-
-Definition at line 138 of file inprod\+\_\+analytic.\+f90.
-
-
-\begin{DoxyCode}
-138     \textcolor{keywordtype}{INTEGER} :: pk,pj,mj,hk
-139     s2 = (pk * mj - pj * hk) / 2.d0
-\end{DoxyCode}
-\index{inprod\+\_\+analytic@{inprod\+\_\+analytic}!s3@{s3}}
-\index{s3@{s3}!inprod\+\_\+analytic@{inprod\+\_\+analytic}}
-\subsubsection[{\texorpdfstring{s3(\+Pj, Pk, Hj, Hk)}{s3(Pj, Pk, Hj, Hk)}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8) function inprod\+\_\+analytic\+::s3 (
-\begin{DoxyParamCaption}
-\item[{integer}]{Pj, }
-\item[{integer}]{Pk, }
-\item[{integer}]{Hj, }
-\item[{integer}]{Hk}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespaceinprod__analytic_a671ca8c3aae1db0a453a13e94462baa0}{}\label{namespaceinprod__analytic_a671ca8c3aae1db0a453a13e94462baa0}
-
-
-Cehelsky \& Tung Helper functions. 
-
-
-
-Definition at line 144 of file inprod\+\_\+analytic.\+f90.
-
-
-\begin{DoxyCode}
-144     \textcolor{keywordtype}{INTEGER} :: pj,pk,hj,hk
-145     s3 = (pk * hj + pj * hk) / 2.d0
-\end{DoxyCode}
-\index{inprod\+\_\+analytic@{inprod\+\_\+analytic}!s4@{s4}}
-\index{s4@{s4}!inprod\+\_\+analytic@{inprod\+\_\+analytic}}
-\subsubsection[{\texorpdfstring{s4(\+Pj, Pk, Hj, Hk)}{s4(Pj, Pk, Hj, Hk)}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8) function inprod\+\_\+analytic\+::s4 (
-\begin{DoxyParamCaption}
-\item[{integer}]{Pj, }
-\item[{integer}]{Pk, }
-\item[{integer}]{Hj, }
-\item[{integer}]{Hk}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespaceinprod__analytic_a8dacf930ffdf8fd09da0a77bfd4d3a4b}{}\label{namespaceinprod__analytic_a8dacf930ffdf8fd09da0a77bfd4d3a4b}
-
-
-Cehelsky \& Tung Helper functions. 
-
-
-
-Definition at line 150 of file inprod\+\_\+analytic.\+f90.
-
-
-\begin{DoxyCode}
-150     \textcolor{keywordtype}{INTEGER} :: pj,pk,hj,hk
-151     s4 = (pk * hj - pj * hk) / 2.d0
-\end{DoxyCode}
-
-
-\subsection{Variable Documentation}
-\index{inprod\+\_\+analytic@{inprod\+\_\+analytic}!atmos@{atmos}}
-\index{atmos@{atmos}!inprod\+\_\+analytic@{inprod\+\_\+analytic}}
-\subsubsection[{\texorpdfstring{atmos}{atmos}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf atm\+\_\+tensors}), public inprod\+\_\+analytic\+::atmos}\hypertarget{namespaceinprod__analytic_a6f4fe9aa292d78b871e5498e411d1297}{}\label{namespaceinprod__analytic_a6f4fe9aa292d78b871e5498e411d1297}
-
-
-Atmospheric tensors. 
-
-
-
-Definition at line 78 of file inprod\+\_\+analytic.\+f90.
-
-
-\begin{DoxyCode}
-78   \textcolor{keywordtype}{TYPE}(atm\_tensors), \textcolor{keywordtype}{PUBLIC} :: atmos 
-\end{DoxyCode}
-\index{inprod\+\_\+analytic@{inprod\+\_\+analytic}!awavenum@{awavenum}}
-\index{awavenum@{awavenum}!inprod\+\_\+analytic@{inprod\+\_\+analytic}}
-\subsubsection[{\texorpdfstring{awavenum}{awavenum}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf atm\+\_\+wavenum}), dimension(\+:), allocatable, public inprod\+\_\+analytic\+::awavenum}\hypertarget{namespaceinprod__analytic_aa6b6ebedac44495720ffe649bc937a56}{}\label{namespaceinprod__analytic_aa6b6ebedac44495720ffe649bc937a56}
-
-
-Atmospheric blocs specification. 
-
-
-
-Definition at line 73 of file inprod\+\_\+analytic.\+f90.
-
-
-\begin{DoxyCode}
-73   \textcolor{keywordtype}{TYPE}(atm\_wavenum), \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: awavenum 
-\end{DoxyCode}
-\index{inprod\+\_\+analytic@{inprod\+\_\+analytic}!ocean@{ocean}}
-\index{ocean@{ocean}!inprod\+\_\+analytic@{inprod\+\_\+analytic}}
-\subsubsection[{\texorpdfstring{ocean}{ocean}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf ocean\+\_\+tensors}), public inprod\+\_\+analytic\+::ocean}\hypertarget{namespaceinprod__analytic_ac691a1258fb0a341e2ba5b4811be1c0b}{}\label{namespaceinprod__analytic_ac691a1258fb0a341e2ba5b4811be1c0b}
-
-
-Oceanic tensors. 
-
-
-
-Definition at line 80 of file inprod\+\_\+analytic.\+f90.
-
-
-\begin{DoxyCode}
-80   \textcolor{keywordtype}{TYPE}(ocean\_tensors), \textcolor{keywordtype}{PUBLIC} :: ocean
-\end{DoxyCode}
-\index{inprod\+\_\+analytic@{inprod\+\_\+analytic}!owavenum@{owavenum}}
-\index{owavenum@{owavenum}!inprod\+\_\+analytic@{inprod\+\_\+analytic}}
-\subsubsection[{\texorpdfstring{owavenum}{owavenum}}]{\setlength{\rightskip}{0pt plus 5cm}type({\bf ocean\+\_\+wavenum}), dimension(\+:), allocatable, public inprod\+\_\+analytic\+::owavenum}\hypertarget{namespaceinprod__analytic_a7273713c6b1a079e1c653e8b8d2fe089}{}\label{namespaceinprod__analytic_a7273713c6b1a079e1c653e8b8d2fe089}
-
-
-Oceanic blocs specification. 
-
-
-
-Definition at line 75 of file inprod\+\_\+analytic.\+f90.
-
-
-\begin{DoxyCode}
-75   \textcolor{keywordtype}{TYPE}(ocean\_wavenum), \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE}, \textcolor{keywordtype}{PUBLIC} :: owavenum 
+499     j=0
+500     \textcolor{keywordflow}{DO} i=1,model\_config%modes%nbatm
+501       \textcolor{keywordflow}{IF} (model\_config%modes%ams(i,1)==1) \textcolor{keywordflow}{THEN}
+502         ips%awavenum(j+1)%typ=\textcolor{stringliteral}{'A'}
+503         ips%awavenum(j+2)%typ=\textcolor{stringliteral}{'K'}
+504         ips%awavenum(j+3)%typ=\textcolor{stringliteral}{'L'}
+505 
+506         ips%awavenum(j+1)%P=model\_config%modes%ams(i,2)
+507         ips%awavenum(j+2)%M=model\_config%modes%ams(i,1)
+508         ips%awavenum(j+2)%P=model\_config%modes%ams(i,2)
+509         ips%awavenum(j+3)%H=model\_config%modes%ams(i,1)
+510         ips%awavenum(j+3)%P=model\_config%modes%ams(i,2)
+511 
+512         ips%awavenum(j+1)%Ny=\textcolor{keywordtype}{REAL}(model\_config%modes%ams(i,2))
+513         ips%awavenum(j+2)%Nx=\textcolor{keywordtype}{REAL}(model\_config%modes%ams(i,1))
+514         ips%awavenum(j+2)%Ny=\textcolor{keywordtype}{REAL}(model\_config%modes%ams(i,2))
+515         ips%awavenum(j+3)%Nx=\textcolor{keywordtype}{REAL}(model\_config%modes%ams(i,1))
+516         ips%awavenum(j+3)%Ny=\textcolor{keywordtype}{REAL}(model\_config%modes%ams(i,2))
+517 
+518         j=j+3
+519       \textcolor{keywordflow}{ELSE}
+520         ips%awavenum(j+1)%typ=\textcolor{stringliteral}{'K'}
+521         ips%awavenum(j+2)%typ=\textcolor{stringliteral}{'L'}
+522 
+523         ips%awavenum(j+1)%M=model\_config%modes%ams(i,1)
+524         ips%awavenum(j+1)%P=model\_config%modes%ams(i,2)
+525         ips%awavenum(j+2)%H=model\_config%modes%ams(i,1)
+526         ips%awavenum(j+2)%P=model\_config%modes%ams(i,2)
+527 
+528         ips%awavenum(j+1)%Nx=\textcolor{keywordtype}{REAL}(model\_config%modes%ams(i,1))
+529         ips%awavenum(j+1)%Ny=\textcolor{keywordtype}{REAL}(model\_config%modes%ams(i,2))
+530         ips%awavenum(j+2)%Nx=\textcolor{keywordtype}{REAL}(model\_config%modes%ams(i,1))
+531         ips%awavenum(j+2)%Ny=\textcolor{keywordtype}{REAL}(model\_config%modes%ams(i,2))
+532 
+533         j=j+2
+534 
+535 \textcolor{keywordflow}{      ENDIF}
+536 \textcolor{keywordflow}{    ENDDO}
+537 
+538     \textcolor{keywordflow}{DO} i=1,model\_config%modes%noc
+539       ips%owavenum(i)%H=model\_config%modes%oms(i,1)
+540       ips%owavenum(i)%P=model\_config%modes%oms(i,2)
+541 
+542       ips%owavenum(i)%Nx=model\_config%modes%oms(i,1)/2.d0
+543       ips%owavenum(i)%Ny=model\_config%modes%oms(i,2)
+544 
+545 \textcolor{keywordflow}{    ENDDO}
+546 
+547     inner\_products%model\_config => model\_config
+548     inner\_products%atmos%inner\_products => inner\_products
+549     inner\_products%ocean%inner\_products => inner\_products
+550 
+551     inner\_products%initialized = .true.
+552 
 \end{DoxyCode}

@@ -5,251 +5,251 @@
 Statistics accumulators.  
 
 
+\subsection*{Data Types}
+\begin{DoxyCompactItemize}
+\item 
+type \hyperlink{structstat_1_1stataccumulator}{stataccumulator}
+\begin{DoxyCompactList}\small\item\em Statistics accumulator objects class. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Functions/\+Subroutines}
 \begin{DoxyCompactItemize}
 \item 
-subroutine, public \hyperlink{namespacestat_a17919a94d519a3b63199ca52590f03c8}{init\+\_\+stat}
-\begin{DoxyCompactList}\small\item\em Initialise the accumulators. \end{DoxyCompactList}\item 
-subroutine, public \hyperlink{namespacestat_a2f642f26a42651e2c0e7275b690deabe}{acc} (x)
+subroutine \hyperlink{namespacestat_a5cf2b5befc54e196ab5d421b225d77a6}{init\+\_\+stat} (istat, ndim)
+\begin{DoxyCompactList}\small\item\em Initialize the accumulators. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacestat_a26d1999c47f94156f2c36b0f02901b84}{acc} (istat, x)
 \begin{DoxyCompactList}\small\item\em Accumulate one state. \end{DoxyCompactList}\item 
-real(kind=8) function, dimension(0\+:ndim), public \hyperlink{namespacestat_ada9a5b64e944a67f5b840d7b91990100}{mean} ()
+real(kind=8) function, dimension(size(istat\%m)) \hyperlink{namespacestat_acb86e45d7c525e6e01b0e1b1c68ebe50}{mean} (istat)
 \begin{DoxyCompactList}\small\item\em Function returning the mean. \end{DoxyCompactList}\item 
-real(kind=8) function, dimension(0\+:ndim), public \hyperlink{namespacestat_a32f0c1c215da5a0f2b92672ddb53dd13}{var} ()
+real(kind=8) function, dimension(size(istat\%m)) \hyperlink{namespacestat_aa03a5f469d96e4b6448153de00af9d08}{var} (istat)
 \begin{DoxyCompactList}\small\item\em Function returning the variance. \end{DoxyCompactList}\item 
-integer function, public \hyperlink{namespacestat_aca30ccb65a1fc6af92be1018ec40f6c6}{iter} ()
+integer function \hyperlink{namespacestat_ab9f2cf97135e848680c3d46d9b7df9a9}{iter} (istat)
 \begin{DoxyCompactList}\small\item\em Function returning the number of data accumulated. \end{DoxyCompactList}\item 
-subroutine, public \hyperlink{namespacestat_aaf88c5c208ce1fac886a9e3c0ee5ae08}{reset}
-\begin{DoxyCompactList}\small\item\em Routine resetting the accumulators. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Variables}
-\begin{DoxyCompactItemize}
-\item 
-integer \hyperlink{namespacestat_aae82ae81e5eb5620583fec6c93aa6fa3}{i} =0
-\begin{DoxyCompactList}\small\item\em Number of stats accumulated. \end{DoxyCompactList}\item 
-real(kind=8), dimension(\+:), allocatable \hyperlink{namespacestat_a2416f75ad24ac05a0ba615f9c8d467db}{m}
-\begin{DoxyCompactList}\small\item\em Vector storing the inline mean. \end{DoxyCompactList}\item 
-real(kind=8), dimension(\+:), allocatable \hyperlink{namespacestat_adcf5178f8d91cdc53ff5f28cc3e04689}{mprev}
-\begin{DoxyCompactList}\small\item\em Previous mean vector. \end{DoxyCompactList}\item 
-real(kind=8), dimension(\+:), allocatable \hyperlink{namespacestat_ab2a3ce8c90189fdbd6bb313c75876473}{v}
-\begin{DoxyCompactList}\small\item\em Vector storing the inline variance. \end{DoxyCompactList}\item 
-real(kind=8), dimension(\+:), allocatable \hyperlink{namespacestat_a24c9afb1c1c6692185b509fd364508c8}{mtmp}
-\end{DoxyCompactItemize}
+subroutine \hyperlink{namespacestat_af4db26b95e6378e574313f3cd664c2f2}{reset} (istat)
+\begin{DoxyCompactList}\small\item\em Routine resetting the accumulator. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacestat_a8d7731166fa17cb566ddbf45ac7b2234}{clean} (istat)
+\begin{DoxyCompactList}\small\item\em Routine to clean the accumulator. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 Statistics accumulators. 
 
 \begin{DoxyCopyright}{Copyright}
-2015 Lesley De Cruz \& Jonathan Demaeyer. See \hyperlink{LICENSE_8txt}{L\+I\+C\+E\+N\+S\+E.\+txt} for license information. 
+2015-\/2020 Lesley De Cruz \& Jonathan Demaeyer. See L\+I\+C\+E\+N\+S\+E.\+txt for license information. 
 \end{DoxyCopyright}
 
 
 \subsection{Function/\+Subroutine Documentation}
+\mbox{\Hypertarget{namespacestat_a26d1999c47f94156f2c36b0f02901b84}\label{namespacestat_a26d1999c47f94156f2c36b0f02901b84}} 
 \index{stat@{stat}!acc@{acc}}
 \index{acc@{acc}!stat@{stat}}
-\subsubsection[{\texorpdfstring{acc(x)}{acc(x)}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public stat\+::acc (
-\begin{DoxyParamCaption}
-\item[{real(kind=8), dimension(0\+:ndim), intent(in)}]{x}
-\end{DoxyParamCaption}
-)}\hypertarget{namespacestat_a2f642f26a42651e2c0e7275b690deabe}{}\label{namespacestat_a2f642f26a42651e2c0e7275b690deabe}
+\subsubsection{\texorpdfstring{acc()}{acc()}}
+{\footnotesize\ttfamily subroutine stat\+::acc (\begin{DoxyParamCaption}\item[{class(\hyperlink{structstat_1_1stataccumulator}{stataccumulator}), intent(inout)}]{istat,  }\item[{real(kind=8), dimension(\+:), intent(in)}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
 
 
 Accumulate one state. 
 
 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em istat} & Statistical accumulator to initialize \\
+\hline
+\mbox{\tt in}  & {\em x} & State to accumulate \\
+\hline
+\end{DoxyParams}
 
-Definition at line 48 of file stat.\+f90.
+
+Definition at line 69 of file stat.\+f90.
 
 
 \begin{DoxyCode}
-48       \textcolor{keywordtype}{IMPLICIT NONE}
-49       \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)}, \textcolor{keywordtype}{INTENT(IN)} :: x
-50       i=i+1
-51       mprev=m+(x-m)/i
-52       mtmp=mprev
-53       mprev=m
-54       m=mtmp
-55       v=v+(x-mprev)*(x-m)
+69       \textcolor{keywordtype}{CLASS}(stataccumulator), \textcolor{keywordtype}{INTENT(INOUT)} :: istat
+70       \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{INTENT(IN)} :: x
+71       istat%i=istat%i+1
+72       istat%mprev=istat%m+(x-istat%m)/istat%i
+73       istat%mtmp=istat%mprev
+74       istat%mprev=istat%m
+75       istat%m=istat%mtmp
+76       istat%v=istat%v+(x-istat%mprev)*(x-istat%m)
 \end{DoxyCode}
+\mbox{\Hypertarget{namespacestat_a8d7731166fa17cb566ddbf45ac7b2234}\label{namespacestat_a8d7731166fa17cb566ddbf45ac7b2234}} 
+\index{stat@{stat}!clean@{clean}}
+\index{clean@{clean}!stat@{stat}}
+\subsubsection{\texorpdfstring{clean()}{clean()}}
+{\footnotesize\ttfamily subroutine stat\+::clean (\begin{DoxyParamCaption}\item[{class(\hyperlink{structstat_1_1stataccumulator}{stataccumulator}), intent(inout)}]{istat }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Routine to clean the accumulator. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em istat} & Statistical accumulator to clean \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 119 of file stat.\+f90.
+
+
+\begin{DoxyCode}
+119       \textcolor{keywordtype}{CLASS}(stataccumulator), \textcolor{keywordtype}{INTENT(INOUT)} :: istat
+120 
+121       \textcolor{keywordflow}{IF} (\textcolor{keyword}{allocated}(istat%m)) \textcolor{keyword}{DEALLOCATE}(istat%m)
+122       \textcolor{keywordflow}{IF} (\textcolor{keyword}{allocated}(istat%mprev)) \textcolor{keyword}{DEALLOCATE}(istat%mprev)
+123       \textcolor{keywordflow}{IF} (\textcolor{keyword}{allocated}(istat%v)) \textcolor{keyword}{DEALLOCATE}(istat%v)
+124       \textcolor{keywordflow}{IF} (\textcolor{keyword}{allocated}(istat%mtmp)) \textcolor{keyword}{DEALLOCATE}(istat%mtmp)
+125 
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacestat_a5cf2b5befc54e196ab5d421b225d77a6}\label{namespacestat_a5cf2b5befc54e196ab5d421b225d77a6}} 
 \index{stat@{stat}!init\+\_\+stat@{init\+\_\+stat}}
 \index{init\+\_\+stat@{init\+\_\+stat}!stat@{stat}}
-\subsubsection[{\texorpdfstring{init\+\_\+stat}{init_stat}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public stat\+::init\+\_\+stat (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}\hypertarget{namespacestat_a17919a94d519a3b63199ca52590f03c8}{}\label{namespacestat_a17919a94d519a3b63199ca52590f03c8}
-
-
-Initialise the accumulators. 
+\subsubsection{\texorpdfstring{init\+\_\+stat()}{init\_stat()}}
+{\footnotesize\ttfamily subroutine stat\+::init\+\_\+stat (\begin{DoxyParamCaption}\item[{class(\hyperlink{structstat_1_1stataccumulator}{stataccumulator}), intent(inout)}]{istat,  }\item[{integer, intent(in)}]{ndim }\end{DoxyParamCaption})}
 
 
 
-Definition at line 35 of file stat.\+f90.
+Initialize the accumulators. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em istat} & Statistical accumulator to initialize \\
+\hline
+\mbox{\tt in}  & {\em ndim} & Dimension of the state space to accumulate statistics for. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 44 of file stat.\+f90.
 
 
 \begin{DoxyCode}
-35       \textcolor{keywordtype}{INTEGER} :: allocstat
-36       
-37       \textcolor{keyword}{ALLOCATE}(m(0:ndim),mprev(0:ndim),v(0:ndim),mtmp(0:ndim), \hyperlink{namespacestat}{stat}=allocstat\textcolor{comment}{)}
-38 \textcolor{comment}{      }\textcolor{keywordflow}{IF} (allocstat /= 0) stop \textcolor{stringliteral}{'*** Not enough memory ***'}
-39       m=0.d0
-40       mprev=0.d0
-41       v=0.d0
-42       mtmp=0.d0
-43       
+44       \textcolor{keywordtype}{CLASS}(stataccumulator), \textcolor{keywordtype}{INTENT(INOUT)} :: istat
+45       \textcolor{keywordtype}{INTEGER}, \textcolor{keywordtype}{INTENT(in)} :: ndim
+46       \textcolor{keywordtype}{INTEGER} :: allocstat
+47       
+48       \textcolor{keyword}{ALLOCATE}(istat%m(ndim), istat%mprev(ndim), \hyperlink{namespacestat}{stat}=allocstat)
+49       \textcolor{keywordflow}{IF} (allocstat /= 0) \textcolor{keywordflow}{THEN}
+50         print*, \textcolor{stringliteral}{"*** init\_stat: Problem with allocation! ***"}
+51         stop \textcolor{stringliteral}{"Exiting ..."}
+52 \textcolor{keywordflow}{      END IF}
+53       \textcolor{keyword}{ALLOCATE}(istat%v(ndim), istat%mtmp(ndim), \hyperlink{namespacestat}{stat}=allocstat)
+54       \textcolor{keywordflow}{IF} (allocstat /= 0) \textcolor{keywordflow}{THEN}
+55         print*, \textcolor{stringliteral}{"*** init\_stat: Problem with allocation! ***"}
+56         stop \textcolor{stringliteral}{"Exiting ..."}
+57 \textcolor{keywordflow}{      END IF}
+58       istat%m=0.d0
+59       istat%mprev=0.d0
+60       istat%v=0.d0
+61       istat%mtmp=0.d0
+62       
 \end{DoxyCode}
+\mbox{\Hypertarget{namespacestat_ab9f2cf97135e848680c3d46d9b7df9a9}\label{namespacestat_ab9f2cf97135e848680c3d46d9b7df9a9}} 
 \index{stat@{stat}!iter@{iter}}
 \index{iter@{iter}!stat@{stat}}
-\subsubsection[{\texorpdfstring{iter()}{iter()}}]{\setlength{\rightskip}{0pt plus 5cm}integer function, public stat\+::iter (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}\hypertarget{namespacestat_aca30ccb65a1fc6af92be1018ec40f6c6}{}\label{namespacestat_aca30ccb65a1fc6af92be1018ec40f6c6}
+\subsubsection{\texorpdfstring{iter()}{iter()}}
+{\footnotesize\ttfamily integer function stat\+::iter (\begin{DoxyParamCaption}\item[{class(\hyperlink{structstat_1_1stataccumulator}{stataccumulator}), intent(in)}]{istat }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
 
 
 Function returning the number of data accumulated. 
 
 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em istat} & Statistical accumulator to initialize \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of the accumulated states 
+\end{DoxyReturn}
 
-Definition at line 72 of file stat.\+f90.
+
+Definition at line 101 of file stat.\+f90.
 
 
 \begin{DoxyCode}
-72       \textcolor{keywordtype}{INTEGER} :: iter
-73       iter=i
+101       \textcolor{keywordtype}{CLASS}(stataccumulator), \textcolor{keywordtype}{INTENT(IN)} :: istat
+102       \textcolor{keywordtype}{INTEGER} :: iter
+103       iter=istat%i
 \end{DoxyCode}
+\mbox{\Hypertarget{namespacestat_acb86e45d7c525e6e01b0e1b1c68ebe50}\label{namespacestat_acb86e45d7c525e6e01b0e1b1c68ebe50}} 
 \index{stat@{stat}!mean@{mean}}
 \index{mean@{mean}!stat@{stat}}
-\subsubsection[{\texorpdfstring{mean()}{mean()}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8) function, dimension(0\+:ndim), public stat\+::mean (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}\hypertarget{namespacestat_ada9a5b64e944a67f5b840d7b91990100}{}\label{namespacestat_ada9a5b64e944a67f5b840d7b91990100}
+\subsubsection{\texorpdfstring{mean()}{mean()}}
+{\footnotesize\ttfamily real(kind=8) function, dimension(size(istat\%m)) stat\+::mean (\begin{DoxyParamCaption}\item[{class(\hyperlink{structstat_1_1stataccumulator}{stataccumulator}), intent(in)}]{istat }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
 
 
 Function returning the mean. 
 
 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em istat} & Statistical accumulator to initialize \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The mean of the accumulated states 
+\end{DoxyReturn}
 
-Definition at line 60 of file stat.\+f90.
+
+Definition at line 83 of file stat.\+f90.
 
 
 \begin{DoxyCode}
-60       \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)} :: mean
-61       mean=m
+83       \textcolor{keywordtype}{CLASS}(stataccumulator), \textcolor{keywordtype}{INTENT(IN)} :: istat
+84       \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(size(istat%m))} :: mean
+85       mean=istat%m
 \end{DoxyCode}
+\mbox{\Hypertarget{namespacestat_af4db26b95e6378e574313f3cd664c2f2}\label{namespacestat_af4db26b95e6378e574313f3cd664c2f2}} 
 \index{stat@{stat}!reset@{reset}}
 \index{reset@{reset}!stat@{stat}}
-\subsubsection[{\texorpdfstring{reset}{reset}}]{\setlength{\rightskip}{0pt plus 5cm}subroutine, public stat\+::reset (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}\hypertarget{namespacestat_aaf88c5c208ce1fac886a9e3c0ee5ae08}{}\label{namespacestat_aaf88c5c208ce1fac886a9e3c0ee5ae08}
-
-
-Routine resetting the accumulators. 
+\subsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily subroutine stat\+::reset (\begin{DoxyParamCaption}\item[{class(\hyperlink{structstat_1_1stataccumulator}{stataccumulator}), intent(inout)}]{istat }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line 78 of file stat.\+f90.
+Routine resetting the accumulator. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em istat} & Statistical accumulator to initialize \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 109 of file stat.\+f90.
 
 
 \begin{DoxyCode}
-78       m=0.d0
-79       mprev=0.d0
-80       v=0.d0
-81       i=0
+109       \textcolor{keywordtype}{CLASS}(stataccumulator), \textcolor{keywordtype}{INTENT(INOUT)} :: istat
+110       istat%m=0.d0
+111       istat%mprev=0.d0
+112       istat%v=0.d0
+113       istat%i=0
 \end{DoxyCode}
+\mbox{\Hypertarget{namespacestat_aa03a5f469d96e4b6448153de00af9d08}\label{namespacestat_aa03a5f469d96e4b6448153de00af9d08}} 
 \index{stat@{stat}!var@{var}}
 \index{var@{var}!stat@{stat}}
-\subsubsection[{\texorpdfstring{var()}{var()}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8) function, dimension(0\+:ndim), public stat\+::var (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}\hypertarget{namespacestat_a32f0c1c215da5a0f2b92672ddb53dd13}{}\label{namespacestat_a32f0c1c215da5a0f2b92672ddb53dd13}
+\subsubsection{\texorpdfstring{var()}{var()}}
+{\footnotesize\ttfamily real(kind=8) function, dimension(size(istat\%m)) stat\+::var (\begin{DoxyParamCaption}\item[{class(\hyperlink{structstat_1_1stataccumulator}{stataccumulator}), intent(in)}]{istat }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
 
 
 Function returning the variance. 
 
 
-
-Definition at line 66 of file stat.\+f90.
-
-
-\begin{DoxyCode}
-66       \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:ndim)} :: var
-67       var=v/(i-1)
-\end{DoxyCode}
-
-
-\subsection{Variable Documentation}
-\index{stat@{stat}!i@{i}}
-\index{i@{i}!stat@{stat}}
-\subsubsection[{\texorpdfstring{i}{i}}]{\setlength{\rightskip}{0pt plus 5cm}integer stat\+::i =0\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacestat_aae82ae81e5eb5620583fec6c93aa6fa3}{}\label{namespacestat_aae82ae81e5eb5620583fec6c93aa6fa3}
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em istat} & Statistical accumulator to initialize \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The variance of the accumulated states 
+\end{DoxyReturn}
 
 
-Number of stats accumulated. 
-
-
-
-Definition at line 20 of file stat.\+f90.
+Definition at line 92 of file stat.\+f90.
 
 
 \begin{DoxyCode}
-20   \textcolor{keywordtype}{INTEGER} :: i=0\textcolor{comment}{ !< Number of stats accumulated}
-\end{DoxyCode}
-\index{stat@{stat}!m@{m}}
-\index{m@{m}!stat@{stat}}
-\subsubsection[{\texorpdfstring{m}{m}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable stat\+::m\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacestat_a2416f75ad24ac05a0ba615f9c8d467db}{}\label{namespacestat_a2416f75ad24ac05a0ba615f9c8d467db}
-
-
-Vector storing the inline mean. 
-
-
-
-Definition at line 23 of file stat.\+f90.
-
-
-\begin{DoxyCode}
-23   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE} :: m\textcolor{comment}{       !< Vector storing the inline mean}
-\end{DoxyCode}
-\index{stat@{stat}!mprev@{mprev}}
-\index{mprev@{mprev}!stat@{stat}}
-\subsubsection[{\texorpdfstring{mprev}{mprev}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable stat\+::mprev\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacestat_adcf5178f8d91cdc53ff5f28cc3e04689}{}\label{namespacestat_adcf5178f8d91cdc53ff5f28cc3e04689}
-
-
-Previous mean vector. 
-
-
-
-Definition at line 24 of file stat.\+f90.
-
-
-\begin{DoxyCode}
-24   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE} :: mprev\textcolor{comment}{   !< Previous mean vector}
-\end{DoxyCode}
-\index{stat@{stat}!mtmp@{mtmp}}
-\index{mtmp@{mtmp}!stat@{stat}}
-\subsubsection[{\texorpdfstring{mtmp}{mtmp}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable stat\+::mtmp\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacestat_a24c9afb1c1c6692185b509fd364508c8}{}\label{namespacestat_a24c9afb1c1c6692185b509fd364508c8}
-
-
-Definition at line 26 of file stat.\+f90.
-
-
-\begin{DoxyCode}
-26   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE} :: mtmp  
-\end{DoxyCode}
-\index{stat@{stat}!v@{v}}
-\index{v@{v}!stat@{stat}}
-\subsubsection[{\texorpdfstring{v}{v}}]{\setlength{\rightskip}{0pt plus 5cm}real(kind=8), dimension(\+:), allocatable stat\+::v\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{namespacestat_ab2a3ce8c90189fdbd6bb313c75876473}{}\label{namespacestat_ab2a3ce8c90189fdbd6bb313c75876473}
-
-
-Vector storing the inline variance. 
-
-
-
-Definition at line 25 of file stat.\+f90.
-
-
-\begin{DoxyCode}
-25   \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(:)}, \textcolor{keywordtype}{ALLOCATABLE} :: v\textcolor{comment}{       !< Vector storing the inline variance}
+92       \textcolor{keywordtype}{CLASS}(stataccumulator), \textcolor{keywordtype}{INTENT(IN)} :: istat
+93       \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(size(istat%m))} :: var
+94       var=istat%v/(istat%i-1)
 \end{DoxyCode}

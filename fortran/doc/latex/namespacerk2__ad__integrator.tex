@@ -1,0 +1,71 @@
+\hypertarget{namespacerk2__ad__integrator}{}\section{rk2\+\_\+ad\+\_\+integrator Module Reference}
+\label{namespacerk2__ad__integrator}\index{rk2\+\_\+ad\+\_\+integrator@{rk2\+\_\+ad\+\_\+integrator}}
+
+
+Adjoint (AD) model versions of M\+A\+O\+O\+AM. Second-\/order Runge-\/\+Kutta (R\+K2) integrators module.  
+
+
+\subsection*{Data Types}
+\begin{DoxyCompactItemize}
+\item 
+type \hyperlink{structrk2__ad__integrator_1_1rk2adintegrator}{rk2adintegrator}
+\begin{DoxyCompactList}\small\item\em Class for the Heun (R\+K2) AD integrator object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine \hyperlink{namespacerk2__ad__integrator_a6bf98c880e56d52db5658a7a988059d1}{ad\+\_\+step} (integr, y, ystar, t, res)
+\begin{DoxyCompactList}\small\item\em Routine to perform an integration step (Heun algorithm) of the adjoint model. The incremented time is returned. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Adjoint (AD) model versions of M\+A\+O\+O\+AM. Second-\/order Runge-\/\+Kutta (R\+K2) integrators module. 
+
+\begin{DoxyCopyright}{Copyright}
+2020 Lesley De Cruz \& Jonathan Demaeyer. See L\+I\+C\+E\+N\+S\+E.\+txt for license information. 
+\end{DoxyCopyright}
+\begin{DoxyRemark}{Remarks}
+This module actually contains the Heun algorithm routines. 
+\end{DoxyRemark}
+
+
+\subsection{Function/\+Subroutine Documentation}
+\mbox{\Hypertarget{namespacerk2__ad__integrator_a6bf98c880e56d52db5658a7a988059d1}\label{namespacerk2__ad__integrator_a6bf98c880e56d52db5658a7a988059d1}} 
+\index{rk2\+\_\+ad\+\_\+integrator@{rk2\+\_\+ad\+\_\+integrator}!ad\+\_\+step@{ad\+\_\+step}}
+\index{ad\+\_\+step@{ad\+\_\+step}!rk2\+\_\+ad\+\_\+integrator@{rk2\+\_\+ad\+\_\+integrator}}
+\subsubsection{\texorpdfstring{ad\+\_\+step()}{ad\_step()}}
+{\footnotesize\ttfamily subroutine rk2\+\_\+ad\+\_\+integrator\+::ad\+\_\+step (\begin{DoxyParamCaption}\item[{class(\hyperlink{structrk2__ad__integrator_1_1rk2adintegrator}{rk2adintegrator}), intent(inout)}]{integr,  }\item[{real(kind=8), dimension(0\+:integr\%ndim), intent(in)}]{y,  }\item[{real(kind=8), dimension(0\+:integr\%ndim), intent(in)}]{ystar,  }\item[{real(kind=8), intent(inout)}]{t,  }\item[{real(kind=8), dimension(0\+:integr\%ndim), intent(out)}]{res }\end{DoxyParamCaption})}
+
+
+
+Routine to perform an integration step (Heun algorithm) of the adjoint model. The incremented time is returned. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em integr} & Integrator object to perform the step with. \\
+\hline
+\mbox{\tt in}  & {\em y} & Initial point. \\
+\hline
+\mbox{\tt in}  & {\em ystar} & Evaluating the adjoint model at the point $\boldsymbol{y}^\ast$. \\
+\hline
+\mbox{\tt in}  & {\em t} & Actual integration time \\
+\hline
+\mbox{\tt out}  & {\em res} & Final point after the step. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 49 of file rk2\+\_\+ad\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+49     \textcolor{keywordtype}{CLASS}(rk2adintegrator), \textcolor{keywordtype}{INTENT(INOUT)} :: integr
+50     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:integr%ndim)}, \textcolor{keywordtype}{INTENT(IN)} :: y,ystar
+51     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(INOUT)} :: t
+52     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:integr%ndim)}, \textcolor{keywordtype}{INTENT(OUT)} :: res
+53 
+54     \textcolor{keyword}{CALL }integr%pmodel%ad\_tendencies(t,ystar,y,integr%buf\_f0)
+55     integr%buf\_y1 = y+integr%dt*integr%buf\_f0
+56     \textcolor{keyword}{CALL }integr%pmodel%ad\_tendencies(t+integr%dt,ystar,integr%buf\_y1,integr%buf\_f1)
+57     res=y+0.5*(integr%buf\_f0+integr%buf\_f1)*integr%dt
+58     t=t+integr%dt
+\end{DoxyCode}

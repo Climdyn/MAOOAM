@@ -5,18 +5,17 @@
 !> of MAOOAM.
 !     
 !> @copyright                                                               
-!> 2016 Lesley De Cruz & Jonathan Demaeyer.
+!> 2016-2020 Lesley De Cruz & Jonathan Demaeyer.
 !> See LICENSE.txt for license information.                                  
 !
 !---------------------------------------------------------------------------!
 
 
 PROGRAM test_tl_ad
-  USE params, only:ndim,dt,t_trans
-  USE aotensor_def, only: init_aotensor
-  USE integrator, only: init_integrator,step
-  USE tl_ad_tensor, only: init_tltensor, init_adtensor
-  USE tl_ad_integrator, only: init_tl_ad_integrator,tl_step,ad_step
+  USE model_def
+  USE rk2_integrator
+  USE rk2_tl_integrator
+  USE rk2_ad_integrator
   IMPLICIT NONE
 
   REAL(KIND=8), DIMENSION(:), ALLOCATABLE :: y0_IC,y0,y0prime,dy0,dy0_bis
@@ -24,17 +23,30 @@ PROGRAM test_tl_ad
   REAL(KIND=8), DIMENSION(:), ALLOCATABLE :: dy,dy_bis
   REAL(KIND=8), DIMENSION(:), ALLOCATABLE :: dy1,dy1_tl,dy1_bis_tl,dy1_ad,dy1_bis_ad
   REAL(KIND=8) :: t=0.D0
+  REAL(KIND=8) :: t_up
   REAL(KIND=8) :: norm1,norm2,gasdev
   INTEGER :: i,idum1,n
   
-  ! Compute the tensors
+  INTEGER, POINTER :: ndim
+  REAL(KIND=8), POINTER :: t_trans
 
-  CALL init_aotensor
-  CALL init_tltensor
-  CALL init_adtensor
+  TYPE(Model), TARGET :: maooam_model
+  TYPE(RK2Integrator) :: integr
+  TYPE(RK2TlIntegrator) :: tl_integr
+  TYPE(RK2AdIntegrator) :: ad_integr
 
-  CALL init_integrator  ! Initialize the model integrator
-  CALL init_tl_ad_integrator  ! Initialize the TL & AD integrator
+  CALL maooam_model%init
+  CALL maooam_model%init_tl
+  CALL maooam_model%init_ad
+
+  CALL integr%init(maooam_model)
+  CALL tl_integr%init(maooam_model)
+  CALL ad_integr%init(maooam_model)
+
+  ndim => maooam_model%model_configuration%modes%ndim
+  t_trans => maooam_model%model_configuration%integration%t_trans
+
+  t_up=integr%dt/t_trans*100.D0
 
   ALLOCATE(y0_IC(0:ndim),dy(0:ndim),y0(0:ndim),y0prime(0:ndim)&
        &,y1(0:ndim))!, STAT=AllocStat)
@@ -62,7 +74,8 @@ PROGRAM test_tl_ad
 
   ! PRINT*, 'Random values:',y0_IC(0:ndim)
   DO WHILE (t<t_trans)
-     CALL step(y0_IC,t,dt,y0)
+     CALL integr%step(y0_IC,t,y0)
+  !   IF (mod(t/t_trans*100.D0,0.1)<t_up) WRITE(*,'(" Progress ",F6.1," %",A,$)') t/t_trans*100.D0,char(13)
      y0_IC=y0
   END DO
   PRINT*, 'Initial values:',y0_IC(0:ndim)
@@ -79,13 +92,13 @@ PROGRAM test_tl_ad
      
      y0 = y0_IC*1
      y0prime = y0 + dy
-     CALL step(y0,t,dt,y1)
-     CALL step(y0prime,t,dt,y1prime)
+     CALL integr%step(y0,t,y1)
+     CALL integr%step(y0prime,t,y1prime)
 
      dy1 = y1prime - y1
 
      dy0 = dy*1
-     CALL tl_step(dy0,y0_IC,t,dt,dy1_tl)
+     CALL tl_integr%tl_step(dy0,y0_IC,t,dy1_tl)
 
      ! Don't forget to set 0'th component to 0...
      dy1(0)=0.D0
@@ -113,16 +126,17 @@ PROGRAM test_tl_ad
 
      ! Calculate M(TL).x in dy1_tl
      dy0 = dy*1
-     CALL tl_step(dy0,y0_IC,t,dt,dy1_tl)
+     CALL tl_integr%tl_step(dy0,y0_IC,t,dy1_tl)
      
      ! Calculate M(AD).x in dy1_ad
-     CALL ad_step(dy0,y0_IC,t,dt,dy1_ad)
+     CALL ad_integr%ad_step(dy0,y0_IC,t,dy1_ad)
 
+     dy0_bis = dy_bis*1
      ! Calculate M(TL).y in dy1_bis_tl
-     CALL tl_step(dy0_bis,y0_IC,t,dt,dy1_bis_tl)
+     CALL tl_integr%tl_step(dy0_bis,y0_IC,t,dy1_bis_tl)
      
      ! Calculate M(AD).y in dy1_bis_ad
-     CALL ad_step(dy0_bis,y0_IC,t,dt,dy1_bis_ad)
+     CALL ad_integr%ad_step(dy0_bis,y0_IC,t,dy1_bis_ad)
 
      ! Calculate norm <M(TL).x,y>
      norm1 = dot_product(dy1_tl,dy0_bis)

@@ -1,0 +1,161 @@
+\hypertarget{namespacerk4__integrator}{}\section{rk4\+\_\+integrator Module Reference}
+\label{namespacerk4__integrator}\index{rk4\+\_\+integrator@{rk4\+\_\+integrator}}
+
+
+Module containing the fourth-\/order Runge-\/\+Kutta (R\+K4) integration routines.  
+
+
+\subsection*{Data Types}
+\begin{DoxyCompactItemize}
+\item 
+type \hyperlink{structrk4__integrator_1_1rk4integrator}{rk4integrator}
+\begin{DoxyCompactList}\small\item\em Class for the fourth-\/order Runge-\/\+Kutta (R\+K4) integrator object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine \hyperlink{namespacerk4__integrator_a28281cb923e5a74dcbc518a1ea2269b1}{init} (integr, imodel)
+\begin{DoxyCompactList}\small\item\em Routine to initialise the integration buffers. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacerk4__integrator_affbb7f244c8be3f9493b8a7876d3753b}{step} (integr, y, t, res)
+\begin{DoxyCompactList}\small\item\em Routine to perform an integration step (R\+K4 algorithm). The incremented time is returned. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacerk4__integrator_a4883cf93b6d3ba274296d2d255059473}{clean} (integr)
+\begin{DoxyCompactList}\small\item\em Routine to clean the integrator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Module containing the fourth-\/order Runge-\/\+Kutta (R\+K4) integration routines. 
+
+\begin{DoxyCopyright}{Copyright}
+2015-\/2020 Lesley De Cruz \& Jonathan Demaeyer. See L\+I\+C\+E\+N\+S\+E.\+txt for license information. 
+\end{DoxyCopyright}
+
+
+\subsection{Function/\+Subroutine Documentation}
+\mbox{\Hypertarget{namespacerk4__integrator_a4883cf93b6d3ba274296d2d255059473}\label{namespacerk4__integrator_a4883cf93b6d3ba274296d2d255059473}} 
+\index{rk4\+\_\+integrator@{rk4\+\_\+integrator}!clean@{clean}}
+\index{clean@{clean}!rk4\+\_\+integrator@{rk4\+\_\+integrator}}
+\subsubsection{\texorpdfstring{clean()}{clean()}}
+{\footnotesize\ttfamily subroutine rk4\+\_\+integrator\+::clean (\begin{DoxyParamCaption}\item[{class(\hyperlink{structrk4__integrator_1_1rk4integrator}{rk4integrator}), intent(inout)}]{integr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Routine to clean the integrator. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em integr} & Integrator object to clean. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 101 of file rk4\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+101       \textcolor{keywordtype}{CLASS}(rk4integrator), \textcolor{keywordtype}{INTENT(INOUT)} :: integr
+102 
+103       \textcolor{keywordflow}{IF} (\textcolor{keyword}{allocated}(integr%buf\_y1)) \textcolor{keyword}{DEALLOCATE}(integr%buf\_y1)
+104       \textcolor{keywordflow}{IF} (\textcolor{keyword}{allocated}(integr%buf\_kA)) \textcolor{keyword}{DEALLOCATE}(integr%buf\_kA)
+105       \textcolor{keywordflow}{IF} (\textcolor{keyword}{allocated}(integr%buf\_kB)) \textcolor{keyword}{DEALLOCATE}(integr%buf\_kB)
+106 
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacerk4__integrator_a28281cb923e5a74dcbc518a1ea2269b1}\label{namespacerk4__integrator_a28281cb923e5a74dcbc518a1ea2269b1}} 
+\index{rk4\+\_\+integrator@{rk4\+\_\+integrator}!init@{init}}
+\index{init@{init}!rk4\+\_\+integrator@{rk4\+\_\+integrator}}
+\subsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily subroutine rk4\+\_\+integrator\+::init (\begin{DoxyParamCaption}\item[{class(\hyperlink{structrk4__integrator_1_1rk4integrator}{rk4integrator}), intent(inout)}]{integr,  }\item[{class(\hyperlink{structmodel__def_1_1model}{model}), intent(in), target}]{imodel }\end{DoxyParamCaption})}
+
+
+
+Routine to initialise the integration buffers. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em integr} & Integrator object to initialize. \\
+\hline
+\mbox{\tt in}  & {\em imodel} & Model object to initialize the integrator with. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 39 of file rk4\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+39     \textcolor{keywordtype}{CLASS}(rk4integrator), \textcolor{keywordtype}{INTENT(INOUT)} :: integr
+40     \textcolor{keywordtype}{CLASS}(model), \textcolor{keywordtype}{INTENT(IN)}, \textcolor{keywordtype}{TARGET} :: imodel
+41     \textcolor{keywordtype}{INTEGER} :: allocstat
+42     \textcolor{keywordflow}{IF} (.NOT.imodel%initialized) \textcolor{keywordflow}{THEN}
+43       print*, \textcolor{stringliteral}{'Model not yet initialized, impossible to associate an integrator to an empty model!'}
+44       \textcolor{keywordflow}{RETURN}
+45 \textcolor{keywordflow}{    END IF}
+46 
+47     integr%pmodel => imodel
+48     integr%dt => imodel%model\_configuration%integration%dt
+49     integr%ndim => imodel%model\_configuration%modes%ndim
+50 
+51     \textcolor{keyword}{ALLOCATE}(integr%buf\_y1(0:integr%ndim) ,\hyperlink{namespacestat}{stat}=allocstat)
+52     \textcolor{keywordflow}{IF} (allocstat /= 0) \textcolor{keywordflow}{THEN}
+53       print*, \textcolor{stringliteral}{"*** rk4integrator%init: Problem with allocation! ***"}
+54       stop \textcolor{stringliteral}{"Exiting ..."}
+55 \textcolor{keywordflow}{    END IF}
+56     \textcolor{keyword}{ALLOCATE}(integr%buf\_kA(0:integr%ndim) ,\hyperlink{namespacestat}{stat}=allocstat)
+57     \textcolor{keywordflow}{IF} (allocstat /= 0) \textcolor{keywordflow}{THEN}
+58       print*, \textcolor{stringliteral}{"*** rk4integrator%init: Problem with allocation! ***"}
+59       stop \textcolor{stringliteral}{"Exiting ..."}
+60 \textcolor{keywordflow}{    END IF}
+61     \textcolor{keyword}{ALLOCATE}(integr%buf\_kB(0:integr%ndim) ,\hyperlink{namespacestat}{stat}=allocstat)
+62     \textcolor{keywordflow}{IF} (allocstat /= 0) \textcolor{keywordflow}{THEN}
+63       print*, \textcolor{stringliteral}{"*** rk4integrator%init: Problem with allocation! ***"}
+64       stop \textcolor{stringliteral}{"Exiting ..."}
+65 \textcolor{keywordflow}{    END IF}
+66 
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacerk4__integrator_affbb7f244c8be3f9493b8a7876d3753b}\label{namespacerk4__integrator_affbb7f244c8be3f9493b8a7876d3753b}} 
+\index{rk4\+\_\+integrator@{rk4\+\_\+integrator}!step@{step}}
+\index{step@{step}!rk4\+\_\+integrator@{rk4\+\_\+integrator}}
+\subsubsection{\texorpdfstring{step()}{step()}}
+{\footnotesize\ttfamily subroutine rk4\+\_\+integrator\+::step (\begin{DoxyParamCaption}\item[{class(\hyperlink{structrk4__integrator_1_1rk4integrator}{rk4integrator}), intent(inout)}]{integr,  }\item[{real(kind=8), dimension(0\+:integr\%ndim), intent(in)}]{y,  }\item[{real(kind=8), intent(inout)}]{t,  }\item[{real(kind=8), dimension(0\+:integr\%ndim), intent(out)}]{res }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Routine to perform an integration step (R\+K4 algorithm). The incremented time is returned. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em integr} & Integrator object to perform the step with. \\
+\hline
+\mbox{\tt in}  & {\em y} & Initial point. \\
+\hline
+\mbox{\tt in}  & {\em t} & Actual integration time \\
+\hline
+\mbox{\tt out}  & {\em res} & Final point after the step. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 75 of file rk4\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+75     \textcolor{keywordtype}{CLASS}(rk4integrator), \textcolor{keywordtype}{INTENT(INOUT)} :: integr
+76     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:integr%ndim)}, \textcolor{keywordtype}{INTENT(IN)} :: y
+77     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(INOUT)} :: t
+78     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:integr%ndim)}, \textcolor{keywordtype}{INTENT(OUT)} :: res
+79 
+80     \textcolor{keyword}{CALL }integr%pmodel%tendencies(t,y,integr%buf\_kA)
+81     integr%buf\_y1 = y + 0.5*integr%dt*integr%buf\_kA
+82 
+83     \textcolor{keyword}{CALL }integr%pmodel%tendencies(t+0.5*integr%dt,integr%buf\_y1,integr%buf\_kB)
+84     integr%buf\_y1 = y + 0.5*integr%dt*integr%buf\_kB
+85     integr%buf\_kA = integr%buf\_kA + 2*integr%buf\_kB
+86     
+87     \textcolor{keyword}{CALL }integr%pmodel%tendencies(t+0.5*integr%dt,integr%buf\_y1,integr%buf\_kB)
+88     integr%buf\_y1 = y + integr%dt*integr%buf\_kB
+89     integr%buf\_kA = integr%buf\_kA + 2*integr%buf\_kB
+90     
+91     \textcolor{keyword}{CALL }integr%pmodel%tendencies(t+integr%dt,integr%buf\_y1,integr%buf\_kB)
+92     integr%buf\_kA = integr%buf\_kA + integr%buf\_kB
+93     
+94     t=t+integr%dt
+95     res=y+integr%buf\_kA*integr%dt/6
+\end{DoxyCode}

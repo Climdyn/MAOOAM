@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['maooam',['maooam',['../maooam_8f90.html#a7624071e6295ef244457a0c1e66e3a3a',1,'maooam.f90']]],
-  ['mat_5fto_5fcoo',['mat_to_coo',['../namespacetensor.html#a75d1a9ca8b39e9ad4b151a7b4b45c70f',1,'tensor']]],
-  ['mean',['mean',['../namespacestat.html#ada9a5b64e944a67f5b840d7b91990100',1,'stat']]]
+  ['load_5fic',['load_ic',['../namespacemodel__def.html#aff217ae0244a4b5f7039eb1e6f728cea',1,'model_def']]],
+  ['load_5ftensor_5ffrom_5ffile',['load_tensor_from_file',['../namespacetensor__def.html#a5b0b21c7d1fa8232c32167923ec9dac6',1,'tensor_def']]]
 ];

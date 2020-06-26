@@ -1,10 +1,9 @@
 var searchData=
 [
-  ['o',['o',['../structinprod__analytic_1_1ocean__tensors.html#a1002c698464fe4761ac8f0c53908c796',1,'inprod_analytic::ocean_tensors']]],
-  ['ocean',['ocean',['../namespaceinprod__analytic.html#ac691a1258fb0a341e2ba5b4811be1c0b',1,'inprod_analytic']]],
-  ['ocean_5ftensors',['ocean_tensors',['../structinprod__analytic_1_1ocean__tensors.html',1,'inprod_analytic']]],
-  ['ocean_5fwavenum',['ocean_wavenum',['../structinprod__analytic_1_1ocean__wavenum.html',1,'inprod_analytic']]],
-  ['oms',['oms',['../namespaceparams.html#a5e25e072992d5908eea5308243b7ec63',1,'params']]],
-  ['otherwise',['OTHERWISE',['../LICENSE_8txt.html#ae4c7c54aef6c135b4520f2237dbcf7c6',1,'LICENSE.txt']]],
-  ['owavenum',['owavenum',['../namespaceinprod__analytic.html#a7273713c6b1a079e1c653e8b8d2fe089',1,'inprod_analytic']]]
+  ['o',['o',['../structinprod__analytic_1_1oceaninnerproducts.html#acf470fb66c8ac2447a5d990e42bf80e3',1,'inprod_analytic::oceaninnerproducts']]],
+  ['ocean',['ocean',['../structinprod__analytic_1_1innerproducts.html#a349a38f433c62a09f3f4cd9720bdea14',1,'inprod_analytic::innerproducts']]],
+  ['oceanicwavenumber',['oceanicwavenumber',['../structinprod__analytic_1_1oceanicwavenumber.html',1,'inprod_analytic']]],
+  ['oceaninnerproducts',['oceaninnerproducts',['../structinprod__analytic_1_1oceaninnerproducts.html',1,'inprod_analytic']]],
+  ['oms',['oms',['../structparams_1_1modesconfiguration.html#a10bce57d0b89eaf60320cec21bb75857',1,'params::modesconfiguration']]],
+  ['owavenum',['owavenum',['../structinprod__analytic_1_1innerproducts.html#a7cd1a769aa1468eafce276b25bde03ee',1,'inprod_analytic::innerproducts']]]
 ];

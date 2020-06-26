@@ -5,7 +5,7 @@
 !>  Utility module
 !
 !> @copyright                                                               
-!> 2018 Lesley De Cruz & Jonathan Demaeyer.
+!> 2018-2020 Lesley De Cruz & Jonathan Demaeyer.
 !> See LICENSE.txt for license information.                                  
 !
 !---------------------------------------------------------------------------!
@@ -21,7 +21,7 @@ CONTAINS
     
   ! SUBROUTINE scalar_allocate(x)
   !   INTEGER :: AllocStat
-  !   IF (.NOT. ALLOCATED(x)) THEN 
+  !   IF (.NOT. allocated(x)) THEN
   !      ALLOCATE(x, STAT=AllocStat)
   
   !> Convert an integer to string.

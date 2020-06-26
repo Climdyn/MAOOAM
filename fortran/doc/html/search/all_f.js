@@ -1,13 +1,11 @@
 var searchData=
 [
-  ['p',['p',['../structinprod__analytic_1_1atm__wavenum.html#a5a938641d8939931bc4eb71499298a6a',1,'inprod_analytic::atm_wavenum::p()'],['../structinprod__analytic_1_1ocean__wavenum.html#a3170ff1b2a81b58ae81527a964682c06',1,'inprod_analytic::ocean_wavenum::p()']]],
   ['params',['params',['../namespaceparams.html',1,'']]],
-  ['params_2ef90',['params.f90',['../params_8f90.html',1,'']]],
-  ['phi0',['phi0',['../namespaceparams.html#a7e58166ca3fb2153f781aa623c5c31e6',1,'params']]],
-  ['phi0_5fnpi',['phi0_npi',['../namespaceparams.html#a516e6c305e938087cfe780629c76ef64',1,'params']]],
-  ['pi',['pi',['../namespaceparams.html#aaed8cf35d6e94ec5a9aeab80125e470f',1,'params']]],
+  ['phi0',['phi0',['../structparams_1_1physicsconfiguration.html#a840e968e2974fee05717f9e16ec9a2ae',1,'params::physicsconfiguration']]],
+  ['phi0_5fnpi',['phi0_npi',['../structparams_1_1physicsconfiguration.html#ad958e3395625b1202eee634355337750',1,'params::physicsconfiguration']]],
+  ['physicsconfiguration',['physicsconfiguration',['../structparams_1_1physicsconfiguration.html',1,'params']]],
+  ['pi',['pi',['../structparams_1_1physicsconfiguration.html#ae17384a4e312cca87427114772725932',1,'params::physicsconfiguration']]],
   ['piksrt',['piksrt',['../namespaceutil.html#af8d0a8ec8cb7391ddbf455dc92f2189d',1,'util']]],
-  ['print_5ftensor',['print_tensor',['../namespacetensor.html#a1fbaf180beb7fe8ab83ade2f576db80f',1,'tensor']]],
-  ['psi',['psi',['../namespaceaotensor__def.html#afa05aa849a8cb9e08b36dee6560986b8',1,'aotensor_def']]],
-  ['publish',['publish',['../LICENSE_8txt.html#ae6b6c4d3ae1a4140d31294e27bb0ebd8',1,'LICENSE.txt']]]
+  ['pmodel',['pmodel',['../structintegrator__def_1_1integrator.html#a1d261286cba5b917c64b348f5b903e64',1,'integrator_def::integrator']]],
+  ['print_5ftensor',['print_tensor',['../namespacetensor__def.html#a45166fa9f93ed0223c38c38231650e40',1,'tensor_def']]]
 ];

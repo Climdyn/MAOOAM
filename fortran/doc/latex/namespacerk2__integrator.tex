@@ -1,0 +1,153 @@
+\hypertarget{namespacerk2__integrator}{}\section{rk2\+\_\+integrator Module Reference}
+\label{namespacerk2__integrator}\index{rk2\+\_\+integrator@{rk2\+\_\+integrator}}
+
+
+Module containing the second-\/order Runge-\/\+Kutta (R\+K2) integration routines.  
+
+
+\subsection*{Data Types}
+\begin{DoxyCompactItemize}
+\item 
+type \hyperlink{structrk2__integrator_1_1rk2integrator}{rk2integrator}
+\begin{DoxyCompactList}\small\item\em Class for the Heun (R\+K2) integrator object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine \hyperlink{namespacerk2__integrator_a1b91e270c5963d316f19ae12ffe35f79}{init} (integr, imodel)
+\begin{DoxyCompactList}\small\item\em Routine to initialise the integration buffers. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacerk2__integrator_af90ce8bcd52238459d1367d39f898b12}{step} (integr, y, t, res)
+\begin{DoxyCompactList}\small\item\em Routine to perform an integration step (Heun algorithm). The incremented time is returned. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacerk2__integrator_a4425dabc7bb2f6f999479c3ab64ab06e}{clean} (integr)
+\begin{DoxyCompactList}\small\item\em Routine to clean the integrator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Module containing the second-\/order Runge-\/\+Kutta (R\+K2) integration routines. 
+
+\begin{DoxyCopyright}{Copyright}
+2015-\/2020 Lesley De Cruz \& Jonathan Demaeyer. See L\+I\+C\+E\+N\+S\+E.\+txt for license information. 
+\end{DoxyCopyright}
+\begin{DoxyRemark}{Remarks}
+This module actually contains the Heun algorithm routines. 
+\end{DoxyRemark}
+
+
+\subsection{Function/\+Subroutine Documentation}
+\mbox{\Hypertarget{namespacerk2__integrator_a4425dabc7bb2f6f999479c3ab64ab06e}\label{namespacerk2__integrator_a4425dabc7bb2f6f999479c3ab64ab06e}} 
+\index{rk2\+\_\+integrator@{rk2\+\_\+integrator}!clean@{clean}}
+\index{clean@{clean}!rk2\+\_\+integrator@{rk2\+\_\+integrator}}
+\subsubsection{\texorpdfstring{clean()}{clean()}}
+{\footnotesize\ttfamily subroutine rk2\+\_\+integrator\+::clean (\begin{DoxyParamCaption}\item[{class(\hyperlink{structrk2__integrator_1_1rk2integrator}{rk2integrator}), intent(inout)}]{integr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Routine to clean the integrator. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em integr} & Integrator object to clean. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 92 of file rk2\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+92       \textcolor{keywordtype}{CLASS}(rk2integrator), \textcolor{keywordtype}{INTENT(INOUT)} :: integr
+93 
+94       \textcolor{keywordflow}{IF} (\textcolor{keyword}{allocated}(integr%buf\_y1)) \textcolor{keyword}{DEALLOCATE}(integr%buf\_y1)
+95       \textcolor{keywordflow}{IF} (\textcolor{keyword}{allocated}(integr%buf\_f1)) \textcolor{keyword}{DEALLOCATE}(integr%buf\_f1)
+96       \textcolor{keywordflow}{IF} (\textcolor{keyword}{allocated}(integr%buf\_f0)) \textcolor{keyword}{DEALLOCATE}(integr%buf\_f0)
+97 
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacerk2__integrator_a1b91e270c5963d316f19ae12ffe35f79}\label{namespacerk2__integrator_a1b91e270c5963d316f19ae12ffe35f79}} 
+\index{rk2\+\_\+integrator@{rk2\+\_\+integrator}!init@{init}}
+\index{init@{init}!rk2\+\_\+integrator@{rk2\+\_\+integrator}}
+\subsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily subroutine rk2\+\_\+integrator\+::init (\begin{DoxyParamCaption}\item[{class(\hyperlink{structrk2__integrator_1_1rk2integrator}{rk2integrator}), intent(inout)}]{integr,  }\item[{class(\hyperlink{structmodel__def_1_1model}{model}), intent(in), target}]{imodel }\end{DoxyParamCaption})}
+
+
+
+Routine to initialise the integration buffers. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em integr} & Integrator object to initialize. \\
+\hline
+\mbox{\tt in}  & {\em imodel} & Model object to initialize the integrator with. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 41 of file rk2\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+41     \textcolor{keywordtype}{CLASS}(rk2integrator), \textcolor{keywordtype}{INTENT(INOUT)} :: integr
+42     \textcolor{keywordtype}{CLASS}(model), \textcolor{keywordtype}{INTENT(IN)}, \textcolor{keywordtype}{TARGET} :: imodel
+43     \textcolor{keywordtype}{INTEGER} :: allocstat
+44     \textcolor{keywordflow}{IF} (.NOT.imodel%initialized) \textcolor{keywordflow}{THEN}
+45       print*, \textcolor{stringliteral}{'Model not yet initialized, impossible to associate an integrator to an empty model!'}
+46       \textcolor{keywordflow}{RETURN}
+47 \textcolor{keywordflow}{    END IF}
+48 
+49     integr%pmodel => imodel
+50     integr%dt => imodel%model\_configuration%integration%dt
+51     integr%ndim => imodel%model\_configuration%modes%ndim
+52 
+53     \textcolor{keyword}{ALLOCATE}(integr%buf\_y1(0:integr%ndim) ,\hyperlink{namespacestat}{stat}=allocstat)
+54     \textcolor{keywordflow}{IF} (allocstat /= 0) \textcolor{keywordflow}{THEN}
+55       print*, \textcolor{stringliteral}{"*** rk2integrator%init: Problem with allocation! ***"}
+56       stop \textcolor{stringliteral}{"Exiting ..."}
+57 \textcolor{keywordflow}{    END IF}
+58     \textcolor{keyword}{ALLOCATE}(integr%buf\_f0(0:integr%ndim) ,\hyperlink{namespacestat}{stat}=allocstat)
+59     \textcolor{keywordflow}{IF} (allocstat /= 0) \textcolor{keywordflow}{THEN}
+60       print*, \textcolor{stringliteral}{"*** rk2integrator%init: Problem with allocation! ***"}
+61       stop \textcolor{stringliteral}{"Exiting ..."}
+62 \textcolor{keywordflow}{    END IF}
+63     \textcolor{keyword}{ALLOCATE}(integr%buf\_f1(0:integr%ndim) ,\hyperlink{namespacestat}{stat}=allocstat)
+64     \textcolor{keywordflow}{IF} (allocstat /= 0) \textcolor{keywordflow}{THEN}
+65       print*, \textcolor{stringliteral}{"*** rk2integrator%init: Problem with allocation! ***"}
+66       stop \textcolor{stringliteral}{"Exiting ..."}
+67 \textcolor{keywordflow}{    END IF}
+68 
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacerk2__integrator_af90ce8bcd52238459d1367d39f898b12}\label{namespacerk2__integrator_af90ce8bcd52238459d1367d39f898b12}} 
+\index{rk2\+\_\+integrator@{rk2\+\_\+integrator}!step@{step}}
+\index{step@{step}!rk2\+\_\+integrator@{rk2\+\_\+integrator}}
+\subsubsection{\texorpdfstring{step()}{step()}}
+{\footnotesize\ttfamily subroutine rk2\+\_\+integrator\+::step (\begin{DoxyParamCaption}\item[{class(\hyperlink{structrk2__integrator_1_1rk2integrator}{rk2integrator}), intent(inout)}]{integr,  }\item[{real(kind=8), dimension(0\+:integr\%ndim), intent(in)}]{y,  }\item[{real(kind=8), intent(inout)}]{t,  }\item[{real(kind=8), dimension(0\+:integr\%ndim), intent(out)}]{res }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Routine to perform an integration step (Heun algorithm). The incremented time is returned. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em integr} & Integrator object to perform the step with. \\
+\hline
+\mbox{\tt in}  & {\em y} & Initial point. \\
+\hline
+\mbox{\tt in}  & {\em t} & Actual integration time \\
+\hline
+\mbox{\tt out}  & {\em res} & Final point after the step. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 77 of file rk2\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+77     \textcolor{keywordtype}{CLASS}(rk2integrator), \textcolor{keywordtype}{INTENT(INOUT)} :: integr
+78     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:integr%ndim)}, \textcolor{keywordtype}{INTENT(IN)} :: y
+79     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(INOUT)} :: t
+80     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:integr%ndim)}, \textcolor{keywordtype}{INTENT(OUT)} :: res
+81     
+82     \textcolor{keyword}{CALL }integr%pmodel%tendencies(t,y,integr%buf\_f0)
+83     integr%buf\_y1 = y+integr%dt*integr%buf\_f0
+84     \textcolor{keyword}{CALL }integr%pmodel%tendencies(t+integr%dt,integr%buf\_y1,integr%buf\_f1)
+85     res=y+0.5*(integr%buf\_f0+integr%buf\_f1)*integr%dt
+86     t=t+integr%dt
+\end{DoxyCode}

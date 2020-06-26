@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['g',['g',['../structinprod__analytic_1_1atm__tensors.html#a4543ab64bfdcdb2aac1f2d9b1af2ee36',1,'inprod_analytic::atm_tensors::g()'],['../namespaceparams.html#afb5953f2f72e02fa67d474979127e79d',1,'params::g()']]],
-  ['ga',['ga',['../namespaceparams.html#a1c769c8719a62f1a72837b7b9daf8024',1,'params']]],
-  ['go',['go',['../namespaceparams.html#a30bd914fd64880f5407ebb055e72b88c',1,'params']]],
-  ['gp',['gp',['../namespaceparams.html#a29ba9893360b5685ca584deead6dbc55',1,'params']]]
+  ['g',['g',['../structparams_1_1physicsconfiguration.html#a46d66b1586db8cad8c365bec4fb66e59',1,'params::physicsconfiguration']]],
+  ['ga',['ga',['../structparams_1_1physicsconfiguration.html#adc8b14810a8f7e5e53b0b1f6b9a937bb',1,'params::physicsconfiguration']]],
+  ['go',['go',['../structparams_1_1physicsconfiguration.html#a4a6c09f2e8a5081c69c682a8ffb265b2',1,'params::physicsconfiguration']]],
+  ['gp',['gp',['../structparams_1_1physicsconfiguration.html#ab65b9980a9b9b33ace337c35efcfedb8',1,'params::physicsconfiguration']]]
 ];

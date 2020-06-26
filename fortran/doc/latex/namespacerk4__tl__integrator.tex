@@ -1,0 +1,75 @@
+\hypertarget{namespacerk4__tl__integrator}{}\section{rk4\+\_\+tl\+\_\+integrator Module Reference}
+\label{namespacerk4__tl__integrator}\index{rk4\+\_\+tl\+\_\+integrator@{rk4\+\_\+tl\+\_\+integrator}}
+
+
+Tangent Linear (TL) model versions of M\+A\+O\+O\+AM. Fourth-\/order Runge-\/\+Kutta (R\+K4) integrators module.  
+
+
+\subsection*{Data Types}
+\begin{DoxyCompactItemize}
+\item 
+type \hyperlink{structrk4__tl__integrator_1_1rk4tlintegrator}{rk4tlintegrator}
+\begin{DoxyCompactList}\small\item\em Class for the fourth-\/order Runge-\/\+Kutta (R\+K4) TL integrator object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine \hyperlink{namespacerk4__tl__integrator_a5630423cca1b2495ece95e66814207a1}{tl\+\_\+step} (integr, y, ystar, t, res)
+\begin{DoxyCompactList}\small\item\em Routine to perform an integration step (R\+K4 algorithm) of the tangent linear model. The incremented time is returned. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Tangent Linear (TL) model versions of M\+A\+O\+O\+AM. Fourth-\/order Runge-\/\+Kutta (R\+K4) integrators module. 
+
+\begin{DoxyCopyright}{Copyright}
+2020 Lesley De Cruz, Jonathan Demaeyer \& Sebastian Schubert. See L\+I\+C\+E\+N\+S\+E.\+txt for license information. 
+\end{DoxyCopyright}
+
+
+\subsection{Function/\+Subroutine Documentation}
+\mbox{\Hypertarget{namespacerk4__tl__integrator_a5630423cca1b2495ece95e66814207a1}\label{namespacerk4__tl__integrator_a5630423cca1b2495ece95e66814207a1}} 
+\index{rk4\+\_\+tl\+\_\+integrator@{rk4\+\_\+tl\+\_\+integrator}!tl\+\_\+step@{tl\+\_\+step}}
+\index{tl\+\_\+step@{tl\+\_\+step}!rk4\+\_\+tl\+\_\+integrator@{rk4\+\_\+tl\+\_\+integrator}}
+\subsubsection{\texorpdfstring{tl\+\_\+step()}{tl\_step()}}
+{\footnotesize\ttfamily subroutine rk4\+\_\+tl\+\_\+integrator\+::tl\+\_\+step (\begin{DoxyParamCaption}\item[{class(\hyperlink{structrk4__tl__integrator_1_1rk4tlintegrator}{rk4tlintegrator}), intent(inout)}]{integr,  }\item[{real(kind=8), dimension(0\+:integr\%ndim), intent(in)}]{y,  }\item[{real(kind=8), dimension(0\+:integr\%ndim), intent(in)}]{ystar,  }\item[{real(kind=8), intent(inout)}]{t,  }\item[{real(kind=8), dimension(0\+:integr\%ndim), intent(out)}]{res }\end{DoxyParamCaption})}
+
+
+
+Routine to perform an integration step (R\+K4 algorithm) of the tangent linear model. The incremented time is returned. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in,out}  & {\em integr} & Integrator object to perform the step with. \\
+\hline
+\mbox{\tt in}  & {\em y} & Initial point. \\
+\hline
+\mbox{\tt in}  & {\em ystar} & Evaluating the adjoint model at the point $\boldsymbol{y}^\ast$. \\
+\hline
+\mbox{\tt in}  & {\em t} & Actual integration time \\
+\hline
+\mbox{\tt out}  & {\em res} & Final point after the step. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 47 of file rk4\+\_\+tl\+\_\+integrator.\+f90.
+
+
+\begin{DoxyCode}
+47     \textcolor{keywordtype}{CLASS}(rk4tlintegrator), \textcolor{keywordtype}{INTENT(INOUT)} :: integr
+48     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:integr%ndim)}, \textcolor{keywordtype}{INTENT(IN)} :: y,ystar
+49     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{INTENT(INOUT)} :: t
+50     \textcolor{keywordtype}{REAL(KIND=8)}, \textcolor{keywordtype}{DIMENSION(0:integr%ndim)}, \textcolor{keywordtype}{INTENT(OUT)} :: res
+51 
+52     \textcolor{keyword}{CALL }integr%pmodel%tl\_tendencies(t,ystar,y,integr%buf\_kA)
+53     integr%buf\_y1 = y+0.5*integr%dt*integr%buf\_kA
+54     \textcolor{keyword}{CALL }integr%pmodel%tl\_tendencies(t+0.5*integr%dt,ystar,integr%buf\_y1,integr%buf\_kB)
+55     integr%buf\_y1 = y+0.5*integr%dt*integr%buf\_kB
+56     integr%buf\_kA = integr%buf\_kA+2*integr%buf\_kB
+57     \textcolor{keyword}{CALL }integr%pmodel%tl\_tendencies(t+0.5*integr%dt,ystar,integr%buf\_y1,integr%buf\_kB)
+58     integr%buf\_y1 = y+0.5*integr%dt*integr%buf\_kB
+59     integr%buf\_kA = integr%buf\_kA+2*integr%buf\_kB
+60     \textcolor{keyword}{CALL }integr%pmodel%tl\_tendencies(t+integr%dt,ystar,integr%buf\_y1,integr%buf\_kB)
+61     integr%buf\_kA = integr%buf\_kA+integr%buf\_kB
+62     res=y+integr%buf\_kA*integr%dt/6
+63     t=t+integr%dt
+\end{DoxyCode}

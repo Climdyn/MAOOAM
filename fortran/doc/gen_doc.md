@@ -2,9 +2,9 @@
 
 ## About ##
 
-(c) 2013-2016 Lesley De Cruz and Jonathan Demaeyer
+(c) 2013-2020 Lesley De Cruz and Jonathan Demaeyer
 
-See [LICENSE.txt](../LICENSE.txt) for license information.
+See [LICENSE.txt](../../LICENSE.txt) for license information.
 
 This software is provided as supplementary material with:
 
@@ -25,6 +25,7 @@ resources.
 
 A pdf version of this manual is available [here](../latex/Reference_manual.pdf).
 
+
 ------------------------------------------------------------------------
 
 ## Installation ##
@@ -33,66 +34,60 @@ The program can be installed with Makefile. We provide configuration files for
 two compilers : gfortran and ifort.
 
 By default, gfortran is selected. To select one or the other, simply modify the 
-Makefile accordingly or pass the COMPILER flag to `make`. If gfortran is
-selected, the code should be compiled with gfortran 4.7+ (allows for
-allocatable arrays in namelists).  If ifort is selected, the code has been
-tested with the version 14.0.2 and we do not guarantee compatibility with older
-compiler version.
+Makefile accordingly or pass the COMPILER flag to `make`.
 
 To install, unpack the archive in a folder or clone with git:
 
 ```bash     
 git clone https://github.com/Climdyn/MAOOAM.git
-cd MAOOAM
+cd MAOOAM/fortran
 ```
      
 and run:
 
 ```bash     
 make
-```     
-By default, the inner products of the basis functions, used to compute the
-coefficients of the ODEs, are not stored in memory. If you want to enable the
-storage in memory of these inner products, run make with the following flag:
-
-```bash
-make RES=store
 ```
-
-Depending on the chosen resolution, storing the inner products may result in a
-huge memory usage and is not recommended unless you need them for a specific
-purpose.
+     
+The command
  
- Remark: The command "make clean" removes the compiled files.
+```bash
+make clean
+```
+removes the compiled files.
 
 For Windows users, a minimalistic GNU development environment
  (including gfortran and make) is available at [www.mingw.org](http://www.mingw.org) .
+
 
 ------------------------------------------------------------------------
 
 ##  Description of the files ##
 
-The model tendencies are represented through a tensor called aotensor which
-includes all the coefficients. This tensor is computed once at the program
-initialization.
+The model tendencies are represented through a tensor class called AtmOcTensor (aotensor_def::atmoctensor) which
+includes all the coefficients. In the standard implementation using maooam.f90 , this tensor is 
+computed once at the program initialization.
 
 * maooam.f90 : Main program.
-* aotensor_def.f90 : Tensor aotensor computation module.
-* IC_def.f90 : A module which loads the user specified initial condition.
-* inprod_analytic.f90 : Inner products computation module.
-* rk2_integrator.f90 : A module which contains the Heun integrator for the model equations.
-* rk4_integrator.f90 : A module which contains the RK4 integrator for the model equations.
+* model_def.f90 : Main model class module.
+* aotensor_def.f90 : Tensor class AtmOcTensor module.
+* inprod_analytic.f90 : Inner products class module.
+* integrator_def.f90 : A module holding the model's integrator base class definition.
+* rk2_integrator.f90 : A module which contains the Heun integrator class for the model equations.
+* rk2_tl_integrator.f90 : Heun Tangent Linear (TL) model integrator class module.
+* rk2_ad_integrator.f90 : Heun Adjoint (AD) model integrator class module.
+* rk4_integrator.f90 : A module which contains the RK4 integrator class for the model equations.
+* rk4_tl_integrator.f90 : RK4 Tangent Linear (TL) model integrators module.
+* rk4_ad_integrator.f90 : Adjoint (AD) model integrators module.
 * Makefile : The Makefile.
-* params.f90 : The model parameters module.
-* tl_ad_tensor.f90 : Tangent Linear (TL) and Adjoint (AD) model tensors definition module
-* rk2_tl_ad_integrator.f90 : Heun Tangent Linear (TL) and Adjoint (AD) model integrators module
-* rk4_tl_ad_integrator.f90 : RK4 Tangent Linear (TL) and Adjoint (AD) model integrators module
-* test_tl_ad.f90 : Tests for the Tangent Linear (TL) and Adjoint (AD) model versions
+* params.f90 : The model parameters classes module.
+* tl_ad_tensor.f90 : Tangent Linear (TL) and Adjoint (AD) model tensors class definition module.
+* test_tl_ad.f90 : Tests for the Tangent Linear (TL) and Adjoint (AD) model versions.
 * README.md : A read me file.
 * LICENSE.txt : The license text of the program.
 * util.f90 : A module with various useful functions.
-* tensor.f90 : Tensor utility module.
-* stat.f90 : A module for statistic accumulation.
+* tensor_def.f90 : Main tensor class utility module.
+* stat.f90 : A module implementing a statistics accumulator class.
 * params.nml : A namelist to specify the model parameters.
 * int_params.nml : A namelist to specify the integration parameters.
 * modeselection.nml : A namelist to specify which spectral decomposition will be used.
@@ -103,7 +98,7 @@ initialization.
 ## Usage ##
 
 The user first has to fill the params.nml and int_params.nml namelist files according to their needs.
-Indeed, model and integration parameters can be specified respectively in the params.nml and int_params.nml namelist files. Some examples related to already published article are available in the params folder.
+Indeed, model and integration parameters can be specified respectively in the params.nml and int_params.nml namelist files. Some examples related to already published article are available in the [params](../../params/) folder.
 
 The modeselection.nml namelist can then be filled : 
 * NBOC and NBATM specify the number of blocks that will be used in respectively the ocean and
@@ -113,14 +108,12 @@ The modeselection.nml namelist can then be filled :
   atmosphere. Their shapes are OMS(NBOC,2) and AMS(NBATM,2).
 * The first dimension specifies the number attributed by the user to the block and the second
   dimension specifies the x and the y wavenumbers.
-* The VDDG model, described in Vannitsem et al. (2015) is given as an example
-  in the archive.
+* The VDDG model is given as a default example. It is described in:
+    - Vannitsem, S., Demaeyer, J., De Cruz, L., and Ghil, M.: Low-frequency
+      variability and heat transport in a loworder nonlinear coupled ocean-atmosphere
+      model, Physica D: Nonlinear Phenomena, 309, 71-85, [doi:10.1016/j.physd.2015.07.006](https://doi.org/10.1016/j.physd.2015.07.006), 2015.   
 * Note that the variables of the model are numbered according to the chosen
   order of the blocks.
-
-The Makefile allows to change the integrator being used for the time evolution.
-The user should modify it according to its need.
-By default a RK2 scheme is selected.
 
 Finally, the IC.nml file specifying the initial condition should be defined. To
 obtain an example of this configuration file corresponding to the model you
@@ -137,10 +130,14 @@ initial condition, stop the program, fill the newly generated file and restart :
 It will generate two files :
  * evol_field.dat : the recorded time evolution of the variables.
  * mean_field.dat : the mean field (the climatology)
+ 
+By default, the code uses the rk2_integrator class of integrator, which integrates the model with  
+the [Heun algorithm](https://en.wikipedia.org/wiki/Heun%27s_method). However, by modifying the file maooam.f90, it is possible to use the 
+rk4_integrator class which integrates the model with the [fourth-order Runge-Kutta algorithm (RK4)](https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods). It is also possible to write an user-defined integrator by subclassing the base class integrator_def::integrator.
 
 The tangent linear and adjoint models of MAOOAM are provided in the
-tl_ad_tensor, rk2_tl_ad_integrator and rk4_tl_ad_integrator modules. It is
-documented [here](./md_doc_tl_ad_doc.html).
+tl_ad_tensor, with integrators provided in the rk2_tl_integrator, rk2_ad_integrator, rk4_tl_integrator and rk4_ad_integrator modules. 
+It is documented [here](./md_doc_tl_ad_doc.html).
 
 
 ------------------------------------------------------------------------
@@ -164,11 +161,12 @@ contribution to \f$dy_i/dt\f$
 * \f$\mathcal{T}_{i,j,0} + \mathcal{T}_{i,0,j}\f$ is the contribution to  \f$dy_i/dt\f$ which is linear in
 \f$y_j\f$.
 
-Ideally, the tensor aotensor_def::aotensor is composed as an upper triangular matrix 
-(in the last two coordinates).
+The tensor aotensor_def::atmoctensor is composed as an upper triangular matrix 
+(in the last two coordinates), and its computation uses the inner products defined in a inprod_analytic::innerproducts class.
 
-The tensor for this model is composed in the aotensor_def module and uses the
-inner products defined in the inprod_analytic module.
+The implementation is made using Fortran classes that are linked together.
+It turns the model into an instanciated object that can be reused, allowing the usage of several different model versions in the same program.
+See the page model_def::model for a sketch of how the various classes are linked together.
 
 
 ------------------------------------------------------------------------

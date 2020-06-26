@@ -4,7 +4,7 @@
 !>  Statistics accumulators
 !
 !> @copyright                                                               
-!> 2015 Lesley De Cruz & Jonathan Demaeyer.
+!> 2015-2020 Lesley De Cruz & Jonathan Demaeyer.
 !> See LICENSE.txt for license information.                                  
 !
 !---------------------------------------------------------------------------!
@@ -12,74 +12,118 @@
 
 
 MODULE stat
-  USE params, only: ndim
   IMPLICIT NONE
 
   PRIVATE
   
-  INTEGER :: i=0 !< Number of stats accumulated
+  !> Statistics accumulator objects class
+  TYPE, PUBLIC :: StatAccumulator
+    INTEGER :: i=0 !< Number of stats accumulated
   
-  ! Vectors holding the stats
-  REAL(KIND=8), DIMENSION(:), ALLOCATABLE :: m       !< Vector storing the inline mean
-  REAL(KIND=8), DIMENSION(:), ALLOCATABLE :: mprev   !< Previous mean vector
-  REAL(KIND=8), DIMENSION(:), ALLOCATABLE :: v       !< Vector storing the inline variance
-  REAL(KIND=8), DIMENSION(:), ALLOCATABLE :: mtmp  
-
-
-  PUBLIC :: acc,init_stat,mean,var,iter,reset
+    ! Vectors holding the stats
+    REAL(KIND=8), DIMENSION(:), ALLOCATABLE :: m       !< Vector storing the inline mean
+    REAL(KIND=8), DIMENSION(:), ALLOCATABLE :: mprev   !< Previous mean vector
+    REAL(KIND=8), DIMENSION(:), ALLOCATABLE :: v       !< Vector storing the inline variance
+    REAL(KIND=8), DIMENSION(:), ALLOCATABLE :: mtmp
+  CONTAINS
+    PROCEDURE :: init => init_stat
+    PROCEDURE :: accumulate => acc
+    PROCEDURE :: mean
+    PROCEDURE :: var
+    PROCEDURE :: iter
+    PROCEDURE :: reset
+    PROCEDURE :: clean
+  END TYPE StatAccumulator
 
   CONTAINS
 
-    !> Initialise the accumulators
-    SUBROUTINE init_stat
+    !> Initialize the accumulators
+    !> @param[in,out] istat Statistical accumulator to initialize
+    !> @param[in] ndim Dimension of the state space to accumulate statistics for.
+    SUBROUTINE init_stat(istat, ndim)
+      CLASS(StatAccumulator), INTENT(INOUT) :: istat
+      INTEGER, INTENT(in) :: ndim
       INTEGER :: AllocStat
       
-      ALLOCATE(m(0:ndim),mprev(0:ndim),v(0:ndim),mtmp(0:ndim), STAT=AllocStat)
-      IF (AllocStat /= 0) STOP '*** Not enough memory ***'
-      m=0.D0
-      mprev=0.D0
-      v=0.D0
-      mtmp=0.D0
+      ALLOCATE(istat%m(ndim), istat%mprev(ndim), STAT=AllocStat)
+      IF (AllocStat /= 0) THEN
+        PRINT*, "*** init_stat: Problem with allocation! ***"
+        STOP "Exiting ..."
+      END IF
+      ALLOCATE(istat%v(ndim), istat%mtmp(ndim), STAT=AllocStat)
+      IF (AllocStat /= 0) THEN
+        PRINT*, "*** init_stat: Problem with allocation! ***"
+        STOP "Exiting ..."
+      END IF
+      istat%m=0.D0
+      istat%mprev=0.D0
+      istat%v=0.D0
+      istat%mtmp=0.D0
       
     END SUBROUTINE init_stat
 
     !> Accumulate one state
-    SUBROUTINE acc(x)
-      IMPLICIT NONE
-      REAL(KIND=8), DIMENSION(0:ndim), INTENT(IN) :: x
-      i=i+1
-      mprev=m+(x-m)/i
-      mtmp=mprev
-      mprev=m
-      m=mtmp
-      v=v+(x-mprev)*(x-m)
+    !> @param[in,out] istat Statistical accumulator to initialize
+    !> @param[in] x State to accumulate
+    SUBROUTINE acc(istat, x)
+      CLASS(StatAccumulator), INTENT(INOUT) :: istat
+      REAL(KIND=8), DIMENSION(:), INTENT(IN) :: x
+      istat%i=istat%i+1
+      istat%mprev=istat%m+(x-istat%m)/istat%i
+      istat%mtmp=istat%mprev
+      istat%mprev=istat%m
+      istat%m=istat%mtmp
+      istat%v=istat%v+(x-istat%mprev)*(x-istat%m)
     END SUBROUTINE acc
 
     !> Function returning the mean
-    FUNCTION mean()
-      REAL(KIND=8), DIMENSION(0:ndim) :: mean
-      mean=m
+    !> @param[in,out] istat Statistical accumulator to initialize
+    !> @return The mean of the accumulated states
+    FUNCTION mean(istat)
+      CLASS(StatAccumulator), INTENT(IN) :: istat
+      REAL(KIND=8), DIMENSION(size(istat%m)) :: mean
+      mean=istat%m
     END FUNCTION mean
 
     !> Function returning the variance
-    FUNCTION var()
-      REAL(KIND=8), DIMENSION(0:ndim) :: var
-      var=v/(i-1)
+    !> @param[in,out] istat Statistical accumulator to initialize
+    !> @return The variance of the accumulated states
+    FUNCTION var(istat)
+      CLASS(StatAccumulator), INTENT(IN) :: istat
+      REAL(KIND=8), DIMENSION(size(istat%m)) :: var
+      var=istat%v/(istat%i-1)
     END FUNCTION var
 
     !> Function returning the number of data accumulated
-    FUNCTION iter()
+    !> @param[in,out] istat Statistical accumulator to initialize
+    !> @return The number of the accumulated states
+    FUNCTION iter(istat)
+      CLASS(StatAccumulator), INTENT(IN) :: istat
       INTEGER :: iter
-      iter=i
+      iter=istat%i
     END FUNCTION iter
 
-    !> Routine resetting the accumulators
-    SUBROUTINE reset
-      m=0.D0
-      mprev=0.D0
-      v=0.D0
-      i=0
+    !> Routine resetting the accumulator
+    !> @param[in,out] istat Statistical accumulator to initialize
+    SUBROUTINE reset(istat)
+      CLASS(StatAccumulator), INTENT(INOUT) :: istat
+      istat%m=0.D0
+      istat%mprev=0.D0
+      istat%v=0.D0
+      istat%i=0
     END SUBROUTINE reset
-      
 
-  END MODULE stat
+  !> Routine to clean the accumulator
+  !> @param[in,out] istat Statistical accumulator to clean
+  SUBROUTINE clean(istat)
+      CLASS(StatAccumulator), INTENT(INOUT) :: istat
+
+      IF (allocated(istat%m)) DEALLOCATE(istat%m)
+      IF (allocated(istat%mprev)) DEALLOCATE(istat%mprev)
+      IF (allocated(istat%v)) DEALLOCATE(istat%v)
+      IF (allocated(istat%mtmp)) DEALLOCATE(istat%mtmp)
+
+  END SUBROUTINE clean
+
+
+END MODULE stat

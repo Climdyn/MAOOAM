@@ -1,19 +1,16 @@
 
 ! aotensor_def.f90
 !
-!>  The equation tensor for the coupled ocean-atmosphere model
+!>  The equation tensor \f$\mathcal{T}_{i,j,k}\f$ for the coupled ocean-atmosphere model
 !>  with temperature which allows for an extensible set of modes
 !>  in the ocean and in the atmosphere.
 !
 !> @copyright                                                               
-!> 2015 Lesley De Cruz & Jonathan Demaeyer.
+!> 2015-2020 Lesley De Cruz & Jonathan Demaeyer.
 !> See LICENSE.txt for license information.                                  
 !
 !---------------------------------------------------------------------------!
 !                                                                           
-!> @remark                                                                 
-!> Generated Fortran90/95 code 
-!> from aotensor.lua
 !                                                                           
 !---------------------------------------------------------------------------!
 
@@ -28,22 +25,27 @@ MODULE aotensor_def
 
   USE params
   USE inprod_analytic
-  USE tensor, only:coolist,simplify
+  USE tensor_def
   IMPLICIT NONE
 
   PRIVATE
 
-  !> Vector used to count the tensor elements
-  INTEGER, DIMENSION(:), ALLOCATABLE :: count_elems
-
-  !> Epsilon to test equality with 0
+  ! Epsilon to test equality with 0
   REAL(KIND=8), PARAMETER :: real_eps = 2.2204460492503131e-16
 
-  PUBLIC :: init_aotensor
-
-  !> \f$\mathcal{T}_{i,j,k}\f$ - Tensor representation of the tendencies.
-  TYPE(coolist), DIMENSION(:), ALLOCATABLE, PUBLIC :: aotensor
-
+  !> Class to hold the tensor \f$\mathcal{T}_{i,j,k}\f$ representation of the tendencies.
+  TYPE, PUBLIC :: AtmOcTensor
+    TYPE(Tensor) :: tensor                                  !< The tensor object
+    INTEGER, DIMENSION(:), ALLOCATABLE :: count_elems       !< A list of the number of non-zero entries of the tensor component along \f$i\f$.
+    PROCEDURE(ao_coeff), PRIVATE, POINTER :: operation
+    LOGICAL :: initialized
+    INTEGER, POINTER :: noc, natm, ndim
+  CONTAINS
+    PROCEDURE :: init => init_aotensor
+    PROCEDURE :: clean => delete_aotensor
+    PROCEDURE, PRIVATE :: compute_tensor => compute_aotensor
+    PROCEDURE, PRIVATE :: psi, theta, A, T
+  END TYPE AtmOcTensor
 
   !-----------------------------------------------------!
   !                                                     !
@@ -59,131 +61,147 @@ CONTAINS
   !                                                     !
   !-----------------------------------------------------!
 
-  !> Translate the \f$\psi_{a,i}\f$ coefficients into effective coordinates
-  FUNCTION psi(i)
+  ! Translate the \f$\psi_{a,i}\f$ coefficients into effective coordinates
+  FUNCTION psi(aot, i)
+    CLASS(AtmOcTensor), INTENT(IN) :: aot
     INTEGER :: i,psi
     psi = i
   END FUNCTION psi
 
-  !> Translate the \f$\theta_{a,i}\f$ coefficients into effective coordinates
-  FUNCTION theta(i)
+  ! Translate the \f$\theta_{a,i}\f$ coefficients into effective coordinates
+  FUNCTION theta(aot,i)
+    CLASS(AtmOcTensor), INTENT(IN) :: aot
     INTEGER :: i,theta
-    theta = i + natm
+    theta = i + aot%natm
   END FUNCTION theta
 
-  !> Translate the \f$\psi_{o,i}\f$ coefficients into effective coordinates
-  FUNCTION A(i)
+  ! Translate the \f$\psi_{o,i}\f$ coefficients into effective coordinates
+  FUNCTION A(aot,i)
+    CLASS(AtmOcTensor), INTENT(IN) :: aot
     INTEGER :: i,A
-    A = i + 2 * natm
+    A = i + 2 * aot%natm
   END FUNCTION A
 
-  !> Translate the \f$\delta T_{o,i}\f$ coefficients into effective coordinates
-  FUNCTION T(i)
+  ! Translate the \f$\delta T_{o,i}\f$ coefficients into effective coordinates
+  FUNCTION T(aot,i)
+    CLASS(AtmOcTensor), INTENT(IN) :: aot
     INTEGER :: i,T
-    T = i + 2 * natm + noc
+    T = i + 2 * aot%natm + aot%noc
   END FUNCTION T
 
-  !> Kronecker delta function
+  ! Kronecker delta function
   FUNCTION kdelta(i,j)
     INTEGER :: i,j,kdelta
     kdelta=0
     IF (i == j) kdelta = 1
   END FUNCTION kdelta
 
-  !> Subroutine to add element in the #aotensor \f$\mathcal{T}_{i,j,k}\f$ structure.
-  !> @param i tensor \f$i\f$ index
-  !> @param j tensor \f$j\f$ index
-  !> @param k tensor \f$k\f$ index
-  !> @param v value to add
-  SUBROUTINE coeff(i,j,k,v)
+  ! Subroutine to add element in the aotensor \f$\mathcal{T}_{i,j,k}\f$ structure.
+  SUBROUTINE ao_coeff(aot,i,j,k,v)
+    CLASS(AtmOcTensor), INTENT(INOUT) :: aot
     INTEGER, INTENT(IN) :: i,j,k
     REAL(KIND=8), INTENT(IN) :: v
     INTEGER :: n
-    IF (.NOT. ALLOCATED(aotensor)) STOP "*** coeff routine : tensor not yet allocated ***"
-    IF (.NOT. ALLOCATED(aotensor(i)%elems)) STOP "*** coeff routine : tensor not yet allocated ***"
-    IF (ABS(v) .ge. real_eps) THEN
-       n=(aotensor(i)%nelems)+1
-       IF (j .LE. k) THEN
-          aotensor(i)%elems(n)%j=j
-          aotensor(i)%elems(n)%k=k
-       ELSE
-          aotensor(i)%elems(n)%j=k
-          aotensor(i)%elems(n)%k=j
-       END IF
-       aotensor(i)%elems(n)%v=v
-       aotensor(i)%nelems=n
+    IF (.NOT. allocated(aot%tensor%t)) THEN
+      PRINT*, "Warning: Trying to compute an aotensor not previously allocated."
+      PRINT*, "Aborting aotensor initialization."
+      aot%initialized = .FALSE.
+      RETURN
     END IF
-  END SUBROUTINE coeff
+    IF (.NOT. allocated(aot%tensor%t(i)%elems)) THEN
+      PRINT*, "Warning: Trying to compute an aotensor not previously allocated."
+      PRINT*, "Aborting aotensor initialization."
+      aot%initialized = .FALSE.
+      RETURN
+    END IF
+    IF (abs(v) .ge. real_eps) THEN
+       n=(aot%tensor%t(i)%nelems)+1
+       IF (j .LE. k) THEN
+          aot%tensor%t(i)%elems(n)%j=j
+          aot%tensor%t(i)%elems(n)%k=k
+       ELSE
+          aot%tensor%t(i)%elems(n)%j=k
+          aot%tensor%t(i)%elems(n)%k=j
+       END IF
+       aot%tensor%t(i)%elems(n)%v=v
+       aot%tensor%t(i)%nelems=n
+    END IF
+  END SUBROUTINE ao_coeff
 
-  !> Subroutine to count the elements of the #aotensor \f$\mathcal{T}_{i,j,k}\f$. Add +1 to count_elems(i) for each value that is added to the tensor i-th component.
-  !> @param i tensor \f$i\f$ index
-  !> @param j tensor \f$j\f$ index
-  !> @param k tensor \f$k\f$ index
-  !> @param v value that will be added
-  SUBROUTINE add_count(i,j,k,v)
+  ! Subroutine to count the elements of the aotensor \f$\mathcal{T}_{i,j,k}\f$. Add +1 to count_elems(i) for each value that is added to the tensor i-th component.
+  SUBROUTINE ao_add_count(aot,i,j,k,v)
+    CLASS(AtmOcTensor), INTENT(INOUT) :: aot
     INTEGER, INTENT(IN) :: i,j,k
     REAL(KIND=8), INTENT(IN)  :: v
-    IF (ABS(v) .ge. real_eps) count_elems(i)=count_elems(i)+1
-  END SUBROUTINE add_count
+    IF (abs(v) .ge. real_eps) aot%count_elems(i)=aot%count_elems(i)+1
+  END SUBROUTINE ao_add_count
 
-  !> Subroutine to compute the tensor #aotensor
-  !> @param func External function to be used
-  SUBROUTINE compute_aotensor(func)
-    EXTERNAL :: func
-    INTERFACE
-       SUBROUTINE func(i,j,k,v)
-         INTEGER, INTENT(IN) :: i,j,k
-         REAL(KIND=8), INTENT(IN) :: v
-       END SUBROUTINE func
-    END INTERFACE
+  ! Subroutine to compute the tensor aotensor
+  SUBROUTINE compute_aotensor(aot, model_config, inprods)
+    CLASS(AtmOcTensor), INTENT(INOUT) :: aot
+    CLASS(ModelConfiguration), INTENT(IN), TARGET :: model_config
+    CLASS(InnerProducts), INTENT(IN), TARGET :: inprods
+
+    TYPE(PhysicsConfiguration), POINTER :: phys
+    TYPE(InnerProducts), POINTER :: ips
+
     INTEGER :: i,j,k
-    CALL func(theta(1),0,0,(Cpa / (1 - atmos%a(1,1) * sig0)))
-    DO i = 1, natm
-       DO j = 1, natm
-          CALL func(psi(i),psi(j),0,-(((atmos%c(i,j) * betp) / atmos%a(i,i))) -&
-               &(kd * kdelta(i,j)) / 2 + atmos%a(i,j)*nuap)
-          CALL func(theta(i),psi(j),0,(atmos%a(i,j) * kd * sig0) / (-2 + 2 * atmos%a(i,i) * sig0))
-          CALL func(psi(i),theta(j),0,(kd * kdelta(i,j)) / 2)
-          CALL func(theta(i),theta(j),0,(-((sig0 * (2. * atmos%c(i,j) * betp +&
-               & atmos%a(i,j) * (kd + 4. * kdp)))) + 2. * (LSBpa + sc * Lpa) &
-               &* kdelta(i,j)) / (-2. + 2. * atmos%a(i,i) * sig0))
-          DO k = 1, natm
-             CALL func(psi(i),psi(j),psi(k),-((atmos%b(i,j,k) / atmos%a(i,i))))
-             CALL func(psi(i),theta(j),theta(k),-((atmos%b(i,j,k) / atmos%a(i,i))))
-             CALL func(theta(i),psi(j),theta(k),(atmos%g(i,j,k) -&
-                  & atmos%b(i,j,k) * sig0) / (-1 + atmos%a(i,i) *&
-                  & sig0))
-             CALL func(theta(i),theta(j),psi(k),(atmos%b(i,j,k) * sig0) / (1 - atmos%a(i,i) * sig0))
+
+    phys => model_config%physics
+    ips => inprods
+
+    CALL aot%operation(aot%theta(1),0,0,(phys%Cpa / (1 - ips%atmos%a(1,1) * phys%sig0)))
+    DO i = 1, aot%natm
+       DO j = 1, aot%natm
+          CALL aot%operation(aot%psi(i),aot%psi(j),0,-(((ips%atmos%c(i,j) * phys%betp) / ips%atmos%a(i,i))) -&
+               &(phys%kd * kdelta(i,j)) / 2 + ips%atmos%a(i,j)*phys%nuap)
+          CALL aot%operation(aot%theta(i),aot%psi(j),0,(ips%atmos%a(i,j) * phys%kd * phys%sig0) &
+               & / (-2 + 2 * ips%atmos%a(i,i) * phys%sig0))
+          CALL aot%operation(aot%psi(i),aot%theta(j),0,(phys%kd * kdelta(i,j)) / 2)
+          CALL aot%operation(aot%theta(i),aot%theta(j),0,(-((phys%sig0 * (2. * ips%atmos%c(i,j) * phys%betp +&
+               & ips%atmos%a(i,j) * (phys%kd + 4. * phys%kdp)))) + 2. * (phys%LSBpa + phys%sc * phys%Lpa) &
+               &* kdelta(i,j)) / (-2. + 2. * ips%atmos%a(i,i) * phys%sig0))
+          DO k = 1, aot%natm
+             CALL aot%operation(aot%psi(i),aot%psi(j),aot%psi(k),-((ips%atmos%b(i,j,k) / ips%atmos%a(i,i))))
+             CALL aot%operation(aot%psi(i),aot%theta(j),aot%theta(k),-((ips%atmos%b(i,j,k) / ips%atmos%a(i,i))))
+             CALL aot%operation(aot%theta(i),aot%psi(j),aot%theta(k),(ips%atmos%g(i,j,k) -&
+                  & ips%atmos%b(i,j,k) * phys%sig0) / (-1 + ips%atmos%a(i,i) *&
+                  & phys%sig0))
+             CALL aot%operation(aot%theta(i),aot%theta(j),aot%psi(k),(ips%atmos%b(i,j,k) * phys%sig0) &
+                  & / (1 - ips%atmos%a(i,i) * phys%sig0))
           END DO
        END DO
-       DO j = 1, noc
-          CALL func(psi(i),A(j),0,kd * atmos%d(i,j) / (2 * atmos%a(i,i)))
-          CALL func(theta(i),A(j),0,kd * (atmos%d(i,j) * sig0) / (2 - 2 * atmos%a(i,i) * sig0))
-          CALL func(theta(i),T(j),0,atmos%s(i,j) * (2 * LSBpo + Lpa) / (2 - 2 * atmos%a(i,i) * sig0))
+       DO j = 1, aot%noc
+          CALL aot%operation(aot%psi(i),aot%A(j),0,phys%kd * ips%atmos%d(i,j) / (2 * ips%atmos%a(i,i)))
+          CALL aot%operation(aot%theta(i),aot%A(j),0,phys%kd * (ips%atmos%d(i,j) * phys%sig0) &
+                & / (2 - 2 * ips%atmos%a(i,i) * phys%sig0))
+          CALL aot%operation(aot%theta(i),aot%T(j),0,ips%atmos%s(i,j) * (2 * phys%LSBpo + phys%Lpa) &
+                & / (2 - 2 * ips%atmos%a(i,i) * phys%sig0))
        END DO
     END DO
-    DO i = 1, noc
-       DO j = 1, natm
-          CALL func(A(i),psi(j),0,ocean%K(i,j) * dp / (ocean%M(i,i) + G))
-          CALL func(A(i),theta(j),0,-(ocean%K(i,j)) * dp / (ocean%M(i,i) + G))
+    DO i = 1, aot%noc
+       DO j = 1, aot%natm
+          CALL aot%operation(aot%A(i),aot%psi(j),0,ips%ocean%K(i,j) * phys%dp / (ips%ocean%M(i,i) + phys%G))
+          CALL aot%operation(aot%A(i),aot%theta(j),0,-(ips%ocean%K(i,j)) * phys%dp / (ips%ocean%M(i,i) + phys%G))
        END DO
-       DO j = 1, noc
-          CALL func(A(i),A(j),0,-((ocean%N(i,j) * betp + ocean%M(i,i) * (rp + dp) * kdelta(i,j)&
-               & - ocean%M(i,j)**2*nuop)) / (ocean%M(i,i) + G))
-          DO k = 1, noc
-             CALL func(A(i),A(j),A(k),-(ocean%C(i,j,k)) / (ocean%M(i,i) + G))
+       DO j = 1, aot%noc
+          CALL aot%operation(aot%A(i),aot%A(j),0,-((ips%ocean%N(i,j) * phys%betp &
+               & + ips%ocean%M(i,i) * (phys%rp + phys%dp) * kdelta(i,j)&
+               & - ips%ocean%M(i,j)**2*phys%nuop)) / (ips%ocean%M(i,i) + phys%G))
+          DO k = 1, aot%noc
+             CALL aot%operation(aot%A(i),aot%A(j),aot%A(k),-(ips%ocean%C(i,j,k)) / (ips%ocean%M(i,i) + phys%G))
           END DO
        END DO
     END DO
-    DO i = 1, noc
-       CALL func(T(i),0,0,Cpo * ocean%W(i,1))
-       DO j = 1, natm
-          CALL func(T(i),theta(j),0,ocean%W(i,j) * (2 * sc * Lpo + sBpa))
+    DO i = 1, aot%noc
+       CALL aot%operation(aot%T(i),0,0,phys%Cpo * ips%ocean%W(i,1))
+       DO j = 1, aot%natm
+          CALL aot%operation(aot%T(i),aot%theta(j),0,ips%ocean%W(i,j) * (2 * phys%sc * phys%Lpo + phys%sBpa))
        END DO
-       DO j = 1, noc
-          CALL func(T(i),T(j),0,-((Lpo + sBpo)) * kdelta(i,j))
-          DO k = 1, noc
-             CALL func(T(i),A(j),T(k),-(ocean%O(i,j,k)))
+       DO j = 1, aot%noc
+          CALL aot%operation(aot%T(i),aot%T(j),0,-((phys%Lpo + phys%sBpo)) * kdelta(i,j))
+          DO k = 1, aot%noc
+             CALL aot%operation(aot%T(i),aot%A(j),aot%T(k),-(ips%ocean%O(i,j,k)))
           END DO
        END DO
     END DO
@@ -195,37 +213,80 @@ CONTAINS
   !                                                     !
   !-----------------------------------------------------!
 
-  !> Subroutine to initialise the #aotensor tensor
-  !> @remark This procedure will also call params::init_params() and inprod_analytic::init_inprod() .
-  !> It will finally call inprod_analytic::deallocate_inprod() to remove the inner products, which are not needed
-  !> anymore at this point.
-  SUBROUTINE init_aotensor
+  !> Subroutine to initialise the AtmOcTensor tensor.
+  !> @param[in,out] aot The AO tensor object to initialize.
+  !> @param[in] model_configuration A model configuration object to initialize the model tensor with.
+  !> @param[in] inprods A model inner products object to initialize the model with.
+  SUBROUTINE init_aotensor(aot, model_configuration, inprods)
+    CLASS(AtmOcTensor), INTENT(INOUT) :: aot
+    CLASS(ModelConfiguration), INTENT(IN), TARGET :: model_configuration
+    CLASS(InnerProducts), INTENT(IN), TARGET :: inprods
+
     INTEGER :: i
     INTEGER :: AllocStat 
 
-    CALL init_params  ! Iniatialise the parameter
+    IF (.NOT.model_configuration%initialized) THEN
+      PRINT*, "Warning: Model configuration not initialized."
+      PRINT*, "Aborting aotensor initialization."
+      RETURN
+    END IF
 
-    CALL init_inprod  ! Initialise the inner product tensors
+    IF (.NOT.inprods%initialized) THEN
+      PRINT*, "Warning: Inner products not initialized."
+      PRINT*, "Aborting aotensor initialization."
+      RETURN
+    END IF
 
-    ALLOCATE(aotensor(ndim),count_elems(ndim), STAT=AllocStat)
-    IF (AllocStat /= 0) STOP "*** Not enough memory ! ***"
-    count_elems=0
+    aot%ndim => model_configuration%modes%ndim
+    aot%natm => model_configuration%modes%natm
+    aot%noc => model_configuration%modes%noc
 
-    CALL compute_aotensor(add_count)
+    ALLOCATE(aot%count_elems(aot%ndim), STAT=AllocStat)
+    IF (AllocStat /= 0) THEN
+      PRINT*, "*** init_aotensor: Problem with allocation! ***"
+      STOP "Exiting ..."
+    END IF
+    aot%count_elems=0
 
-    DO i=1,ndim
-       ALLOCATE(aotensor(i)%elems(count_elems(i)), STAT=AllocStat)
-       IF (AllocStat /= 0) STOP "*** Not enough memory ! ***"
+    CALL aot%tensor%init(aot%ndim)
+
+    aot%operation => ao_add_count
+    CALL aot%compute_tensor(model_configuration, inprods)
+
+    DO i=1,aot%ndim
+      ALLOCATE(aot%tensor%t(i)%elems(aot%count_elems(i)), STAT=AllocStat)
+      IF (AllocStat /= 0) THEN
+        PRINT*, "*** init_aotensor: Problem with allocation! ***"
+      STOP "Exiting ..."
+    END IF
+
     END DO
 
-    DEALLOCATE(count_elems, STAT=AllocStat)
-    IF (AllocStat /= 0) STOP "*** Deallocation problem ! ***"
-    
-    CALL compute_aotensor(coeff)
+    aot%operation => ao_coeff
+    CALL aot%compute_tensor(model_configuration, inprods)
 
-    CALL simplify(aotensor)
+    CALL aot%tensor%simplify
+
+    aot%initialized = .TRUE.
 
   END SUBROUTINE init_aotensor
+
+  !> Subroutine to clean a AtmOcTensor tensor.
+  !> @param[in,out] aot The AtmOcTensor tensor object to initialize.
+  SUBROUTINE delete_aotensor(aot)
+    CLASS(AtmOcTensor), INTENT(INOUT) :: aot
+
+    IF (allocated(aot%count_elems)) DEALLOCATE(aot%count_elems)
+
+    CALL aot%tensor%clean
+    NULLIFY(aot%ndim)
+    NULLIFY(aot%natm)
+    NULLIFY(aot%noc)
+
+    aot%initialized = .FALSE.
+
+  END SUBROUTINE delete_aotensor
+
 END MODULE aotensor_def
       
 

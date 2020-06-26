@@ -1,16 +1,14 @@
 var searchData=
 [
-  ['n',['n',['../structinprod__analytic_1_1ocean__tensors.html#a2ccccfae8fb93871f6d7d81d90676b19',1,'inprod_analytic::ocean_tensors::n()'],['../namespaceparams.html#abe66e904e07861ba1ef258ee92184e88',1,'params::n()']]],
-  ['natm',['natm',['../namespaceparams.html#a4f46551b6a8ad183d2dced1da3dc5fed',1,'params']]],
-  ['nbatm',['nbatm',['../namespaceparams.html#aa5dc201b0a59d8bb25a5dc52d2ed3cac',1,'params']]],
-  ['nboc',['nboc',['../namespaceparams.html#a54123b5a947703d21d0c882dec6780ac',1,'params']]],
-  ['ndim',['ndim',['../namespaceparams.html#a2323fe1773f086e20c14f266351c482b',1,'params']]],
-  ['nelems',['nelems',['../structtensor_1_1coolist.html#aac72e7727f1b161da2b9d54e25eb7aae',1,'tensor::coolist']]],
-  ['noc',['noc',['../namespaceparams.html#acdb6ef89bcada9ba7b6b6bba575b60f4',1,'params']]],
-  ['nua',['nua',['../namespaceparams.html#a8421c6937257007fb96366980677061c',1,'params']]],
-  ['nuap',['nuap',['../namespaceparams.html#a3a0962facf5be13872568dd81f95453c',1,'params']]],
-  ['nuo',['nuo',['../namespaceparams.html#a49937b0c51e9f89ac9b2f332d387af2f',1,'params']]],
-  ['nuop',['nuop',['../namespaceparams.html#a4802663c55680d2c51142f63636abd2e',1,'params']]],
-  ['nx',['nx',['../structinprod__analytic_1_1atm__wavenum.html#ad67bf9989f5524b1f97dc7211ef78db2',1,'inprod_analytic::atm_wavenum::nx()'],['../structinprod__analytic_1_1ocean__wavenum.html#a6084ea7c554f942e74779a2be38b7d3d',1,'inprod_analytic::ocean_wavenum::nx()']]],
-  ['ny',['ny',['../structinprod__analytic_1_1atm__wavenum.html#af75974631175c67689c588f6d92ceb3e',1,'inprod_analytic::atm_wavenum::ny()'],['../structinprod__analytic_1_1ocean__wavenum.html#a0738c305f503d7864a9073c5cea352ab',1,'inprod_analytic::ocean_wavenum::ny()']]]
+  ['n',['n',['../structparams_1_1physicsconfiguration.html#abc99c6428c59f5d8fc95140bbcba4456',1,'params::physicsconfiguration::n()'],['../structinprod__analytic_1_1oceaninnerproducts.html#ad98419788cc39ab5d6408d9a56360ebb',1,'inprod_analytic::oceaninnerproducts::n()']]],
+  ['natm',['natm',['../structparams_1_1modesconfiguration.html#a7ede74e1e6b6d7cda3dd09a02797a884',1,'params::modesconfiguration']]],
+  ['nbatm',['nbatm',['../structparams_1_1modesconfiguration.html#a26c0b1a58aa2ac7a17b59cf4ec0a1be8',1,'params::modesconfiguration']]],
+  ['nboc',['nboc',['../structparams_1_1modesconfiguration.html#a69a0793ecee9913a43b12001b3bd96ba',1,'params::modesconfiguration']]],
+  ['ndim',['ndim',['../structintegrator__def_1_1integrator.html#a3e374d290b3754d2079de91068314f2e',1,'integrator_def::integrator::ndim()'],['../structmodel__def_1_1model.html#a7d00fa265bddc896253a230a906f02e5',1,'model_def::model::ndim()'],['../structparams_1_1modesconfiguration.html#aadba4b01a2ee12635e80e3ef183f8b51',1,'params::modesconfiguration::ndim()']]],
+  ['nelems',['nelems',['../structtensor__def_1_1coolist.html#acbdf5af7f599640405c1d194c87c07fd',1,'tensor_def::coolist']]],
+  ['noc',['noc',['../structparams_1_1modesconfiguration.html#a1e4bfd9c3ab523dcb6b8f7547cc4e8ca',1,'params::modesconfiguration']]],
+  ['nua',['nua',['../structparams_1_1physicsconfiguration.html#a3cb30679b5e1a512d1962fcdd072918b',1,'params::physicsconfiguration']]],
+  ['nuap',['nuap',['../structparams_1_1physicsconfiguration.html#a23a7473f296dc377f96313f182a0fd42',1,'params::physicsconfiguration']]],
+  ['nuo',['nuo',['../structparams_1_1physicsconfiguration.html#ac097cb40db626ca357939eeea2208f68',1,'params::physicsconfiguration']]],
+  ['nuop',['nuop',['../structparams_1_1physicsconfiguration.html#a0ca4d9d70afe045ba184833e08a057cf',1,'params::physicsconfiguration']]]
 ];
