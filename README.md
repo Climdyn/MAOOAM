@@ -4,7 +4,7 @@
 
 ## About ##
 
-(c) 2013-2016 Lesley De Cruz and Jonathan Demaeyer
+(c) 2013-2020 Lesley De Cruz and Jonathan Demaeyer
 
 See LICENSE.txt for license information.
 

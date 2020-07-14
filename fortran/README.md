@@ -27,6 +27,8 @@ resources.
 
 ## Installation ##
 
+### Using make alone
+
 The program can be installed with Makefile. We provide configuration files for 
 two compilers : gfortran and ifort.
 
@@ -39,15 +41,13 @@ To install, unpack the archive in a folder or clone with git:
 git clone https://github.com/Climdyn/MAOOAM.git
 cd MAOOAM/fortran
 ```
-     
 and run:
-
 ```bash     
 make
 ```
+The program `maooam`  must now be available.
      
 The command
- 
 ```bash
 make clean
 ```
@@ -56,6 +56,36 @@ removes the compiled files.
 For Windows users, a minimalistic GNU development environment
  (including gfortran and make) is available at [www.mingw.org](http://www.mingw.org) .
 
+### Using cmake and make
+
+The program can also be installed with cmake and make. 
+
+To install, first unpack the archive in a folder or clone with git:
+
+```bash     
+git clone https://github.com/Climdyn/MAOOAM.git
+cd MAOOAM/fortran
+```
+and create the folder where you want to build the program sources (`build` in the example below):
+```bash
+mkdir build
+cd build
+```
+and run cmake:
+```bash
+cmake ..
+```
+and run make:
+```bash     
+make
+```
+The program `maooam` and the configuration files must now be available in the `build` folder.
+     
+The command
+```bash
+make clean
+```
+inside this folder removes the compiled files.
 
 ------------------------------------------------------------------------
 
@@ -77,6 +107,7 @@ computed once at the program initialization.
 * rk4_tl_integrator.f90 : RK4 Tangent Linear (TL) model integrators module.
 * rk4_ad_integrator.f90 : Adjoint (AD) model integrators module.
 * Makefile : The Makefile.
+* CMakeLists.txt : The CMake file.
 * params.f90 : The model parameters classes module.
 * tl_ad_tensor.f90 : Tangent Linear (TL) and Adjoint (AD) model tensors class definition module.
 * test_tl_ad.f90 : Tests for the Tangent Linear (TL) and Adjoint (AD) model versions.
