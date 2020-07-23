@@ -1,5 +1,4 @@
 
-
 ! util.f90
 !
 !>  Utility module
@@ -60,7 +59,9 @@ CONTAINS
   !> Random generator initialization routine  
   SUBROUTINE init_random_seed()
     USE iso_fortran_env, only: int64
-    USE IFPORT !, only: getpid
+#ifdef __INTEL_COMPILER
+    USE IFPORT
+#endif
     IMPLICIT NONE
     INTEGER, ALLOCATABLE :: seed_loc(:)
     INTEGER :: i, n, un, istat, dt(8), pid
