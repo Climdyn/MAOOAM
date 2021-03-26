@@ -39,17 +39,6 @@ endif
 
 
 ifeq ($(COMPILER),gfortran)
-  #Derive gfortran version from gcc version and check if >=4.6.0.
-  GVERSION := $(shell gcc -dumpversion)
-  GE40600 := $(shell expr `gcc -dumpversion | sed -e 's/\.\([0-9][0-9]\)/\1/g' -e 's/\.\([0-9]\)/0\1/g' -e 's/^[0-9]\{3,4\}$$/&00/'` \>= 40600)
-  
-  ifeq ($(COMPILER),gfortran)
-    ifeq ($(GE40600), 0)
-      $(error GCC/gfortran version $(GVERSION) detected. This program uses features of gfortran >= 4.6.0. Please update your toolchain)
-    endif
-  else
-    $(warning This code was optimized for gfortran >= 4.6.0 and has not been tested with other compilers)
-  endif
   COMPILER_FLAGS = $(GCC_COMPILER_FLAGS)
   LD_FLAGS = $(GCC_LD_FLAGS)
   COMPILER_FLAGS_DBG = $(GCC_COMPILER_FLAGS_DBG)
@@ -61,8 +50,6 @@ else ifeq ($(COMPILER),ifort)
   LD_FLAGS = $(IFORT_LD_FLAGS)
   COMPILER_FLAGS_DBG = $(IFORT_COMPILER_FLAGS_DBG)
   LD_FLAGS_DBG = $(IFORT_LD_FLAGS_DBG)
-else
-  $(warning This code was optimized for gfortran >= 4.6.0 and ifort >= 14.0.2 and has not been tested with other compilers)
 endif
 
 .SUFFIXES:
