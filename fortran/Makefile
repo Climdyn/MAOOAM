@@ -1,6 +1,6 @@
 
 ifndef COMPILER
-  COMPILER=ifort
+  COMPILER=gfortran
 endif
 # Define relevant compiler options for debug case and normal case for each compiler
 # Normal Case:
